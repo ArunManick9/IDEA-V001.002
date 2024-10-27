@@ -5,9 +5,7 @@ const WaiterContext = createContext();
 
 export const WaiterProvider = ({ children }) => {
 	const [passKey, setPassKey] = useState("74856");
-	const [newTable, setNewTable] = useState({});
-	console.log(passKey);
-	console.log(newTable);
+	const [newTable, setNewTable] = useState({ defaultAttribute: 0 });
 
 	return (
 		<WaiterContext.Provider
