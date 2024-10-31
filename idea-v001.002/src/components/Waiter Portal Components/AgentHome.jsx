@@ -23,7 +23,7 @@ export default function AgentHome() {
         style={{ transform: `translateX(-${currentPage * 100}%)` }}
       >
         <div className="w-screen h-screen flex-shrink-0">
-          <ConfirmTableScreen />
+          <ConfirmTableScreen  />
         </div>
         <div className="w-screen h-screen flex-shrink-0">
           <OrdersHandlerScreen loc_id={loc_id}/>

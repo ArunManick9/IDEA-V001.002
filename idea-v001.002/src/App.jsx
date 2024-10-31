@@ -1,9 +1,7 @@
 // App.js
-import React from 'react';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { LocationProvider } from './context/LocationContext.jsx';
-import { WaiterProvider } from './context/WaiterContext'; // Import WaiterProvider
-
 import MenuList from './components/MenuList.jsx';
 import MenuListDashboard from './components/MenuListDashboard.jsx';
 import AddItemForm from './components/AddItem.jsx';
@@ -11,7 +9,6 @@ import LoginScreen from './components/LoginScreen.jsx';
 import LocationCards from './components/LocationCards.jsx';
 import CreateOrganization from './components/CreateOrganisation.jsx';
 import CreateQR from './components/CreateQR.jsx';
-import DigiMenu from './components/Visitor Components/DigiMenu.jsx';
 import Orders from './components/Order Management Components/Orders.jsx';
 import CreateAgent from './components/CreateAgent.jsx';
 import WaiterLogin from './components/Waiter Portal Components/waiterLogin.jsx';
@@ -21,7 +18,6 @@ import ConfirmTable from './components/Visitor Components/ConfirmTable.jsx';
 const App = () => {
   return (
     <LocationProvider>
-      <WaiterProvider> {/* Wrap with WaiterProvider */}
         <Router>
           <Routes>
             <Route path="/createlocation" element={<CreateOrganization />} />
@@ -38,7 +34,6 @@ const App = () => {
             <Route path="/location/:loc_id/:agent_id" element={<AgentHome />} />
           </Routes>
         </Router>
-      </WaiterProvider>
     </LocationProvider>
   );
 };
