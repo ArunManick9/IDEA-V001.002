@@ -65,7 +65,7 @@ export default function OrdersHandlerScreen({ loc_id }) {
 		return <p className="text-center mt-10">Loading orders...</p>;
 	}
 
-	console.log(selectedOrder);
+	
 
 	return (
 		<div className="min-h-screen bg-gray-100 p-4">

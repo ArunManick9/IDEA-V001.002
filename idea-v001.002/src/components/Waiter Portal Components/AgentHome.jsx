@@ -23,7 +23,7 @@ export default function AgentHome() {
         style={{ transform: `translateX(-${currentPage * 100}%)` }}
       >
         <div className="w-screen h-screen flex-shrink-0">
-          <ConfirmTableScreen  />
+          <ConfirmTableScreen loc_id={loc_id} />
         </div>
         <div className="w-screen h-screen flex-shrink-0">
           <OrdersHandlerScreen loc_id={loc_id}/>
@@ -34,22 +34,4 @@ export default function AgentHome() {
       </div>
     </div>
   );
-	return (
-		<div {...handlers} className="overflow-hidden w-screen h-screen">
-			<div
-				className="flex transition-transform duration-300"
-				style={{ transform: `translateX(-${currentPage * 100}%)` }}
-			>
-				<div className="w-screen h-screen flex-shrink-0">
-					<ConfirmTableScreen />
-				</div>
-				<div className="w-screen h-screen flex-shrink-0">
-					<OrdersHandlerScreen loc_id={loc_id} />
-				</div>
-				<div className="w-screen h-screen flex-shrink-0">
-					<ProfileScreen agent_id={agent_id} loc_id={loc_id} />
-				</div>
-			</div>
-		</div>
-	);
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import DigiMenu from './DigiMenu';
 import { useParams } from 'react-router-dom';
 import supabase from '../../services/supabase';
@@ -9,6 +9,7 @@ export default function ConfirmTable() {
   const { loc_id, table_id } = useParams();
   const [passKey, setPassKey] = useState('');
   const [hasInserted, setHasInserted] = useState(false); // Track insertion
+  const inputRefs = useRef([]); // Refs to handle focus on each input
 
   useEffect(() => {
     if (hasInserted) return; // Prevent duplicate insertion
@@ -55,6 +56,17 @@ export default function ConfirmTable() {
     const newEnteredKey = [...enteredKey];
     newEnteredKey[index] = e.target.value;
     setEnteredKey(newEnteredKey);
+
+    // Move to the next input if a digit was entered and it's not the last box
+    if (e.target.value && index < 4) {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === 'Backspace' && index > 0 && !enteredKey[index]) {
+      inputRefs.current[index - 1].focus();
+    }
   };
 
   if (isAuthenticated) {
@@ -73,6 +85,8 @@ export default function ConfirmTable() {
             className="w-12 h-12 text-center border rounded-lg text-2xl"
             value={digit}
             onChange={(e) => handleChange(e, index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            ref={(el) => (inputRefs.current[index] = el)}
           />
         ))}
       </div>
