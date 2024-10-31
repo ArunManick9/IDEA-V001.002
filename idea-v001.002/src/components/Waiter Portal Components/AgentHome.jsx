@@ -16,7 +16,6 @@ export default function AgentHome() {
 		trackMouse: true,
 	});
 
-<<<<<<< HEAD
   return (
     <div {...handlers} className="overflow-hidden w-screen h-screen">
       <div
@@ -35,7 +34,6 @@ export default function AgentHome() {
       </div>
     </div>
   );
-=======
 	return (
 		<div {...handlers} className="overflow-hidden w-screen h-screen">
 			<div
@@ -54,5 +52,4 @@ export default function AgentHome() {
 			</div>
 		</div>
 	);
->>>>>>> 725a7053bb5fb3de50a6fa27cc28ed46cbae2664
 }
