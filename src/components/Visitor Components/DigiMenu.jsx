@@ -1,5 +1,5 @@
 // DigiMenu.js
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getdetailedmenu } from "../../services/supported_api";
 import { FaShoppingCart, FaChevronDown, FaChevronUp } from "react-icons/fa";
