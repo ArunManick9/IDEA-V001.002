@@ -1,17 +1,9 @@
-// src/components/ConfirmTableScreen.js
+
 import { useEffect } from 'react';
-import { useWaiters } from '../../context/WaiterContext';
 
-export default function ConfirmTableScreen() {
-  const { tableData, passKey } = useWaiters(); // Access contERGTGRGTUHJNHext
-  console.log(`confirmationtable`, tableData, passKey)
+export default function ConfirmTableScreen({loc_id}) {
 
-  useEffect(()=> {
-    console.log('confirmation table', tableData, passKey)
-  },[tableData,passKey])
-  if (!tableData) {
-    return <p>No new table requests yet.</p>;
-  }
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-green-100">
