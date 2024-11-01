@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocations } from "../context/LocationContext";
 import { addlocationtodb } from "../services/supported_api";
 import axios from "axios"; // Import axios for API request
+import "../scss/CreateOrganization.scss";
 
 const CreateOrganization = (user_id) => {
 	//console.log(user_id.user_id)
@@ -175,7 +176,7 @@ const CreateOrganization = (user_id) => {
 
 	return (
 		<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 overflow-auto z-50">
-			<div className="relative bg-gray-900 text-white p-8 rounded-lg shadow-lg w-full max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl backdrop-blur-md bg-opacity-70 border border-gray-700 overflow-y-auto max-h-screen z-50">
+			<div className="relative bg-gray-900 text-white p-8 rounded-lg shadow-lg w-full max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl backdrop-blur-md bg-opacity-70 border border-gray-700 overflow-y-auto max-h-screen z-50 new-class">
 				<h2 className="text-2xl font-semibold mb-6 text-center">
 					Create Organization
 				</h2>

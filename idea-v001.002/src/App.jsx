@@ -14,6 +14,7 @@ import CreateAgent from './components/CreateAgent.jsx';
 import WaiterLogin from './components/Waiter Portal Components/waiterLogin.jsx';
 import AgentHome from './components/Waiter Portal Components/AgentHome.jsx';
 import ConfirmTable from './components/Visitor Components/ConfirmTable.jsx';
+import OrderModal from './components/Waiter Portal Components/OrderModal.jsx';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/location/:loc_id/createagent" element={<CreateAgent />} />
             <Route path="/location/:loc_id/agentlogin" element={<WaiterLogin />} />
             <Route path="/location/:loc_id/:agent_id" element={<AgentHome />} />
+            <Route path="/location/:loc_id/orders/:order_id" element={<OrderModal/>} />
           </Routes>
         </Router>
     </LocationProvider>

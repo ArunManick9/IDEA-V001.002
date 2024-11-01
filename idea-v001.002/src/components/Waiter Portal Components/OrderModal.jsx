@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import supabase from "../../services/supabase";
+import { useParams } from "react-router-dom";
 
-export default function OrderModal({ loc_id, order_id, onClose }) {
+export default function OrderModal() {
+	const {loc_id, order_id} = useParams()
 	const [orderDetails, setOrderDetails] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [fadeIn, setFadeIn] = useState(false);
@@ -38,7 +40,7 @@ export default function OrderModal({ loc_id, order_id, onClose }) {
 
 	const handleClose = () => {
 		setFadeIn(false);
-		setTimeout(onClose, 500); // Wait for animation to finish before closing
+	 // Wait for animation to finish before closing
 	};
 
 	if (loading) {
