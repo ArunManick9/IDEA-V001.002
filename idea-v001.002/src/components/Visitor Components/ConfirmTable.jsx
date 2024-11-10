@@ -27,7 +27,7 @@ export default function ConfirmTable() {
       const { data, error } = await supabase
         .from('OTP_TABLE')
         .insert([
-          { loc_id: loc_id, table_id: table_id, passKey: newPassKey }
+          { loc_id: loc_id, table_id: table_id, passKey: newPassKey, waiter_consumed: false }
         ])
         .select();
 

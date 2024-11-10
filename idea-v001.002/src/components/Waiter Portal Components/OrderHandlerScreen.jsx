@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../../services/supabase";
-import OrderModal from "./OrderModal";
 import { useNavigate } from "react-router-dom";
 
 export default function OrdersHandlerScreen({ loc_id }) {
