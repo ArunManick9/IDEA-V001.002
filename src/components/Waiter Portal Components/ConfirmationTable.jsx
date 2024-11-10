@@ -4,7 +4,24 @@ import supabase from '../../services/supabase';
 export default function ConfirmTableScreen({ loc_id }) {
 	const [tableRecords, setTableRecords] = useState([]);
 
+	// Fetch records with waiter_consumed set to FALSE on page load
+	const fetchInitialRecords = async () => {
+		const { data, error } = await supabase
+			.from('OTP_TABLE')
+			.select('*')
+			.eq('waiter_consumed', false)
+			.eq('loc_id', loc_id);
+
+		if (error) {
+			console.error('Error fetching records:', error);
+		} else {
+			setTableRecords(data);
+		}
+	};
+
 	useEffect(() => {
+		fetchInitialRecords();
+
 		const locIdString = JSON.stringify(loc_id);
 		console.log('Setting up subscription for loc_id:', locIdString);
 
@@ -14,14 +31,15 @@ export default function ConfirmTableScreen({ loc_id }) {
 				{ event: 'INSERT', schema: 'public', table: 'OTP_TABLE', filter: `loc_id=eq.${loc_id}` },
 				(payload) => {
 					console.log('Update received!', payload);
-					const { table_id, passKey } = payload.new;
-					console.log('Extracted table_id:', table_id, 'and passKey:', passKey);
+					const { table_id, passKey, waiter_consumed } = payload.new;
 
-					// Add the new record to the existing list of table records
-					setTableRecords((prevRecords) => [
-						...prevRecords,
-						{ table_id, passKey },
-					]);
+					// Only add the record if waiter_consumed is FALSE
+					if (!waiter_consumed) {
+						setTableRecords((prevRecords) => [
+							...prevRecords,
+							{ table_id, passKey, id: payload.new.id },
+						]);
+					}
 				}
 			)
 			.subscribe();
@@ -34,8 +52,20 @@ export default function ConfirmTableScreen({ loc_id }) {
 		};
 	}, [loc_id]);
 
-	const handleClose = (index) => {
-		setTableRecords((prevRecords) => prevRecords.filter((_, i) => i !== index));
+	// Handle close button click and update waiter_consumed to TRUE
+	const handleClose = async (index, id) => {
+		// Update waiter_consumed to TRUE for the specific record in Supabase
+		const { error } = await supabase
+			.from('OTP_TABLE')
+			.update({ waiter_consumed: true })
+			.eq('id', id);
+
+		if (error) {
+			console.error('Error updating waiter_consumed:', error);
+		} else {
+			// Remove the record from the displayed list
+			setTableRecords((prevRecords) => prevRecords.filter((_, i) => i !== index));
+		}
 	};
 
 	return (
@@ -44,11 +74,11 @@ export default function ConfirmTableScreen({ loc_id }) {
 			{tableRecords.length > 0 ? (
 				tableRecords.map((record, index) => (
 					<div
-						key={index}
+						key={record.id}
 						className="w-11/12 max-w-md p-6 bg-white rounded-lg shadow-lg transition-transform transform scale-100 hover:scale-105 duration-200 ease-in-out relative"
 					>
 						<button
-							onClick={() => handleClose(index)}
+							onClick={() => handleClose(index, record.id)}
 							className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition duration-200 ease-in-out"
 						>
 							&times;

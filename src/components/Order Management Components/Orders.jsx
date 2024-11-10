@@ -31,7 +31,7 @@ export default function Orders() {
         const fulfilledOrders = [];
 
         data.forEach((order) => {
-          if (order.status === 'New') {
+          if (order.status === 'Verified') {
             newOrders.push(order);
           } else if (order.status === 'Accepted') {
             acceptedOrders.push(order);
@@ -50,26 +50,47 @@ export default function Orders() {
 
     fetchOrders();
 
+    // Subscribe to updates in ORDER_DB for the specified location ID
     const channel = supabase
       .channel('custom-filter-channel')
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'ORDER_DB', filter: `loc_id=eq.${locid}` },
+        { event: 'UPDATE', schema: 'public', table: 'ORDER_DB', filter: `loc_id=eq.${locid}` },
         (payload) => {
-          setBuckets((prev) => ({
-            ...prev,
-            newOrders: [payload.new, ...prev.newOrders]
-          }));
+          // Update the relevant bucket based on the order's updated status
+          const updatedOrder = payload.new;
+
+          setBuckets((prev) => {
+            const newBuckets = { ...prev };
+
+            // Remove the order from its current bucket
+            Object.keys(newBuckets).forEach(bucket => {
+              newBuckets[bucket] = newBuckets[bucket].filter(order => order.order_id !== updatedOrder.order_id);
+            });
+
+            // Add the order to the appropriate bucket based on its new status
+            if (updatedOrder.status === 'Verified') {
+              newBuckets.newOrders.push(updatedOrder);
+            } else if (updatedOrder.status === 'Accepted') {
+              newBuckets.acceptedOrders.push(updatedOrder);
+            } else if (updatedOrder.status === 'Fulfilled') {
+              newBuckets.fulfilledOrders.push(updatedOrder);
+            }
+
+            return newBuckets;
+          });
 
           setShowNotification(true);
-          setTimeout(() => setShowNotification(false), 3000);
+          setHighlightedOrderId(updatedOrder.order_id);
 
-          setHighlightedOrderId(payload.new.id);
+          // Hide notification and reset highlight after a timeout
+          setTimeout(() => setShowNotification(false), 3000);
           setTimeout(() => setHighlightedOrderId(null), 5000);
         }
       )
       .subscribe();
 
+    // Clean up subscription on unmount
     return () => {
       supabase.removeChannel(channel);
     };
@@ -84,9 +105,7 @@ export default function Orders() {
     }
   };
 
-  // Move order to the next bucket and update the status using the external API
   const moveOrder = async (orderId, fromBucket, toBucket, newStatus) => {
-    // Step 1: Move the order in frontend (immediate visual update)
     const orderToMove = buckets[fromBucket].find((order) => order.order_id === orderId);
     if (!orderToMove) return;
 
@@ -96,11 +115,9 @@ export default function Orders() {
       [toBucket]: [orderToMove, ...prev[toBucket]]
     }));
 
-    // Step 2: Update order status in the backend after moving it visually
     await updateOrderStatus(orderId, newStatus);
   };
 
-  // Render orders in each bucket
   const renderOrders = (bucket, fromBucket, toBucket, newStatus) => (
     <ul>
       {buckets[bucket].length === 0 ? (
@@ -153,7 +170,7 @@ export default function Orders() {
 
       {showNotification && (
         <div className="fixed top-0 left-0 right-0 bg-green-500 text-white text-center p-3 rounded-md shadow-lg">
-          New order received!
+          Order updated!
         </div>
       )}
 
