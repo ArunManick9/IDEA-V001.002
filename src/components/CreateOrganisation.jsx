@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useLocations } from "../context/LocationContext";
 import { addlocationtodb } from "../services/supported_api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios"; // Import axios for API request
 import "../scss/CreateOrganization.scss";
 
-const CreateOrganization = (user_id) => {
+const CreateOrganization = ({ user_id, setCreateOrgClicked }) => {
 	//console.log(user_id.user_id)
 	const [currentStep, setCurrentStep] = useState(0); // 0: Image & Name, 1: Address & Contact, 2: Menus & Categories
 	const [formData, setFormData] = useState({
@@ -13,7 +17,7 @@ const CreateOrganization = (user_id) => {
 		address: "",
 		contactNumber: "",
 		customerId: "",
-		user_id: user_id.user_id,
+		user_id: user_id,
 	});
 	const [imagePreview, setImagePreview] = useState("");
 	const [menuInput, setMenuInput] = useState("");
@@ -24,6 +28,18 @@ const CreateOrganization = (user_id) => {
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
+	};
+
+	const closePopup = () => {
+		setFormData({
+			image: null,
+			name: "",
+			address: "",
+			contactNumber: "",
+			customerId: "",
+			user_id: user_id,
+		});
+		setCreateOrgClicked(false);
 	};
 
 	const handleFileChange = async (e) => {
@@ -176,8 +192,11 @@ const CreateOrganization = (user_id) => {
 
 	return (
 		<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-90 overflow-auto z-50">
-			<div className="relative bg-gray-900 text-white p-8 rounded-lg shadow-lg w-full max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl backdrop-blur-md bg-opacity-70 border border-gray-700 overflow-y-auto max-h-screen z-50 new-class">
-				<h2 className="text-2xl font-semibold mb-6 text-center">
+			<div className="relative create-org-popup text-white p-8 rounded-lg shadow-lg w-full max-w-lg sm:max-w-md md:max-w-lg lg:max-w-xl backdrop-blur-md bg-opacity-70 border border-gray-700 overflow-y-auto max-h-screen z-50 ">
+				<div className="close-icon-container">
+					<FontAwesomeIcon icon={faCircleXmark} onClick={closePopup} />
+				</div>
+				<h2 className="text-2xl font-semibold mb-6 text-center create-org-header">
 					Create Organization
 				</h2>
 
@@ -185,16 +204,17 @@ const CreateOrganization = (user_id) => {
 					{currentStep === 0 && (
 						<>
 							<div className="mb-4">
-								<label className="block text-sm font-medium">
+								<label className="block text-sm font-medium form-label">
 									Upload Image
 								</label>
 								<input
 									type="file"
 									accept="image/*"
 									onChange={handleFileChange}
-									className="mt-1 block w-full text-sm text-black file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:py-2 file:px-4 hover:file:bg-blue-700 transition-colors duration-300"
+									className="mt-1 block w-full text-sm text-gray-900 file:bg-gray-700 file:text-white file:border-0 file:rounded-md file:py-2 file:px-4 hover:file:bg-gray-800 transition-colors duration-300"
 									required
 								/>
+
 								{imagePreview && (
 									<img
 										src={imagePreview}
@@ -205,13 +225,15 @@ const CreateOrganization = (user_id) => {
 							</div>
 
 							<div className="mb-4">
-								<label className="block text-sm font-medium">Name</label>
+								<label className="block text-sm font-medium form-label">
+									Name
+								</label>
 								<input
 									type="text"
 									name="name"
 									value={formData.name}
 									onChange={handleInputChange}
-									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 create-org-input"
 									required
 								/>
 							</div>
@@ -221,19 +243,21 @@ const CreateOrganization = (user_id) => {
 					{currentStep === 1 && (
 						<>
 							<div className="mb-4">
-								<label className="block text-sm font-medium">Address</label>
+								<label className="block text-sm font-medium form-label">
+									Address
+								</label>
 								<input
 									type="text"
 									name="address"
 									value={formData.address}
 									onChange={handleInputChange}
-									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 create-org-input"
 									required
 								/>
 							</div>
 
 							<div className="mb-4">
-								<label className="block text-sm font-medium">
+								<label className="block text-sm font-medium form-label">
 									Contact Number
 								</label>
 								<input
@@ -241,18 +265,20 @@ const CreateOrganization = (user_id) => {
 									name="contactNumber"
 									value={formData.contactNumber}
 									onChange={handleInputChange}
-									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 create-org-input"
 								/>
 							</div>
 
 							<div className="mb-4">
-								<label className="block text-sm font-medium">Customer ID</label>
+								<label className="block text-sm font-medium form-label">
+									Customer ID
+								</label>
 								<input
 									type="text"
 									name="customerId"
 									value={formData.customerId}
 									onChange={handleInputChange}
-									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 create-org-input"
 								/>
 							</div>
 						</>
@@ -261,24 +287,28 @@ const CreateOrganization = (user_id) => {
 					{currentStep === 2 && (
 						<>
 							<div className="mb-4">
-								<label className="block text-sm font-medium">Menus</label>
+								<label className="block text-sm font-medium form-label form-label--menu">
+									Menus
+								</label>
 								{menuList.map((menu, index) => (
 									<div key={index} className="mb-2">
-										<div className="flex justify-between items-center">
-											<span>{menu.menuType}</span>
+										<div className="flex justify-between items-center menu-item">
+											<span>
+												{index + 1}. {menu.menuType}
+											</span>
 											<button
 												type="button"
 												onClick={() => handleDeleteMenu(index)}
-												className="text-red-600 hover:text-red-800"
+												className="trash-icon"
 											>
-												Delete
+												<FontAwesomeIcon icon={faTrash} />
 											</button>
 										</div>
 
 										{categories[index]?.map((category, categoryIndex) => (
 											<div
 												key={categoryIndex}
-												className="flex justify-between items-center mt-1"
+												className="flex justify-between items-center mt-1 categories"
 											>
 												<input
 													type="text"
@@ -290,16 +320,16 @@ const CreateOrganization = (user_id) => {
 															e.target.value
 														)
 													}
-													className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+													className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 category-input create-org-input"
 												/>
 												<button
 													type="button"
 													onClick={() =>
 														handleCategoryDelete(index, categoryIndex)
 													}
-													className="text-red-600 hover:text-red-800"
+													className="trash-icon trash-icon--category"
 												>
-													Delete
+													<FontAwesomeIcon icon={faTrash} />
 												</button>
 											</div>
 										))}
@@ -307,9 +337,9 @@ const CreateOrganization = (user_id) => {
 										<button
 											type="button"
 											onClick={() => handleAddCategory(index)}
-											className="text-blue-600 hover:text-blue-800 mt-2"
+											className="button-add-category"
 										>
-											Add Category
+											<FontAwesomeIcon icon={faSquarePlus} /> Add Category
 										</button>
 									</div>
 								))}
@@ -319,12 +349,12 @@ const CreateOrganization = (user_id) => {
 									value={menuInput}
 									onChange={(e) => setMenuInput(e.target.value)}
 									placeholder="Enter new menu"
-									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+									className="mt-1 block w-full border text-black border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 create-org-input new-menu-input"
 								/>
 								<button
 									type="button"
 									onClick={handleAddMenu}
-									className="mt-2 text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700"
+									className="btn btn--add"
 								>
 									Add Menu
 								</button>
@@ -337,23 +367,17 @@ const CreateOrganization = (user_id) => {
 							<button
 								type="button"
 								onClick={handleBack}
-								className="text-white bg-gray-600 px-4 py-2 rounded-md hover:bg-gray-700"
+								className="btn btn--back"
 							>
 								Back
 							</button>
 						)}
 						{currentStep < 2 ? (
-							<button
-								type="submit"
-								className="text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700"
-							>
+							<button type="submit" className="btn btn--next">
 								Next
 							</button>
 						) : (
-							<button
-								type="submit"
-								className="text-white bg-green-600 px-4 py-2 rounded-md hover:bg-green-700"
-							>
+							<button type="submit" className="btn btn--submit">
 								Submit
 							</button>
 						)}
