@@ -7,6 +7,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Loading from "./Loading.jsx"; // Import the Loading component
 import { useLocation } from "react-router-dom";
 import CreateOrganization from "./CreateOrganisation.jsx";
+import "../scss/LocationCards.scss";
 
 const LocationCards = () => {
 	const [createOrgClicked, setCreateOrgClicked] = useState(false);
@@ -104,7 +105,7 @@ const LocationCards = () => {
 	};
 
 	return (
-		<div className="relative min-h-screen bg-white">
+		<div className="relative min-h-screen bg-white container">
 			{createOrgClicked && (
 				<CreateOrganization
 					user_id={user_id}
@@ -125,7 +126,7 @@ const LocationCards = () => {
 						<div
 							key={index}
 							onClick={() => handleCardClick(location.loc_id)} // Add onClick to navigate
-							className="relative bg-white border border-gray-200 rounded-lg shadow-sm transition-all transform hover:scale-105 hover:shadow-lg cursor-pointer"
+							className="relative bg-white border border-gray-200 rounded-lg shadow-sm transition-all transform hover:scale-105 hover:shadow-lg cursor-pointer location-card"
 						>
 							<img
 								src={location.image}
