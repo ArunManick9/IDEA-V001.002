@@ -105,7 +105,12 @@ const LocationCards = () => {
 
 	return (
 		<div className="relative min-h-screen bg-white">
-			{createOrgClicked && <CreateOrganization user_id={user_id} />}{" "}
+			{createOrgClicked && (
+				<CreateOrganization
+					user_id={user_id}
+					setCreateOrgClicked={setCreateOrgClicked}
+				/>
+			)}{" "}
 			{/* Conditionally render CreateOrganization */}
 			{loading && <Loading />} {/* Display loading spinner */}
 			<div className="container mx-auto py-12">
