@@ -1,0 +1,9 @@
+@import "variables.scss";
+
+.container {
+	font-family: "Poppins", sans-serif;
+	background-color: $color-white-blue;
+}
+.location-card {
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+}
