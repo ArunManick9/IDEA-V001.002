@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../../services/supabase";
-import OrderModal from "./OrderModal";
+import { useNavigate } from "react-router-dom";
 
 export default function OrdersHandlerScreen({ loc_id }) {
 	const [orders, setOrders] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [selectedOrder, setSelectedOrder] = useState(null);
+	const navigate = useNavigate();
+	
 
 	useEffect(() => {
 		const fetchOrders = async () => {
@@ -57,15 +58,16 @@ export default function OrdersHandlerScreen({ loc_id }) {
 	};
 
 	const handleViewOrder = (order) => {
-		setSelectedOrder({ loc_id, order_id: order.order_id });
-		console.log("Opening modal with:", { loc_id, order_id: order.order_id });
+		
+		console.log("Opening route with:", { loc_id, order_id: order.order_id });
+		navigate(`/location/${loc_id}/orders/${order.order_id}`)
 	};
 
 	if (loading) {
 		return <p className="text-center mt-10">Loading orders...</p>;
 	}
 
-	console.log(selectedOrder);
+	
 
 	return (
 		<div className="min-h-screen bg-gray-100 p-4">
@@ -98,13 +100,7 @@ export default function OrdersHandlerScreen({ loc_id }) {
 				)}
 			</div>
 
-			{selectedOrder && (
-				<OrderModal
-					loc_id={selectedOrder.loc_id}
-					order_id={selectedOrder.order_id}
-					onClose={() => setSelectedOrder(null)} // Close the modal
-				/>
-			)}
+			
 		</div>
 	);
 }
