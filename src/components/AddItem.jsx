@@ -160,6 +160,7 @@ const AddItemForm = () => {
 			raiseValidations();
 			return;
 		}
+
 		let imageUrl = form.image;
 
 		if (imageFile) {
@@ -171,7 +172,7 @@ const AddItemForm = () => {
 		console.log("Form submitted:", updatedForm);
 
 		addmenuitem(updatedForm);
-		setSubmissionCount(submissionCount + 1);
+		setSubmissionCount((previousCount) => previousCount + 1);
 	};
 
 	if (!data || menus.length === 0) {
