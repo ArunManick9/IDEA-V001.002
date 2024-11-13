@@ -17,7 +17,7 @@ const CreateOrganization = ({ user_id, setCreateOrgClicked }) => {
 		address: "",
 		contactNumber: "",
 		customerId: "",
-		user_id: user_id,
+		user_id,
 	});
 	const [imagePreview, setImagePreview] = useState("");
 	const [menuInput, setMenuInput] = useState("");
@@ -181,6 +181,7 @@ const CreateOrganization = ({ user_id, setCreateOrgClicked }) => {
 			setMenuList([]);
 			setCategories({});
 			setImagePreview("");
+			closePopup();
 		} else {
 			setCurrentStep(currentStep + 1);
 		}
