@@ -5,7 +5,7 @@ import {
 	loadlocation,
 } from "../services/supported_api";
 import { useParams } from "react-router-dom";
-import "./additem.css";
+import "../scss/AddItem.scss";
 
 const AddItemForm = () => {
 	const [data, setData] = useState(null);
