@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import { useNavigate, useParams } from "react-router-dom";
 import supabase from "../../services/supabase";
 
-export default function OrderModal({ loc_id, order_id, onClose }) {
+export default function OrderModal() {
+	const { loc_id, order_id } = useParams();
+	const navigate = useNavigate();
 	const [orderDetails, setOrderDetails] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [fadeIn, setFadeIn] = useState(false);
+	const [isVerified, setIsVerified] = useState(false);
 
 	useEffect(() => {
 		const fetchOrderDetails = async () => {
@@ -28,17 +32,32 @@ export default function OrderModal({ loc_id, order_id, onClose }) {
 					}
 				}
 				setOrderDetails(order);
+				setIsVerified(order.status === "Verified"); // Check if order is already verified
 			}
 			setLoading(false);
-			setFadeIn(true); // Start fade-in animation when data is loaded
+			setFadeIn(true);
 		};
 
 		fetchOrderDetails();
 	}, [loc_id, order_id]);
 
+	const verifyOrder = async () => {
+		const { data, error } = await supabase
+			.from("ORDER_DB")
+			.update({ status: "Verified" })
+			.eq("order_id", order_id)
+			.select();
+
+		if (error) {
+			console.error("Error updating order status:", error);
+		} else {
+			setIsVerified(true); // Update the button state to Verified
+		}
+	};
+
 	const handleClose = () => {
 		setFadeIn(false);
-		setTimeout(onClose, 500); // Wait for animation to finish before closing
+		navigate(-1); // Go back one step in navigation history
 	};
 
 	if (loading) {
@@ -62,7 +81,7 @@ export default function OrderModal({ loc_id, order_id, onClose }) {
 	}
 
 	return (
-		<div className=" flex items-center justify-center bg-black bg-opacity-0 z-50">
+		<div className="flex items-center justify-center bg-black bg-opacity-0 z-50">
 			<div className="relative bg-white w-11/12 md:w-2/3 lg:w-1/2 rounded-lg shadow-lg p-8">
 				<button
 					className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
@@ -116,10 +135,15 @@ export default function OrderModal({ loc_id, order_id, onClose }) {
 						Add Items
 					</button>
 					<button
-						className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors"
-						onClick={() => console.log("Verify order clicked")}
+						className={`${
+							isVerified ? "bg-gray-400" : "bg-green-500"
+						} text-white px-4 py-2 rounded-md transition-colors ${
+							isVerified ? "" : "hover:bg-green-600"
+						}`}
+						onClick={verifyOrder}
+						disabled={isVerified}
 					>
-						Verify Order
+						{isVerified ? "Verified" : "Verify Order"}
 					</button>
 				</div>
 			</div>
