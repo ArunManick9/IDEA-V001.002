@@ -62,8 +62,15 @@
 }
 .btn {
 	border-radius: 5px;
+	margin-top: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 	transition: all 0.2s ease;
 	background-color: $oxford-blue;
 	color: $mikado-yellow;
+	cursor: pointer;
+}
+.btn--saving {
+	cursor: disabled;
+	color: $oxford-blue;
+	background-color: $mikado-yellow;
 }

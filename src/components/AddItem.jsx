@@ -29,6 +29,7 @@ const AddItemForm = () => {
 	const [priceFlag, setPriceFlag] = useState(false);
 	const [nameFlag, setNameFlag] = useState(false);
 	const [descriptionFlag, setDescriptionFlag] = useState(false);
+	const [saving, setSaving] = useState(false);
 	const { loc_id } = useParams();
 
 	const isNameEmpty = () => {
@@ -161,6 +162,7 @@ const AddItemForm = () => {
 			return;
 		}
 
+		setSaving(true);
 		let imageUrl = form.image;
 
 		if (imageFile) {
@@ -171,7 +173,8 @@ const AddItemForm = () => {
 		const updatedForm = { ...form, image: imageUrl, menu_id: generateMenuId() };
 		console.log("Form submitted:", updatedForm);
 
-		addmenuitem(updatedForm);
+		await addmenuitem(updatedForm);
+		setSaving(false);
 		setSubmissionCount((previousCount) => previousCount + 1);
 	};
 
@@ -317,8 +320,12 @@ const AddItemForm = () => {
 							</select>
 						</div>
 
-						<button type="submit" className="w-full py-2  btn">
-							Add Item
+						<button
+							type="submit"
+							disabled={saving}
+							className={`w-full py-2 ${saving ? "btn btn--saving" : "btn"}`}
+						>
+							{!saving ? "Add Item" : "Submitting..."}
 						</button>
 					</form>
 				</div>
