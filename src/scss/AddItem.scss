@@ -26,3 +26,44 @@
 		border: 3px solid #eaeaea; /* Lighter padding color on hover */
 	}
 }
+.red-asterisk {
+	color: $red-asterisk;
+	font-size: 1rem;
+}
+.mandatory-warning {
+	color: $red-asterisk;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	margin: 4px 0;
+	display: inline-block;
+}
+.flex {
+	background-color: $color-grey-2;
+}
+.wrapper {
+	background-color: $color-grey-2;
+	width: 100%;
+	font-family: "Poppins";
+}
+.add-menu--header {
+	color: $color-grey-1;
+	text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+	font-size: 3rem;
+	font-weight: 600;
+}
+.form-wrapper {
+	background-color: $color-grey-1;
+	border-radius: 5px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+	color: $rich-black;
+}
+.add-menu--form-label {
+	color: $rich-black;
+}
+.btn {
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	transition: all 0.2s ease;
+	background-color: $oxford-blue;
+	color: $mikado-yellow;
+}
