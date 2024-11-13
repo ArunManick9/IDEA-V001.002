@@ -1,0 +1,76 @@
+@import "variables.scss";
+
+// scrollbar rules
+.custom-scrollbar {
+	scrollbar-width: thin; /* Thin scrollbar */
+	scrollbar-color: #5a5a5a #f8f9fa; /* Thumb color and track color */
+	scroll-behavior: smooth; /* Smooth scrolling */
+	&::-webkit-scrollbar {
+		width: 10px; /* Slim scrollbar for a sleek look */
+	}
+
+	&::-webkit-scrollbar-track {
+		background: #f8f9fa; /* Light background for the scrollbar track */
+		border-radius: 10px; /* Rounded track for modern feel */
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #5a5a5a; /* Darker, sophisticated thumb color */
+		border-radius: 10px; /* Rounded scrollbar for elegant design */
+		border: 3px solid #f8f9fa; /* Padding to add space between thumb and track */
+		transition: background-color 0.3s ease, border 0.3s ease; /* Smooth transition */
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: #404040; /* Darker shade on hover for a modern effect */
+		border: 3px solid #eaeaea; /* Lighter padding color on hover */
+	}
+}
+.red-asterisk {
+	color: $red-asterisk;
+	font-size: 1rem;
+}
+.mandatory-warning {
+	color: $red-asterisk;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	margin: 4px 0;
+	display: inline-block;
+}
+.flex {
+	background-color: $color-grey-2;
+}
+.wrapper {
+	background-color: $color-grey-2;
+	width: 100%;
+	font-family: "Poppins";
+}
+.add-menu--header {
+	color: $color-grey-1;
+	text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+	font-size: 3rem;
+	font-weight: 600;
+}
+.form-wrapper {
+	background-color: $color-grey-1;
+	border-radius: 5px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+	color: $rich-black;
+}
+.add-menu--form-label {
+	color: $rich-black;
+}
+.btn {
+	border-radius: 5px;
+	margin-top: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	transition: all 0.2s ease;
+	background-color: $oxford-blue;
+	color: $mikado-yellow;
+	cursor: pointer;
+}
+.btn--saving {
+	cursor: disabled;
+	color: $oxford-blue;
+	background-color: $mikado-yellow;
+}
