@@ -6,6 +6,7 @@ import {
 } from "../services/supported_api";
 import { useParams } from "react-router-dom";
 import "../scss/AddItem.scss";
+import AlertPopup from "./AlertPopup";
 
 const AddItemForm = () => {
 	const [data, setData] = useState(null);
@@ -41,42 +42,44 @@ const AddItemForm = () => {
 	const isPriceEmpty = () => {
 		return form.price === "";
 	};
-
-	const isFormInvalid = () => {
-		return isNameEmpty() || isDescriptionEmpty() || isPriceEmpty();
+	const isPriceValid = () => {
+		const { price } = form;
+		return !isNaN(price);
 	};
 
-	useEffect(
-		() => {
-			const fetchData = async () => {
-				try {
-					const result = await loadlocation(loc_id);
-					const neededData = result[0];
-					setData(neededData);
-					const menulist = await getdetailedmenu(loc_id);
-					setSubmissionCount(menulist.length);
+	const isFormInvalid = () => {
+		return (
+			isNameEmpty() || isDescriptionEmpty() || isPriceEmpty() || !isPriceValid()
+		);
+	};
 
-					const parsedMenus =
-						typeof neededData.menus === "string"
-							? JSON.parse(neededData.menus)
-							: neededData.menus;
-					setMenus(parsedMenus);
-					setForm((prevForm) => ({
-						...prevForm,
-						inmenu: parsedMenus[0]?.menu_type || "",
-						inlocation: neededData.loc_id,
-					}));
-					console.log(result);
-				} catch (error) {
-					console.error("Error loading location:", error);
-				}
-			};
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const result = await loadlocation(loc_id);
+				const neededData = result[0];
+				setData(neededData);
+				const menulist = await getdetailedmenu(loc_id);
+				setSubmissionCount(menulist.length);
 
-			fetchData();
-		},
-		[loc_id],
-		submissionCount
-	);
+				const parsedMenus =
+					typeof neededData.menus === "string"
+						? JSON.parse(neededData.menus)
+						: neededData.menus;
+				setMenus(parsedMenus);
+				setForm((prevForm) => ({
+					...prevForm,
+					inmenu: parsedMenus[0]?.menu_type || "",
+					inlocation: neededData.loc_id,
+				}));
+				console.log(result);
+			} catch (error) {
+				console.error("Error loading location:", error);
+			}
+		};
+
+		fetchData();
+	}, [loc_id, submissionCount]);
 
 	useEffect(() => {
 		if (menus.length > 0 && form.inmenu) {
@@ -143,7 +146,7 @@ const AddItemForm = () => {
 	};
 
 	function raiseValidations() {
-		setPriceFlag(isPriceEmpty());
+		setPriceFlag(isPriceEmpty() || !isPriceValid());
 		setDescriptionFlag(isDescriptionEmpty());
 		setNameFlag(isNameEmpty());
 	}
@@ -154,11 +157,23 @@ const AddItemForm = () => {
 		setNameFlag(false);
 	}
 
+	const [showAlert, setShowAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
+	const [alertCode, setAlertCode] = useState("");
+
+	function raiseAlert(message, colorCode) {
+		setAlertMessage(message);
+		setAlertCode(`alert--${colorCode || "green"}`);
+		setShowAlert(true);
+		setTimeout(() => setShowAlert(false), 3000);
+	}
+
 	const handleSubmit = async (e) => {
 		takeDownValidations();
 		e.preventDefault();
 		if (isFormInvalid()) {
 			raiseValidations();
+			raiseAlert("Kindly fix the validations", "red");
 			return;
 		}
 
@@ -171,11 +186,30 @@ const AddItemForm = () => {
 		}
 
 		const updatedForm = { ...form, image: imageUrl, menu_id: generateMenuId() };
-		console.log("Form submitted:", updatedForm);
 
-		await addmenuitem(updatedForm);
-		setSaving(false);
-		setSubmissionCount((previousCount) => previousCount + 1);
+		try {
+			await addmenuitem(updatedForm);
+			// success scenario
+			setSaving(false);
+			setSubmissionCount((previousCount) => previousCount + 1);
+			raiseAlert("Item Added Successfully", "green");
+		} catch (error) {
+			// negative scenario
+			setSaving(false);
+			raiseAlert("Error in Submitting", "red");
+		}
+		setForm({
+			menu_id: "",
+			image: "",
+			name: "",
+			description: "",
+			ingredients: "",
+			price: "",
+			veg_or_nonveg: "Veg",
+			inmenu: "",
+			incategory: "",
+			inlocation: "",
+		});
 	};
 
 	if (!data || menus.length === 0) {
@@ -185,6 +219,15 @@ const AddItemForm = () => {
 	return (
 		<div className="flex justify-center items-start min-h-screen">
 			<div className="mx-auto max-w-4xl px-4 py-6 wrapper">
+				{showAlert && (
+					<div className="alert-wrapper">
+						<AlertPopup
+							message={alertMessage}
+							colorClass={alertCode}
+							closeFunction={() => setShowAlert(false)}
+						/>
+					</div>
+				)}
 				<h1 className="text-center mb-8 add-menu--header">Add Your Menus</h1>
 				<div className="p-6 max-w-3xl mx-auto overflow-y-auto max-h-[80vh] custom-scrollbar form-wrapper">
 					<form onSubmit={handleSubmit} className="space-y-6">
@@ -268,7 +311,8 @@ const AddItemForm = () => {
 							/>
 							{priceFlag && (
 								<span className="mandatory-warning">
-									This field is mandatory.
+									This field is mandatory. Make sure there are only numeric
+									values.
 								</span>
 							)}
 						</div>

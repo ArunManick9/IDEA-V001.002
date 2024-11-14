@@ -1,0 +1,31 @@
+@import "variables.scss";
+@import "animations.scss";
+
+.alert {
+	height: 40px;
+	width: 100%;
+	padding: 4px 10px;
+	animation: fadeDown 0.2s ease-out forwards,
+		fadeUpOut 0.2s ease-in 2.6s forwards;
+	color: $color-white-blue;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	&--green {
+		background-color: green;
+	}
+	&--red {
+		background-color: $red-asterisk;
+	}
+	&-close-container {
+		margin-left: 8px;
+		color: $color-grey-1;
+		cursor: pointer;
+		transition: all 0.05s ease;
+		&:hover {
+			transform: scale(1.4);
+		}
+	}
+}
