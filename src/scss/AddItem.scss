@@ -82,3 +82,36 @@
 	width: 500px;
 	transform: translateX(-50%);
 }
+.whole-relative {
+	position: relative;
+}
+.back-wrapper {
+	position: absolute;
+	top: 30px;
+	left: 20px;
+}
+.btn--back {
+	border-radius: 10px;
+	background-color: $yale-blue;
+	color: $color-white-blue;
+	font-size: 1rem;
+	padding: 6px 12px;
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+	&-icon {
+		margin-right: 10px;
+		color: $mikado-yellow;
+	}
+	transition: all 0.15s ease;
+	&:hover {
+		background-color: $mikado-yellow;
+		box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+		color: $oxford-blue;
+		transform: scale(1.1);
+		.btn--back-icon {
+			color: $rich-black;
+		}
+	}
+	&:active {
+		transform: scale(1.1) translateX(-30px);
+	}
+}

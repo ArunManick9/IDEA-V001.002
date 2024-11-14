@@ -4,9 +4,11 @@ import {
 	getdetailedmenu,
 	loadlocation,
 } from "../services/supported_api";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../scss/AddItem.scss";
 import AlertPopup from "./AlertPopup";
+import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddItemForm = () => {
 	const [data, setData] = useState(null);
@@ -217,7 +219,15 @@ const AddItemForm = () => {
 	}
 
 	return (
-		<div className="flex justify-center items-start min-h-screen">
+		<div className="flex justify-center items-start min-h-screen whole-relative">
+			<div className="back-wrapper">
+				<Link style={{ textDecoration: "none" }} to="/menuboard">
+					<button className="btn--back">
+						<FontAwesomeIcon className="btn--back-icon" icon={faBackward} />
+						Back to Menu Dashboard
+					</button>
+				</Link>
+			</div>
 			<div className="mx-auto max-w-4xl px-4 py-6 wrapper">
 				{showAlert && (
 					<div className="alert-wrapper">
