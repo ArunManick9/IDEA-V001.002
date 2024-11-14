@@ -44,6 +44,7 @@
 	background-color: $color-grey-2;
 	width: 100%;
 	font-family: "Poppins";
+	position: relative;
 }
 .add-menu--header {
 	color: $color-grey-1;
@@ -73,4 +74,11 @@
 	cursor: disabled;
 	color: $oxford-blue;
 	background-color: $mikado-yellow;
+}
+.alert-wrapper {
+	position: absolute;
+	top: 125px;
+	left: 50%;
+	width: 500px;
+	transform: translateX(-50%);
 }
