@@ -278,7 +278,7 @@ const MenuList = () => {
 				</div>
 
 				{selectedMenu && (
-					<div className="w-1/2 bg-white shadow-lg p-6 rounded-lg self-center">
+					<div className="w-1/5 bg-white shadow-lg p-6 rounded-lg">
 						{" "}
 						{/* Adjusted for centering and width */}
 						<button
