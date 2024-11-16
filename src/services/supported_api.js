@@ -249,4 +249,20 @@ let { data: MENU_LIST, error } = await supabase
                   
             
           }
-      
+
+          export async function deleteMenuItem(item_id) {
+            console.log("Deleting menu item with ID:", item_id);
+          
+            const { error } = await supabase
+              .from("MENU_LIST")
+              .delete()
+              .eq("id", item_id); // Replace 'id' with the actual column name if different
+          
+            if (error) {
+              console.log(`Error deleting item: ${error.message}`);
+            } else {
+              console.log(`Successfully deleted item with ID: ${item_id}`);
+            }
+          
+            return error;
+          }
