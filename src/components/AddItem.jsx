@@ -4,8 +4,11 @@ import {
 	getdetailedmenu,
 	loadlocation,
 } from "../services/supported_api";
-import { useParams } from "react-router-dom";
-import "./additem.css";
+import { Link, useParams } from "react-router-dom";
+import "../scss/AddItem.scss";
+import AlertPopup from "./AlertPopup";
+import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddItemForm = () => {
 	const [data, setData] = useState(null);
@@ -26,39 +29,59 @@ const AddItemForm = () => {
 	const [imageFile, setImageFile] = useState(null);
 	const [imagePreview, setImagePreview] = useState("");
 	const [submissionCount, setSubmissionCount] = useState(0);
+	const [priceFlag, setPriceFlag] = useState(false);
+	const [nameFlag, setNameFlag] = useState(false);
+	const [descriptionFlag, setDescriptionFlag] = useState(false);
+	const [saving, setSaving] = useState(false);
 	const { loc_id } = useParams();
 
-	useEffect(
-		() => {
-			const fetchData = async () => {
-				try {
-					const result = await loadlocation(loc_id);
-					const neededData = result[0];
-					setData(neededData);
-					const menulist = await getdetailedmenu(loc_id);
-					setSubmissionCount(menulist.length);
+	const isNameEmpty = () => {
+		return form.name === "";
+	};
+	const isDescriptionEmpty = () => {
+		return form.description === "";
+	};
+	const isPriceEmpty = () => {
+		return form.price === "";
+	};
+	const isPriceValid = () => {
+		const { price } = form;
+		return !isNaN(price);
+	};
 
-					const parsedMenus =
-						typeof neededData.menus === "string"
-							? JSON.parse(neededData.menus)
-							: neededData.menus;
-					setMenus(parsedMenus);
-					setForm((prevForm) => ({
-						...prevForm,
-						inmenu: parsedMenus[0]?.menu_type || "",
-						inlocation: neededData.loc_id,
-					}));
-					console.log(result);
-				} catch (error) {
-					console.error("Error loading location:", error);
-				}
-			};
+	const isFormInvalid = () => {
+		return (
+			isNameEmpty() || isDescriptionEmpty() || isPriceEmpty() || !isPriceValid()
+		);
+	};
 
-			fetchData();
-		},
-		[loc_id],
-		submissionCount
-	);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const result = await loadlocation(loc_id);
+				const neededData = result[0];
+				setData(neededData);
+				const menulist = await getdetailedmenu(loc_id);
+				setSubmissionCount(menulist.length);
+
+				const parsedMenus =
+					typeof neededData.menus === "string"
+						? JSON.parse(neededData.menus)
+						: neededData.menus;
+				setMenus(parsedMenus);
+				setForm((prevForm) => ({
+					...prevForm,
+					inmenu: parsedMenus[0]?.menu_type || "",
+					inlocation: neededData.loc_id,
+				}));
+				console.log(result);
+			} catch (error) {
+				console.error("Error loading location:", error);
+			}
+		};
+
+		fetchData();
+	}, [loc_id, submissionCount]);
 
 	useEffect(() => {
 		if (menus.length > 0 && form.inmenu) {
@@ -124,8 +147,39 @@ const AddItemForm = () => {
 		return `${locationId}_${menuType}${categoryName}${alpha}${numeric}`;
 	};
 
+	function raiseValidations() {
+		setPriceFlag(isPriceEmpty() || !isPriceValid());
+		setDescriptionFlag(isDescriptionEmpty());
+		setNameFlag(isNameEmpty());
+	}
+
+	function takeDownValidations() {
+		setPriceFlag(false);
+		setDescriptionFlag(false);
+		setNameFlag(false);
+	}
+
+	const [showAlert, setShowAlert] = useState(false);
+	const [alertMessage, setAlertMessage] = useState("");
+	const [alertCode, setAlertCode] = useState("");
+
+	function raiseAlert(message, colorCode) {
+		setAlertMessage(message);
+		setAlertCode(`alert--${colorCode || "green"}`);
+		setShowAlert(true);
+		setTimeout(() => setShowAlert(false), 3000);
+	}
+
 	const handleSubmit = async (e) => {
+		takeDownValidations();
 		e.preventDefault();
+		if (isFormInvalid()) {
+			raiseValidations();
+			raiseAlert("Kindly fix the validations", "red");
+			return;
+		}
+
+		setSaving(true);
 		let imageUrl = form.image;
 
 		if (imageFile) {
@@ -134,10 +188,30 @@ const AddItemForm = () => {
 		}
 
 		const updatedForm = { ...form, image: imageUrl, menu_id: generateMenuId() };
-		console.log("Form submitted:", updatedForm);
 
-		addmenuitem(updatedForm);
-		setSubmissionCount(submissionCount + 1);
+		try {
+			await addmenuitem(updatedForm);
+			// success scenario
+			setSaving(false);
+			setSubmissionCount((previousCount) => previousCount + 1);
+			raiseAlert("Item Added Successfully", "green");
+		} catch (error) {
+			// negative scenario
+			setSaving(false);
+			raiseAlert("Error in Submitting", "red");
+		}
+		setForm({
+			menu_id: "",
+			image: "",
+			name: "",
+			description: "",
+			ingredients: "",
+			price: "",
+			veg_or_nonveg: "Veg",
+			inmenu: "",
+			incategory: "",
+			inlocation: "",
+		});
 	};
 
 	if (!data || menus.length === 0) {
@@ -145,17 +219,30 @@ const AddItemForm = () => {
 	}
 
 	return (
-		<div className="flex justify-center items-start min-h-screen bg-gray-100">
-			<div className="container mx-auto max-w-4xl px-4 py-6">
-				<h1 className="text-2xl font-semibold text-gray-800 text-center mb-8">
-					Add Your Menus
-				</h1>
-				<div className="bg-white p-6 rounded-lg shadow-lg max-w-3xl mx-auto overflow-y-auto max-h-[80vh] custom-scrollbar">
+		<div className="flex justify-center items-start min-h-screen whole-relative">
+			<div className="back-wrapper">
+				<Link style={{ textDecoration: "none" }} to="/menuboard">
+					<button className="btn--back">
+						<FontAwesomeIcon className="btn--back-icon" icon={faBackward} />
+						Back to Menu Dashboard
+					</button>
+				</Link>
+			</div>
+			<div className="mx-auto max-w-4xl px-4 py-6 wrapper">
+				{showAlert && (
+					<div className="alert-wrapper">
+						<AlertPopup
+							message={alertMessage}
+							colorClass={alertCode}
+							closeFunction={() => setShowAlert(false)}
+						/>
+					</div>
+				)}
+				<h1 className="text-center mb-8 add-menu--header">Add Your Menus</h1>
+				<div className="p-6 max-w-3xl mx-auto overflow-y-auto max-h-[80vh] custom-scrollbar form-wrapper">
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Upload Image
-							</label>
+							<label className="block add-menu--form-label">Upload Image</label>
 							<input
 								type="file"
 								name="image"
@@ -176,8 +263,8 @@ const AddItemForm = () => {
 						)}
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Name
+							<label className="block add-menu--form-label">
+								Name<abbr className="red-asterisk"> *</abbr>
 							</label>
 							<input
 								type="text"
@@ -186,11 +273,16 @@ const AddItemForm = () => {
 								onChange={handleChange}
 								className="w-full px-4 py-2 border border-gray-300 rounded-lg"
 							/>
+							{nameFlag && (
+								<span className="mandatory-warning">
+									This field is mandatory.
+								</span>
+							)}
 						</div>
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Description
+							<label className="block add-menu--form-label">
+								Description<abbr className="red-asterisk"> *</abbr>
 							</label>
 							<textarea
 								name="description"
@@ -198,12 +290,15 @@ const AddItemForm = () => {
 								onChange={handleChange}
 								className="w-full px-4 py-2 border border-gray-300 rounded-lg"
 							/>
+							{descriptionFlag && (
+								<span className="mandatory-warning">
+									This field is mandatory.
+								</span>
+							)}
 						</div>
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Ingredients
-							</label>
+							<label className="block add-menu--form-label">Ingredients</label>
 							<input
 								type="text"
 								name="ingredients"
@@ -214,8 +309,8 @@ const AddItemForm = () => {
 						</div>
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Price
+							<label className="block add-menu--form-label">
+								Price<abbr className="red-asterisk"> *</abbr>
 							</label>
 							<input
 								type="number"
@@ -224,10 +319,16 @@ const AddItemForm = () => {
 								onChange={handleChange}
 								className="w-full px-4 py-2 border border-gray-300 rounded-lg"
 							/>
+							{priceFlag && (
+								<span className="mandatory-warning">
+									This field is mandatory. Make sure there are only numeric
+									values.
+								</span>
+							)}
 						</div>
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
+							<label className="block add-menu--form-label">
 								Vegetarian or Non-Vegetarian
 							</label>
 							<select
@@ -242,9 +343,7 @@ const AddItemForm = () => {
 						</div>
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Menu
-							</label>
+							<label className="block add-menu--form-label">Menu</label>
 							<select
 								name="inmenu"
 								value={form.inmenu}
@@ -260,9 +359,7 @@ const AddItemForm = () => {
 						</div>
 
 						<div className="space-y-2">
-							<label className="block text-sm font-medium text-gray-700">
-								Category
-							</label>
+							<label className="block add-menu--form-label">Category</label>
 							<select
 								name="incategory"
 								value={form.incategory}
@@ -279,9 +376,10 @@ const AddItemForm = () => {
 
 						<button
 							type="submit"
-							className="w-full bg-purple-600 text-white py-2 rounded-lg shadow-lg hover:bg-purple-500 transition duration-300"
+							disabled={saving}
+							className={`w-full py-2 ${saving ? "btn btn--saving" : "btn"}`}
 						>
-							Add Item
+							{!saving ? "Add Item" : "Submitting..."}
 						</button>
 					</form>
 				</div>
