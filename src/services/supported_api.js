@@ -249,4 +249,46 @@ let { data: MENU_LIST, error } = await supabase
                   
             
           }
-      
+
+          export async function deleteMenuItem(item_id) {
+            console.log("Deleting menu item with ID:", item_id);
+          
+            const { error } = await supabase
+              .from("MENU_LIST")
+              .delete()
+              .eq("id", item_id); // Replace 'id' with the actual column name if different
+          
+            if (error) {
+              console.log(`Error deleting item: ${error.message}`);
+            } else {
+              console.log(`Successfully deleted item with ID: ${item_id}`);
+            }
+          
+            return error;
+          }
+
+          export async function updateMenuItem(menuItemId, updatedFields) {
+            console.log("Function entered: updateMenuItem");
+            console.log("Menu Item ID:", menuItemId);
+            console.log("Updated Fields:", updatedFields);
+          
+            try {
+              // Update the MENU_LIST table with the provided fields
+              const { data, error } = await supabase
+                .from("MENU_LIST")
+                .update(updatedFields) // Update with dynamic fields passed in the function
+                .eq("id", menuItemId) // Match the item using its unique ID
+                .select(); // Optionally return the updated record
+          
+              if (error) {
+                console.error(`Error updating menu item: ${error.message}`);
+                return { success: false, error: error.message };
+              }
+          
+              console.log("Update Success:", data);
+              return { success: true, data };
+            } catch (err) {
+              console.error("Unexpected error:", err);
+              return { success: false, error: "Unexpected error occurred" };
+            }
+          }          

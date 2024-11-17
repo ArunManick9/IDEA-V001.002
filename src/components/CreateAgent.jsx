@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom"; // Import to get route parameters
+import { useNavigate, useParams } from "react-router-dom"; // Import to get route parameters
 import { addagent } from "../services/supported_api";
 
 export default function CreateAgent() {
@@ -14,8 +14,18 @@ export default function CreateAgent() {
 	const [password, setPassword] = useState("");
 	const [isModalVisible, setIsModalVisible] = useState(false); // Modal for password display
 	const [showCreateButton, setShowCreateButton] = useState(true); // Show/Hide Create Agent button
-	const [confirmationModalVisible, setConfirmationModalVisible] =
-		useState(false); // Confirmation modal
+	const [confirmationModalVisible, setConfirmationModalVisible] = useState(false); // Confirmation modal
+
+	const navigate = useNavigate();
+
+	// Retrieve the access token from localStorage (or location state as fallback)
+    const access_token = location.state?.access_token || localStorage.getItem("access_token");
+    const user_id = location.state?.user_id || localStorage.getItem("user_id");
+
+    // Ensure the token is set
+    if (!access_token || !user_id) {
+        navigate("/"); // Redirect to login if no token/user_id is found
+    }
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;

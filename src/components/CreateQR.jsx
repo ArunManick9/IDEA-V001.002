@@ -1,13 +1,24 @@
 import React, { useState } from "react";
 import QRCode from "qrcode";
 import { FiDownload } from "react-icons/fi"; // For download icon
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CreateQR() {
 	const { loc_id } = useParams();
 	const [tableIdentifier, setTableIdentifier] = useState("");
 	const [qrImage, setQrImage] = useState("");
 	const [generatedUrl, setGeneratedUrl] = useState("");
+
+	const navigate = useNavigate();
+
+	// Retrieve the access token from localStorage (or location state as fallback)
+    const access_token = location.state?.access_token || localStorage.getItem("access_token");
+    const user_id = location.state?.user_id || localStorage.getItem("user_id");
+
+    // Ensure the token is set
+    if (!access_token || !user_id) {
+        navigate("/"); // Redirect to login if no token/user_id is found
+    }
 
 	// Handle table identifier change and update the URL
 	const handleTableIdentifierChange = (e) => {
