@@ -26,76 +26,17 @@ const App = () => {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<LoginScreen />} />
+            <Route path="/locations" element={<LocationCards/>} />
+            <Route path="/location/:loc_id/menus" element={<MenuList />} />
+            <Route path="/menuboard" element={ <MenuListDashboard />} />
+            <Route path="/additem/:loc_id" element={ <AddItemForm />} />
+            <Route  path="/location/:loc_id/createqr" element={<CreateQR/>}/>
             <Route path="/location/:loc_id/agentlogin" element={<WaiterLogin />} />
+            <Route  path="/kitchenroom/:loc_id/orders" element={<Orders/>}/> {/*not sure how consme this page yet but it shows all order for ktichen*/ }
+            <Route path="/location/:loc_id/createagent" element={<CreateAgent/>}/>
             <Route path="/location/:loc_id/:agent_id" element={<AgentHome />} />
             <Route path="/digimenu/:loc_id/:table_id" element={<ConfirmTable />} />
             <Route path="/location/:loc_id/orders/:order_id" element={<OrderModal />} />
-
-            {/* Protected Admin Routes */}
-            <Route
-              path="/createlocation"
-              element={
-                <ProtectedAdminRoute>
-                  <CreateOrganization />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/locations"
-              element={
-                <ProtectedAdminRoute>
-                  <LocationCards />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/location/:loc_id/menus"
-              element={
-                <ProtectedAdminRoute>
-                  <MenuList />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/menuboard"
-              element={
-                <ProtectedAdminRoute>
-                  <MenuListDashboard />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/additem/:loc_id"
-              element={
-                <ProtectedAdminRoute>
-                  <AddItemForm />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/location/:loc_id/createqr"
-              element={
-                <ProtectedAdminRoute>
-                  <CreateQR />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/kitchenroom/:loc_id/orders"
-              element={
-                <ProtectedAdminRoute>
-                  <Orders />
-                </ProtectedAdminRoute>
-              }
-            />
-            <Route
-              path="/location/:loc_id/createagent"
-              element={
-                <ProtectedAdminRoute>
-                  <CreateAgent />
-                </ProtectedAdminRoute>
-              }
-            />
           </Routes>
         </Router>
       </LocationProvider> {/* Close LocationProvider */}

@@ -4,7 +4,7 @@ import {
 	getdetailedmenu,
 	loadlocation,
 } from "../services/supported_api";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../scss/AddItem.scss";
 import AlertPopup from "./AlertPopup";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
@@ -34,6 +34,17 @@ const AddItemForm = () => {
 	const [descriptionFlag, setDescriptionFlag] = useState(false);
 	const [saving, setSaving] = useState(false);
 	const { loc_id } = useParams();
+
+	const navigate = useNavigate();
+
+	// Retrieve the access token from localStorage (or location state as fallback)
+    const access_token = location.state?.access_token || localStorage.getItem("access_token");
+    const user_id = location.state?.user_id || localStorage.getItem("user_id");
+
+    // Ensure the token is set
+    if (!access_token || !user_id) {
+        navigate("/"); // Redirect to login if no token/user_id is found
+    }
 
 	const isNameEmpty = () => {
 		return form.name === "";

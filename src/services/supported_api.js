@@ -266,3 +266,29 @@ let { data: MENU_LIST, error } = await supabase
           
             return error;
           }
+
+          export async function updateMenuItem(menuItemId, updatedFields) {
+            console.log("Function entered: updateMenuItem");
+            console.log("Menu Item ID:", menuItemId);
+            console.log("Updated Fields:", updatedFields);
+          
+            try {
+              // Update the MENU_LIST table with the provided fields
+              const { data, error } = await supabase
+                .from("MENU_LIST")
+                .update(updatedFields) // Update with dynamic fields passed in the function
+                .eq("id", menuItemId) // Match the item using its unique ID
+                .select(); // Optionally return the updated record
+          
+              if (error) {
+                console.error(`Error updating menu item: ${error.message}`);
+                return { success: false, error: error.message };
+              }
+          
+              console.log("Update Success:", data);
+              return { success: true, data };
+            } catch (err) {
+              console.error("Unexpected error:", err);
+              return { success: false, error: "Unexpected error occurred" };
+            }
+          }          
