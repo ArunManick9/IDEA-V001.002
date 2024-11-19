@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import QRCode from "qrcode";
 import { FiDownload } from "react-icons/fi"; // For download icon
 import { useNavigate, useParams } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 export default function CreateQR() {
 	const { loc_id } = useParams();
@@ -12,13 +13,14 @@ export default function CreateQR() {
 	const navigate = useNavigate();
 
 	// Retrieve the access token from localStorage (or location state as fallback)
-    const access_token = location.state?.access_token || localStorage.getItem("access_token");
-    const user_id = location.state?.user_id || localStorage.getItem("user_id");
+	const access_token =
+		location.state?.access_token || localStorage.getItem("access_token");
+	const user_id = location.state?.user_id || localStorage.getItem("user_id");
 
-    // Ensure the token is set
-    if (!access_token || !user_id) {
-        navigate("/"); // Redirect to login if no token/user_id is found
-    }
+	// Ensure the token is set
+	if (!access_token || !user_id) {
+		navigate("/"); // Redirect to login if no token/user_id is found
+	}
 
 	// Handle table identifier change and update the URL
 	const handleTableIdentifierChange = (e) => {
@@ -46,6 +48,9 @@ export default function CreateQR() {
 
 	return (
 		<div className="flex flex-col items-center justify-center p-6 space-y-6 bg-gray-100 rounded-lg shadow-lg">
+			<div className="logout-wrapper">
+				<LogoutButton />
+			</div>
 			{/* Heading */}
 			<h2 className="text-2xl font-medium text-gray-800">
 				Enter Table Name to Generate a Unique QR Code
