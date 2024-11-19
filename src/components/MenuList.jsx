@@ -17,6 +17,14 @@ const MenuList = () => {
 	const [loading, setLoading] = useState(true); // New loading state
 
 	const navigate = useNavigate();
+	// Retrieve the access token from localStorage (or location state as fallback)
+    const access_token = location.state?.access_token || localStorage.getItem("access_token");
+    const user_id = location.state?.user_id || localStorage.getItem("user_id");
+
+    // Ensure the token is set
+    if (!access_token || !user_id) {
+        navigate("/"); // Redirect to login if no token/user_id is found
+    }
 
 	const handleBackClick = () => {
 		navigate(-1); // Goes back to the previous page
@@ -278,7 +286,7 @@ const MenuList = () => {
 				</div>
 
 				{selectedMenu && (
-					<div className="w-1/2 bg-white shadow-lg p-6 rounded-lg self-center">
+					<div className="w-1/5 bg-white shadow-lg p-6 rounded-lg">
 						{" "}
 						{/* Adjusted for centering and width */}
 						<button
