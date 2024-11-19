@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CategoryList from "./CategoryList";
 import { editmenulist, loadlocation } from "../services/supported_api";
 import Loading from "./Loading";
+import LogoutButton from "./LogoutButton";
 
 const MenuList = () => {
 	const { loc_id } = useParams(); // Get loc_id from the URL
@@ -18,13 +19,14 @@ const MenuList = () => {
 
 	const navigate = useNavigate();
 	// Retrieve the access token from localStorage (or location state as fallback)
-    const access_token = location.state?.access_token || localStorage.getItem("access_token");
-    const user_id = location.state?.user_id || localStorage.getItem("user_id");
+	const access_token =
+		location.state?.access_token || localStorage.getItem("access_token");
+	const user_id = location.state?.user_id || localStorage.getItem("user_id");
 
-    // Ensure the token is set
-    if (!access_token || !user_id) {
-        navigate("/"); // Redirect to login if no token/user_id is found
-    }
+	// Ensure the token is set
+	if (!access_token || !user_id) {
+		navigate("/"); // Redirect to login if no token/user_id is found
+	}
 
 	const handleBackClick = () => {
 		navigate(-1); // Goes back to the previous page
@@ -126,6 +128,9 @@ const MenuList = () => {
 
 	return (
 		<div className="flex flex-col justify-center items-center space-y-6 min-h-screen transition-all duration-300">
+			<div className="w-full flexbox justify-end">
+				<LogoutButton />
+			</div>
 			{/* Back Button */}
 			<button
 				onClick={handleBackClick}

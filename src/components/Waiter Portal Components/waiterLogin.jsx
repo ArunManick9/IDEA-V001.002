@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // Import useNavigate and useParams
 import { getagentlogin } from "../../services/supported_api";
+import LogoutButton from "../LogoutButton";
 
 export default function WaiterLogin() {
 	const [mbNum, setMbNum] = useState("");
@@ -60,6 +61,9 @@ export default function WaiterLogin() {
 
 	return (
 		<div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+			<div className="logout-wrapper">
+				<LogoutButton />
+			</div>
 			<div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
 				<h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
 					Waiter Login

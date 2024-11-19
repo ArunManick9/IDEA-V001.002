@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import EditMenuItemModal from "./EditMenuItems";
 import "../scss/MenuListDashboard.scss";
+import LogoutButton from "./LogoutButton";
 
 const MenuListDashboard = () => {
 	const location = useLocation();
@@ -108,7 +109,10 @@ const MenuListDashboard = () => {
 
 	return (
 		<div className="flexbox justify-center items-center min-h-screen menuboard-outer">
-			<div className="p-6  w-4/5 h-[80vh] max-h-[80vh] overflow-hidden menuboard">
+			<div className="logout-wrapper">
+				<LogoutButton />
+			</div>
+			<div className="p-6 w-4/5 h-[80vh] max-h-[80vh] overflow-hidden menuboard">
 				<div className="flexbox justify-between mb-8">
 					<button
 						className="menuboard-btn menuboard-btn--add"
