@@ -1,0 +1,72 @@
+@import "variables.scss";
+
+.flexbox {
+	display: flex;
+}
+.outer-container {
+	background-color: $color-grey-3;
+}
+.inner-container {
+	background-color: $color-grey-2;
+	font-family: "Poppins", sans-serif;
+	color: $color-white-blue;
+	border-radius: 8px;
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+	input {
+		color: $rich-black;
+	}
+	input:focus {
+		outline: none;
+	}
+}
+.login-buttons-container {
+	display: flex;
+	*:first-child {
+		margin-right: 30px;
+	}
+	* {
+		border-radius: 8px;
+	}
+}
+.login-btn {
+	background-color: $oxford-blue;
+	color: $gold;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease;
+	margin-top: 32px;
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+	}
+	&:active {
+		transform: translateY(1px);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+	}
+	&--google {
+		color: $rich-black;
+		background-color: $mikado-yellow;
+	}
+}
+
+.help-text {
+	opacity: 0.6;
+	font-size: 0.7rem;
+}
+
+.white-color {
+	color: $color-white-blue;
+}
+.bg-yale {
+	background-color: $yale-blue;
+}
+.dark-gray-color {
+	color: $color-grey-4;
+}
+.bg-light-gray {
+	background-color: $color-grey-1;
+}
+.active-tab {
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
