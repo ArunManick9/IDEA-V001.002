@@ -1,0 +1,57 @@
+@import "variables.scss";
+
+.flexbox {
+	display: flex;
+	flex-direction: column;
+	&--row {
+		flex-direction: row;
+	}
+}
+.create-agent-container {
+	background-color: $oxford-blue;
+	font-family: "Poppins", sans-serif;
+	position: relative;
+}
+.fg-mikado {
+	color: $mikado-yellow;
+}
+h1.title {
+	text-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+}
+
+.btn {
+	padding: 6px 14px;
+	margin-top: 4px;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	background-color: $yale-blue;
+	color: $color-grey-1;
+	transition: all 0.2s ease;
+	&:hover {
+		transform: translateY(-2.5px);
+		filter: brightness(1.1);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+	}
+	&:focus {
+		transform: translateY(1.5px);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+	}
+
+	&--submit {
+		background-color: $mikado-yellow;
+		color: $rich-black;
+		&:hover {
+			filter: brightness(0.9);
+		}
+	}
+}
+.create-agent-form {
+	border-radius: 5px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+	background-color: $yale-blue;
+	color: $color-white-blue;
+	select,
+	input {
+		color: $rich-black;
+	}
+}
