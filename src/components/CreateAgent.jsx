@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // Import to get route parameters
 import { addagent } from "../services/supported_api";
 import LogoutButton from "./LogoutButton";
+import "../scss/CreateAgent.scss";
 
 export default function CreateAgent() {
 	const { loc_id } = useParams(); // Get location_id from URL
@@ -85,41 +86,39 @@ export default function CreateAgent() {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+		<div className="min-h-screen create-agent-container flexbox flexbox-col items-center justify-center">
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>
-			<h1 className="text-4xl font-semibold mb-6 text-gray-700 text-center">
+			<h1 className="text-4xl font-semibold mb-6 fg-mikado text-center title">
 				Create and Manage Your Agents
 			</h1>
 
 			{/* Action buttons */}
-			<div className="flex space-x-8 mb-10">
+			<div className="flexbox flexbox--row space-x-8 mb-10">
 				<button
-					className="bg-white text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-200"
+					className="btn"
 					onClick={() => alert("Create Login QR functionality coming soon!")}
 				>
 					Create Login QR
 				</button>
 				<button
-					className="bg-white text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-600 transition duration-200"
+					className="btn"
 					onClick={() => alert("View All Agents functionality coming soon!")}
 				>
 					View All Agents
 				</button>
 			</div>
 
-			<div className="flex items-start space-x-16">
+			<div className="flexbox items-start space-x-16">
 				{/* Form Section */}
-				<div className="bg-white shadow-xl rounded-lg p-8 w-96">
-					<h2 className="text-2xl font-medium mb-6 text-center text-gray-700">
+				<div className="create-agent-form p-8 w-96">
+					<h2 className="text-2xl font-medium mb-6 text-center">
 						Create Agent
 					</h2>
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div>
-							<label className="block text-sm font-medium text-gray-600">
-								Name
-							</label>
+							<label className="block text-sm font-medium">Name</label>
 							<input
 								type="text"
 								name="name"
@@ -130,9 +129,7 @@ export default function CreateAgent() {
 							/>
 						</div>
 						<div>
-							<label className="block text-sm font-medium text-gray-600">
-								Mobile
-							</label>
+							<label className="block text-sm font-medium">Mobile</label>
 							<input
 								type="text"
 								name="mobile"
@@ -143,9 +140,7 @@ export default function CreateAgent() {
 							/>
 						</div>
 						<div>
-							<label className="block text-sm font-medium text-gray-600">
-								Gender
-							</label>
+							<label className="block text-sm font-medium">Gender</label>
 							<select
 								name="gender"
 								value={agent.gender}
@@ -159,9 +154,7 @@ export default function CreateAgent() {
 							</select>
 						</div>
 						<div>
-							<label className="block text-sm font-medium text-gray-600">
-								Level
-							</label>
+							<label className="block text-sm font-medium">Level</label>
 							<select
 								name="level"
 								value={agent.level}
@@ -175,11 +168,8 @@ export default function CreateAgent() {
 						</div>
 
 						{showCreateButton && (
-							<button
-								type="submit"
-								className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition duration-200"
-							>
-								Create Agent
+							<button type="submit" className="w-full btn btn--submit">
+								Create
 							</button>
 						)}
 					</form>
@@ -195,11 +185,11 @@ export default function CreateAgent() {
 							<h4 className="text-sm font-medium text-gray-600">
 								Generated Password:
 							</h4>
-							<div className="flex space-x-2 justify-center mt-2">
+							<div className="flexbox space-x-2 justify-center mt-2">
 								{password.split("").map((char, index) => (
 									<div
 										key={index}
-										className="w-12 h-12 flex items-center justify-center bg-gray-200 border border-gray-300 rounded-md text-lg font-semibold text-gray-800"
+										className="w-12 h-12 flexbox items-center justify-center bg-gray-200 border border-gray-300 rounded-md text-lg font-semibold text-gray-800"
 									>
 										{char}
 									</div>
@@ -217,7 +207,7 @@ export default function CreateAgent() {
 
 				{/* Confirmation Modal */}
 				{confirmationModalVisible && (
-					<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+					<div className="fixed inset-0 bg-black bg-opacity-50 flexbox items-center justify-center">
 						<div className="bg-white p-6 rounded-lg shadow-lg">
 							<h3 className="text-center text-lg font-semibold mb-4">
 								Please make sure the password is shared or noted separately.
