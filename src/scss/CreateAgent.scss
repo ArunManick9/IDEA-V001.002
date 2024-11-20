@@ -2,7 +2,6 @@
 
 .flexbox {
 	display: flex;
-	flex-direction: column;
 	&--row {
 		flex-direction: row;
 	}
@@ -11,6 +10,7 @@
 	background-color: $oxford-blue;
 	font-family: "Poppins", sans-serif;
 	position: relative;
+	flex-direction: column;
 }
 .fg-mikado {
 	color: $mikado-yellow;

@@ -4,6 +4,7 @@ import CategoryList from "./CategoryList";
 import { editmenulist, loadlocation } from "../services/supported_api";
 import Loading from "./Loading";
 import LogoutButton from "./LogoutButton";
+import "../scss/MenuList.scss";
 
 const MenuList = () => {
 	const { loc_id } = useParams(); // Get loc_id from the URL
@@ -127,57 +128,45 @@ const MenuList = () => {
 	}
 
 	return (
-		<div className="flex flex-col justify-center items-center space-y-6 min-h-screen transition-all duration-300">
-			<div className="w-full flexbox justify-end">
+		<div className="flexbox flex-col justify-center items-center space-y-6 min-h-screen transition-all duration-300 menu-list-container">
+			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>
 			{/* Back Button */}
-			<button
-				onClick={handleBackClick}
-				className="fixed top-4 left-4 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg shadow-md hover:bg-gray-300 hover:shadow-lg transition-all duration-300 ease-in-out"
-			>
+			<button onClick={handleBackClick} className="btn-back">
 				Back To Location
 			</button>
 
 			{/* Heading */}
-			<h1 className="text-3xl font-light text-gray-900">
+			<h1 className="heading">
 				Consolidated View of your Menu and Categories at{" "}
-				<span className="text-purple-600">{data[0]?.name}</span>
+				<span className="fg-mikado">{data[0]?.name}</span>
 			</h1>
 
 			{/* Button Group: View/Edit All Menus, Create QR for Menu, and Create Agent(s) */}
-			<div className="flex space-x-4 mt-4">
+			<div className="flexbox space-x-4 mt-4">
 				{/* View/Edit All Menus Button */}
-				<button
-					className="bg-white text-gray-800 py-2 px-6 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-100 border border-gray-200 transition-all duration-300 ease-in-out"
-					onClick={handleViewOrEditButtonClick}
-				>
+				<button className="btn" onClick={handleViewOrEditButtonClick}>
 					View/Edit All Menus
 				</button>
 
 				{/* Create QR for Menu Button */}
-				<button
-					className="bg-white text-gray-800 py-2 px-6 rounded-lg shadow-md hover:shadow-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 ease-in-out"
-					onClick={handleCreateQRCode}
-				>
+				<button className="btn" onClick={handleCreateQRCode}>
 					Create QR for Menu
 				</button>
 
 				{/* Create Agent(s) Button */}
-				<button
-					className="bg-white text-gray-800 py-2 px-6 rounded-lg shadow-md hover:shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 ease-in-out"
-					onClick={handleCreateAgents}
-				>
+				<button className="btn" onClick={handleCreateAgents}>
 					Create Agent(s)
 				</button>
 			</div>
 
 			{/* Menus and Categories */}
-			<div className="w-full flex justify-center items-start space-x-6 transition-all duration-300">
-				<div className="p-20px bg-white shadow-lg rounded-lg overflow-hidden relative">
+			<div className="w-full flexbox justify-center items-start space-x-6 transition-all duration-300">
+				<div className="p-20px bg-gray-1 shadow-lg rounded-lg overflow-hidden relative">
 					{data && (
 						<>
-							<div className="flex items-center p-6">
+							<div className="flexbox items-center p-6">
 								<div className="flex-1">
 									<h2 className="text-2xl font-medium text-gray-800 mb-2">
 										{data[0].name}
@@ -191,12 +180,12 @@ const MenuList = () => {
 								/>
 							</div>
 
-							<div className="p-4 grid grid-cols-1 gap-4">
+							<div className="p-6 grid grid-cols-1 gap-4">
 								<h1 className="text-lg">List Of Menu</h1>
 								{menus.map((menu, index) => (
 									<div
 										key={index}
-										className="bg-gray-100 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer transform hover:-translate-y-1 hover:scale-105 flex justify-between items-center"
+										className="menu-item p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer justify-between items-center"
 										onClick={() => handleMenuClick(menu.menu_type)}
 									>
 										<p className="text-gray-800 font-normal">
@@ -216,18 +205,12 @@ const MenuList = () => {
 							</div>
 
 							{!selectedMenu && (
-								<div className="p-4 flex justify-between">
-									<button
-										className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
-										onClick={handleAddMenu}
-									>
+								<div className="p-6 flexbox justify-between">
+									<button className="btn btn--add" onClick={handleAddMenu}>
 										Add Menu
 									</button>
 									{showSaveButton && (
-										<button
-											className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition"
-											onClick={handleSave}
-										>
+										<button className="btn btn--submit" onClick={handleSave}>
 											Save
 										</button>
 									)}
@@ -237,12 +220,12 @@ const MenuList = () => {
 					)}
 
 					{showDeleteModal && (
-						<div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+						<div className="fixed inset-0 bg-black bg-opacity-50 flexbox justify-center items-center">
 							<div className="bg-white p-6 rounded-lg shadow-lg">
 								<p className="mb-4">
 									Are you sure you want to delete this menu item?
 								</p>
-								<div className="flex justify-end space-x-4">
+								<div className="flexbox justify-end space-x-4">
 									<button
 										className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition"
 										onClick={() => setShowDeleteModal(false)}
@@ -261,7 +244,7 @@ const MenuList = () => {
 					)}
 
 					{showAddModal && (
-						<div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+						<div className="fixed inset-0 bg-black bg-opacity-50 flexbox justify-center items-center">
 							<div className="bg-white p-6 rounded-lg shadow-lg">
 								<h2 className="text-lg font-light mb-4">Add a New Menu</h2>
 								<input
@@ -271,7 +254,7 @@ const MenuList = () => {
 									value={newMenu}
 									onChange={(e) => setNewMenu(e.target.value)}
 								/>
-								<div className="flex justify-end space-x-4">
+								<div className="flexbox justify-end space-x-4">
 									<button
 										className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition"
 										onClick={() => setShowAddModal(false)}
