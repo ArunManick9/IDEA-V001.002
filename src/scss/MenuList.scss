@@ -1,0 +1,79 @@
+@import "variables.scss";
+
+.menu-list-container {
+	background-color: $rich-black;
+	font-family: "Poppins", sans-serif;
+	gap: 16px;
+	h1.heading {
+		font-size: 1.75rem;
+		color: $color-white-blue;
+		font-weight: 700;
+	}
+	.menu-item {
+		background-color: $color-white-blue;
+		display: flex;
+		color: $oxford-blue;
+		&:hover {
+			transform: scale(1.03);
+			transition: all 0.2s ease;
+		}
+	}
+	.btn-back {
+		position: fixed;
+		top: 10px;
+		left: 16px;
+		background-color: $color-grey-1;
+		color: $color-grey-4;
+		font-size: 14px;
+		padding: 4px 8px;
+		margin-right: 16px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+		border-radius: 4px;
+		font-weight: 600;
+		font-family: "Poppins", sans-serif;
+		transition: all 0.07s ease;
+		cursor: pointer;
+		&:hover {
+			transform: translateY(-2.5px);
+			box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+		}
+		&:focus {
+			transform: translateY(1.5px);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+		}
+	}
+	.btn {
+		padding: 6px 14px;
+		margin-top: 4px;
+		border-radius: 5px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+		background-color: $yale-blue;
+		color: $color-grey-1;
+		transition: all 0.2s ease;
+		&:hover {
+			transform: translateY(-2.5px);
+			filter: brightness(1.1);
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+		}
+		&:focus {
+			transform: translateY(1.5px);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+		}
+
+		&--add {
+			background-color: $oxford-blue;
+			color: $gold;
+			&:hover {
+				filter: brightness(1.2);
+			}
+		}
+
+		&--submit {
+			background-color: $mikado-yellow;
+			color: $rich-black;
+			&:hover {
+				filter: brightness(0.9);
+			}
+		}
+	}
+}
