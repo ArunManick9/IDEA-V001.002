@@ -116,7 +116,7 @@ const LocationCards = () => {
 	};
 
 	return (
-		<div className="relative min-h-screen bg-white container">
+		<div className="relative min-h-screen locations-container">
 			{createOrgClicked && (
 				<CreateOrganization
 					user_id={user_id}
@@ -124,20 +124,18 @@ const LocationCards = () => {
 				/>
 			)}
 			{loading && <Loading />}
-			<div className="container mx-auto py-12">
+			<div className="locations-container--inner mx-auto py-12">
 				<div className="w-full flexbox justify-end">
 					<LogoutButton />
 				</div>
-				<h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-					Manage Your Locations
-				</h1>
+				<h1 className="header mb-8 text-center">Manage Your Locations</h1>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+				<div className="locations-flex">
 					{locations.map((location, index) => (
 						<div
 							key={index}
 							onClick={() => handleCardClick(location.loc_id)}
-							className="relative bg-white border border-gray-200 rounded-lg shadow-sm transition-all transform hover:scale-105 hover:shadow-lg cursor-pointer location-card"
+							className="relative rounded-lg transition-all transform hover:scale-105 hover:shadow-lg  cursor-pointer location-card"
 						>
 							<img
 								src={location.image}
@@ -145,11 +143,9 @@ const LocationCards = () => {
 								className="w-full h-48 object-cover rounded-t-lg"
 							/>
 							<div className="p-6">
-								<h3 className="text-xl font-semibold text-gray-900 mb-2">
-									{location.name}
-								</h3>
-								<p className="text-gray-600">{location.address}</p>
-								<p className="text-gray-500 text-sm mt-1">
+								<h3 className="text-xl font-semibold mb-2">{location.name}</h3>
+								<p className="fg-gray-1">{location.address}</p>
+								<p className="fg-gray-1 text-sm mt-1">
 									Location ID: {location.customerId}
 								</p>
 							</div>
@@ -158,7 +154,7 @@ const LocationCards = () => {
 									e.stopPropagation();
 									handleDeleteClick(location.loc_id);
 								}}
-								className="absolute top-3 right-3 p-2 bg-red-600 rounded-full text-white hover:bg-red-800 transition-colors"
+								className="absolute top-3 right-3 delete-wrapper"
 							>
 								<FontAwesomeIcon icon={faTrash} />
 							</button>
@@ -167,19 +163,19 @@ const LocationCards = () => {
 
 					<div
 						onClick={handleCreateNewClick}
-						className="relative bg-gray-100 border border-gray-300 rounded-lg shadow-sm transition-all transform hover:scale-105 hover:shadow-lg cursor-pointer flex items-center justify-center"
+						className="relative rounded-lg transition-all transform hover:scale-105 hover:shadow-lg cursor-pointer flexbox items-center justify-center location-card--new"
 					>
-						<div className="p-6 text-center text-gray-600">
+						<div className="p-6 text-center ">
 							<h3 className="text-lg font-semibold mb-2">
 								Create New Location
 							</h3>
-							<p className="text-gray-500">Click here to add a new location</p>
+							<p>Click here to add a new location</p>
 						</div>
 					</div>
 				</div>
 
 				{deleteModal.show && (
-					<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+					<div className="fixed inset-0 bg-gray-800 bg-opacity-75 flexbox items-center justify-center z-50">
 						<div className="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg">
 							<h2 className="text-lg font-semibold text-gray-800 mb-4">
 								Confirm Deletion
@@ -187,7 +183,7 @@ const LocationCards = () => {
 							<p className="text-gray-600">
 								Are you sure you want to delete this location?
 							</p>
-							<div className="mt-6 flex justify-end space-x-4">
+							<div className="mt-6 flexbox justify-end space-x-4">
 								<button
 									onClick={confirmDelete}
 									className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-800 transition-colors"
