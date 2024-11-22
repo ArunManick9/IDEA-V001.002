@@ -1,9 +1,66 @@
 @import "variables.scss";
 
-.container {
+.locations-container {
 	font-family: "Poppins", sans-serif;
-	background-color: $color-white-blue;
+	background-color: $yale-blue;
+	min-width: 100vw;
+	&--inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.header {
+		font-size: 2.8rem;
+		font-weight: 700;
+		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+		color: $mikado-yellow;
+		letter-spacing: 1.2px;
+	}
+	.locations-flex {
+		display: flex;
+		width: 80vw;
+		margin: 0 32px;
+		flex-direction: row;
+		gap: 48px;
+		flex-wrap: wrap;
+		align-items: stretch;
+		justify-content: center;
+	}
+}
+.fg-gray-1 {
+	color: $color-grey-1;
 }
 .location-card {
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	min-height: 100%;
+	width: 350px;
+	margin-bottom: 24px;
+	background: linear-gradient(
+		to right bottom,
+		$yale-blue,
+		$oxford-blue,
+		$rich-black
+	);
+	color: $color-white-blue;
+
+	&--new {
+		margin-bottom: 24px;
+		background: linear-gradient(to right bottom, $oxford-blue, $rich-black);
+		color: $gold;
+		width: 350px;
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	}
+	.delete-wrapper {
+		color: $color-grey-4;
+		background: $color-grey-1;
+		padding: 4px 6px;
+		border-radius: 4px;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+		cursor: pointer;
+		transition: all 0.05s ease;
+		&:hover {
+			transform: scale(1.4);
+			box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.5);
+		}
+	}
 }
