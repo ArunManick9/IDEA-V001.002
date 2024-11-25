@@ -120,6 +120,12 @@ const MenuListDashboard = () => {
 					>
 						<FontAwesomeIcon icon={faSquarePlus} /> Add Menu
 					</button>
+					<button
+		className="menuboard-btn menuboard-btn--enhance"
+		onClick={() => navigate("/enhancemenu")}
+	>
+		Enhance Menu
+	</button>
 				</div>
 
 				<div className="flexbox space-x-4 mb-8 justify-center">

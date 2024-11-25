@@ -17,6 +17,7 @@ import WaiterLogin from "./components/Waiter Portal Components/WaiterLogin";
 import AgentHome from "./components/Waiter Portal Components/AgentHome";
 import ConfirmTable from "./components/Visitor Components/ConfirmTable";
 import OrderModal from "./components/Waiter Portal Components/OrderModal";
+import EnhanceMenu from "./components/EnhanceMenu";
 
 const App = () => {
 	return (
@@ -51,6 +52,10 @@ const App = () => {
 						<Route
 							path="/location/:loc_id/orders/:order_id"
 							element={<OrderModal />}
+						/>
+						<Route
+							path="/enhancemenu"
+							element={<EnhanceMenu/>}
 						/>
 					</Routes>
 				</Router>
