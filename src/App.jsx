@@ -54,7 +54,7 @@ const App = () => {
 							element={<OrderModal />}
 						/>
 						<Route
-							path="/enhancemenu"
+							path="menuboard/:loc_id/enhancemenu"
 							element={<EnhanceMenu/>}
 						/>
 					</Routes>

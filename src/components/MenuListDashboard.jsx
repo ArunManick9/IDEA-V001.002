@@ -122,7 +122,7 @@ const MenuListDashboard = () => {
 					</button>
 					<button
 		className="menuboard-btn menuboard-btn--enhance"
-		onClick={() => navigate("/enhancemenu")}
+		onClick={() => navigate(`${loc_id}/enhancemenu`)}
 	>
 		Enhance Menu
 	</button>
