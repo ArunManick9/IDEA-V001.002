@@ -292,3 +292,40 @@ let { data: MENU_LIST, error } = await supabase
               return { success: false, error: "Unexpected error occurred" };
             }
           }          
+// API to update individual banner columns (cartsuggestionbanner, combobanners, or highlightbanner)
+export async function updateBanner(bannerType, bannerData, loc_id) {
+  console.log("Location ID:", loc_id);
+  console.log("Banner Type:", bannerType);
+  console.log("Banner Data:", bannerData);
+
+  try {
+    let updateData = {};
+
+    // Prepare the data to update based on the banner type
+    if (bannerType === "highlight") {
+      updateData.highlightbanner = bannerData;
+    } else if (bannerType === "combo") {
+      updateData.combobanners = bannerData;
+    } else if (bannerType === "cart") {
+      updateData.cartsuggestionbanner = bannerData;
+    }
+
+    // Update the relevant banner column in the database
+    const { data, error } = await supabase
+      .from("HOTEL_BASE")
+      .update(updateData) // Update only the selected banner column
+      .eq("loc_id", loc_id)
+      .select();
+
+    if (error) {
+      console.error(`Error updating banner: ${error.message}`);
+      throw error;
+    }
+
+    console.log("Banner updated successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error in updating banner:", error.message);
+    throw error;
+  }
+}
