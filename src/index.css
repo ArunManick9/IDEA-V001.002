@@ -34,3 +34,33 @@
     animation: fadeOut 0.5s ease-in;
   }
   
+  @layer utilities {
+    .animate-scroll-preview {
+      @apply w-full;
+      animation: scroll-preview 10s linear infinite;
+    }
+    .animate-slide-preview {
+      @apply w-full;
+      animation: slide-preview 5s ease-in-out infinite;
+    }
+    @keyframes scroll-preview {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    @keyframes slide-preview {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      20%, 80% {
+        transform: translateX(-100%);
+      }
+      40%, 60% {
+        transform: translateX(-200%);
+      }
+    }
+  }
+  
