@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+// styling is written in DigiMenu.scss
 
 const MenuItemCard = ({
 	item,
@@ -8,7 +9,7 @@ const MenuItemCard = ({
 	cartItems,
 }) => {
 	return (
-		<div className="flex items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 mb-4">
+		<div className="flexbox items-center p-4 menu-item">
 			<img
 				src={item.image}
 				alt={item.name}
@@ -21,10 +22,10 @@ const MenuItemCard = ({
 				<p className="text-sm text-gray-600 truncate">{item.description}</p>
 				<span className="text-lg font-bold text-gray-900">${item.price}</span>
 			</div>
-			<div className="flex items-center ml-3">
+			<div className="flexbox items-center ml-3 icons-wrapper">
 				<button
 					onClick={() => handleRemoveFromCart(item)}
-					className="bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-gray-300 transition-all duration-200"
+					className=" p-2 rounded-lg menu-item--icons transition-all duration-200"
 				>
 					<FaMinus />
 				</button>
@@ -33,7 +34,7 @@ const MenuItemCard = ({
 				</span>
 				<button
 					onClick={() => handleAddToCart(item)}
-					className="bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-gray-300 transition-all duration-200"
+					className=" p-2 rounded-lg menu-item--icons transition-all duration-200"
 				>
 					<FaPlus />
 				</button>
