@@ -5,6 +5,7 @@ import { getdetailedmenu } from "../../services/supported_api";
 import { FaShoppingCart, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import MenuItemCard from "./MenuItemCard";
 import Cart from "./Cart";
+import "../../scss/DigiMenu.scss";
 
 export default function DigiMenu() {
 	const { loc_id, table_id } = useParams();
@@ -85,58 +86,24 @@ export default function DigiMenu() {
 	};
 
 	return (
-		<div className="p-6 min-h-screen bg-gray-50">
-			<h1 className="text-2xl font-bold text-gray-900 mb-6">
-				Location ID: {loc_id} | Table ID: {table_id}
+		<div className="p-6 min-h-screen digimenu">
+			<h1 className="digimenu__header mb-6">
+				Welcome to <span>{loc_id} | </span> Table: <span>{table_id}</span>
 			</h1>
 
 			{/* Menu Tabs with Dropdowns */}
-			<div className="space-y-4 py-2 mb-4">
-				{getMenus().map((menu) => (
-					<div key={menu} className="border rounded-lg shadow-sm bg-white">
-						<div
-							className={`flex justify-between items-center px-6 py-2 text-lg font-semibold cursor-pointer ${
-								selectedMenu === menu
-									? "bg-blue-600 text-white"
-									: "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white"
-							}`}
-							onClick={() => {
-								setSelectedMenu(menu);
-								setSelectedCategory("");
-							}}
-						>
-							<span>{menu}</span>
-							<button
-								className="text-lg focus:outline-none"
-								onClick={(e) => {
-									e.stopPropagation();
-									toggleMenuDropdown(menu);
-								}}
-							>
-								{openMenus[menu] ? <FaChevronUp /> : <FaChevronDown />}
-							</button>
-						</div>
-
-						{openMenus[menu] && (
-							<div className="p-4 bg-gray-100">
-								{getCategories(menu).map((category) => (
-									<button
-										key={category}
-										className={`block w-full text-left px-5 py-2 rounded-lg transition-all duration-300 ${
-											selectedCategory === category
-												? "bg-green-600 text-white"
-												: "bg-gray-200 text-gray-800 hover:bg-green-500 hover:text-white"
-										}`}
-										onClick={() => {
-											setSelectedMenu(menu);
-											setSelectedCategory(category);
-										}}
-									>
-										{category}
-									</button>
-								))}
-							</div>
-						)}
+			<div className="category-wrapper">
+				{getMenus()?.map((menu) => (
+					<div
+						key={menu}
+						className={`category ${
+							selectedMenu === menu && "category--active"
+						}`}
+						onClick={() => {
+							setSelectedMenu(menu);
+						}}
+					>
+						<span>{menu}</span>
 					</div>
 				))}
 			</div>
@@ -169,7 +136,7 @@ export default function DigiMenu() {
 
 			{/* Floating Cart Button */}
 			<button
-				className="fixed bottom-8 right-8 bg-blue-600 text-white p-5 rounded-full shadow-lg hover:bg-blue-700 transition-all"
+				className=" p-5 rounded-full digimenu__cart"
 				onClick={() => setShowCart(!showCart)}
 			>
 				<FaShoppingCart className="w-6 h-6" />

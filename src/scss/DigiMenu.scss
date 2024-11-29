@@ -1,0 +1,89 @@
+@import "variables.scss";
+.digimenu {
+	font-family: "Poppins", sans-serif;
+	background-color: $color-neu-one;
+	&__header {
+		color: $rich-black;
+		font-size: 1.2rem;
+		& > span {
+			font-weight: 600;
+		}
+	}
+	.category-wrapper {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: wrap;
+		margin: 16px 0;
+		justify-content: space-around;
+
+		.category {
+			display: inline-block;
+			opacity: 0.8;
+			margin: 8px;
+			transition: all 0.1s ease;
+			cursor: pointer;
+
+			&--active {
+				font-weight: 700;
+				margin: 8px 16px;
+				transform: scale(1.2);
+				position: relative;
+				&::after {
+					padding: 3px;
+					background: $red-asterisk;
+					border-radius: 50%;
+					content: "";
+					position: absolute;
+					bottom: -7px;
+					left: 50%;
+					opacity: 0;
+					transform: translate(-40px, 0);
+					animation: dashInFromLeft 0.25s cubic-bezier(0.63, 1.13, 0.63, 0.99);
+					animation-delay: 0.1s;
+					animation-fill-mode: forwards;
+				}
+			}
+		}
+	}
+	&__cart {
+		background: $oxford-blue;
+		box-shadow: $shadow-neu-thick, $shadow-bevel;
+		animation: fadeUp 0.4s ease both;
+		position: fixed;
+		bottom: 16px;
+		right: 16px;
+		color: $mikado-yellow;
+		transition: all 0.4s ease;
+	}
+}
+.menu-item {
+	background-color: $color-neu-one;
+	background: $gradient-concave;
+	border-radius: 15px;
+	box-shadow: $shadow-neu-small;
+	margin: 8px 0;
+	&:nth-child(2n + 1) {
+		animation: dashInFromLongLeft 0.4s ease both;
+	}
+	&:nth-child(2n) {
+		animation: dashInFromLongRight 0.4s ease both;
+	}
+	&--icons {
+		box-shadow: $shadow-lightest;
+		cursor: pointer;
+		margin: 0 4px;
+	}
+	.flex-1 {
+		flex: 0.6;
+		width: min-content;
+		.truncate {
+			width: 124px;
+			text-overflow: ellipsis;
+		}
+	}
+	.icons-wrapper {
+		flex: 0.4;
+	}
+}
