@@ -57,33 +57,118 @@
 		color: $mikado-yellow;
 		transition: all 0.4s ease;
 	}
-}
-.menu-item {
-	background-color: $color-neu-one;
-	background: $gradient-concave;
-	border-radius: 15px;
-	box-shadow: $shadow-neu-small;
-	margin: 8px 0;
-	&:nth-child(2n + 1) {
-		animation: dashInFromLongLeft 0.4s ease both;
-	}
-	&:nth-child(2n) {
-		animation: dashInFromLongRight 0.4s ease both;
-	}
-	&--icons {
-		box-shadow: $shadow-lightest;
-		cursor: pointer;
-		margin: 0 4px;
-	}
-	.flex-1 {
-		flex: 0.6;
-		width: min-content;
-		.truncate {
-			width: 124px;
-			text-overflow: ellipsis;
+	.menu-item {
+		background-color: $color-neu-one;
+		background: $gradient-concave;
+		border-radius: 15px;
+		box-shadow: $shadow-neu-small;
+		margin: 8px 0;
+		&:nth-child(2n + 1) {
+			animation: dashInFromLongLeft 0.4s ease both;
+		}
+		&:nth-child(2n) {
+			animation: dashInFromLongRight 0.4s ease both;
+		}
+		&--icons {
+			box-shadow: $shadow-lightest;
+			cursor: pointer;
+			margin: 0 4px;
+			border-radius: 50%;
+		}
+		.flex-1 {
+			flex: 0.6;
+			width: min-content;
+			.truncate {
+				width: 124px;
+				text-overflow: ellipsis;
+			}
+		}
+		.icons-wrapper {
+			flex: 0.4;
 		}
 	}
-	.icons-wrapper {
-		flex: 0.4;
+}
+.cart-wrapper {
+	animation: slideUp 0.4s ease both;
+	max-height: max-content;
+	background-color: $color-neu-two;
+	box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.15);
+	&--disappear {
+		animation: slideDown 0.6s forwards ease;
+	}
+}
+.cart {
+	background-color: $color-neu-two;
+	color: $rich-black;
+	padding: 2px;
+	&__items {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	&__close-icon {
+		background: $gradient-convex;
+		box-shadow: $shadow-neu-thick;
+		position: absolute;
+		top: -2px;
+		right: -2px;
+	}
+	&__icons-flex {
+		gap: 12px;
+	}
+	&__icon {
+		background: $color-grey-1;
+		color: $color-white-blue;
+		font-weight: 500;
+		font-size: 1rem;
+		height: 30px;
+		width: 30px;
+		box-shadow: $shadow-carved;
+	}
+
+	&__item {
+		box-shadow: $shadow-neu-mid;
+		border-radius: 15px;
+		background: $color-neu-two;
+		padding: 12px 16px;
+		box-sizing: border-box;
+	}
+
+	&__confirmation-modal {
+		background: transparent;
+		backdrop-filter: blur(7px);
+		&--container {
+			background: $color-neu-one;
+			box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+			padding: 24px 12px;
+			width: 90vw;
+			border-radius: 15px;
+		}
+	}
+}
+.neu-button {
+	padding: 12px 20px;
+	border-radius: 20px;
+	border-top-left-radius: 0;
+	margin-top: 16px;
+	box-shadow: $shadow-neu-float;
+	&--submit {
+		color: $color-white-blue;
+		background-color: $oxford-blue;
+	}
+	&--yale {
+		background-color: $yale-blue;
+		color: $mikado-yellow;
+	}
+	&--grey {
+		background-color: $color-grey-2;
+		color: $color-white-blue;
+	}
+	&__small {
+		font-size: 14px;
+		padding: 8px 12px;
+		border-radius: 15px;
+		border-top-left-radius: 0;
+		box-shadow: $shadow-neu-thick;
 	}
 }
