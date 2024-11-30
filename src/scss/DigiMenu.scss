@@ -2,6 +2,48 @@
 .digimenu {
 	font-family: "Poppins", sans-serif;
 	background-color: $color-neu-one;
+	&__greet {
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 10;
+		backdrop-filter: blur(10px);
+		animation: removeBackdrop 0.5s ease forwards 2s;
+		background-color: rgba(0, 0, 0, 0.1);
+		&--content {
+			border-radius: 0;
+			border-bottom-right-radius: 300px;
+			height: 80%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: $color-white-blue;
+			box-shadow: $shadow-neu-mid;
+			animation: circularExpansion 0.5s ease forwards,
+				circularShrink 0.5s ease forwards 2s;
+			&-header {
+				font-size: 1.25rem;
+				font-weight: 500;
+				color: $color-grey-2;
+				& > span {
+					display: block;
+					font-size: 2.25rem;
+					font-weight: 600;
+					color: $oxford-blue;
+					text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+				}
+			}
+			&-sub {
+				font-size: 1.25rem;
+				color: $color-grey-1;
+				text-align: right;
+				margin: 24px 24px 0 auto;
+			}
+		}
+	}
 	&__header {
 		color: $rich-black;
 		font-size: 1.2rem;
