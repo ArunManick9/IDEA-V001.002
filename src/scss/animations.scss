@@ -19,3 +19,120 @@
 		transform: translateY(-20px);
 	}
 }
+
+// animations
+
+@keyframes dashInFromLeft {
+	0% {
+		transform: translateX(-40px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(-50%);
+		opacity: 1;
+	}
+}
+@keyframes dashInFromLongLeft {
+	0% {
+		transform: translateX(-200px);
+		box-shadow: none;
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes dashInFromLongRight {
+	0% {
+		transform: translateX(200px);
+		box-shadow: none;
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes fadeUp {
+	0% {
+		bottom: -92px;
+		right: 16px;
+		opacity: 0;
+	}
+	100% {
+		bottom: 16px;
+		right: 16px;
+		opacity: 1;
+	}
+}
+@keyframes slideUp {
+	0% {
+		bottom: -300px;
+		opacity: 0;
+	}
+	100% {
+		bottom: 0px;
+		opacity: 1;
+	}
+}
+@keyframes slideDown {
+	0% {
+		bottom: 0px;
+		opacity: 1;
+	}
+	100% {
+		bottom: -600px;
+		opacity: 0;
+	}
+}
+
+@keyframes circularExpansion {
+	0% {
+		height: 20px;
+		width: 40px;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+	100% {
+		height: 80%;
+		width: 100%;
+		border-radius: 0;
+		border-bottom-right-radius: 300px;
+	}
+}
+
+@keyframes circularShrink {
+	0% {
+		height: 80%;
+		width: 100%;
+		border-radius: 0;
+		border-bottom-right-radius: 300px;
+		color: transparent;
+		opacity: 1;
+	}
+	50% {
+		color: transparent;
+		opacity: 0.5;
+	}
+	98% {
+		height: 20px;
+		width: 40px;
+		border-radius: 50%;
+		color: transprent;
+	}
+	100% {
+		color: transprent;
+		display: none;
+		opacity: 0;
+	}
+}
+@keyframes removeBackdrop {
+	0% {
+		backdrop-filter: blur(4px);
+		background-color: none;
+	}
+	100% {
+		backdrop-filter: none;
+	}
+}

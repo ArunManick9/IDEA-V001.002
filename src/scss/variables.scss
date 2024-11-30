@@ -1,3 +1,4 @@
+@import "animations.scss";
 $rich-black: #000814ff;
 $oxford-blue: #001d3dff;
 $yale-blue: #003566ff;
@@ -47,70 +48,3 @@ $gradient-concave: linear-gradient(
 	rgba(0, 0, 0, 0.075),
 	rgba(255, 255, 255, 0.15)
 );
-
-// animations
-
-@keyframes dashInFromLeft {
-	0% {
-		transform: translateX(-40px);
-		opacity: 0;
-	}
-	100% {
-		transform: translateX(-50%);
-		opacity: 1;
-	}
-}
-@keyframes dashInFromLongLeft {
-	0% {
-		transform: translateX(-200px);
-		box-shadow: none;
-		opacity: 0;
-	}
-	100% {
-		transform: translateX(0);
-		opacity: 1;
-	}
-}
-@keyframes dashInFromLongRight {
-	0% {
-		transform: translateX(200px);
-		box-shadow: none;
-		opacity: 0;
-	}
-	100% {
-		transform: translateX(0);
-		opacity: 1;
-	}
-}
-@keyframes fadeUp {
-	0% {
-		bottom: -92px;
-		right: 16px;
-		opacity: 0;
-	}
-	100% {
-		bottom: 16px;
-		right: 16px;
-		opacity: 1;
-	}
-}
-@keyframes slideUp {
-	0% {
-		bottom: -300px;
-		opacity: 0;
-	}
-	100% {
-		bottom: 0px;
-		opacity: 1;
-	}
-}
-@keyframes slideDown {
-	0% {
-		bottom: 0px;
-		opacity: 1;
-	}
-	100% {
-		bottom: -600px;
-		opacity: 0;
-	}
-}

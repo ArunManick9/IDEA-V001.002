@@ -15,12 +15,17 @@ export default function DigiMenu() {
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
 	const [openMenus, setOpenMenus] = useState({});
+	const [showGreet, setShowGreet] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const result = await getdetailedmenu(loc_id);
 				setMenuData(result);
+				setShowGreet(true);
+				setTimeout(() => {
+					setShowGreet(false);
+				}, 2500);
 			} catch (error) {
 				console.error("Error loading menus:", error);
 			}
@@ -83,7 +88,6 @@ export default function DigiMenu() {
 	const [cartWrapperClass, setCartWrapperClass] = useState("cart-wrapper");
 
 	const handleCloseCart = () => {
-		console.log(showCart, cartWrapperClass);
 		if (showCart) {
 			setCartWrapperClass("cart-wrapper cart-wrapper--disappear");
 			setTimeout(() => {
@@ -98,12 +102,24 @@ export default function DigiMenu() {
 
 	return (
 		<div className="p-6 min-h-screen digimenu">
-			<h1 className="digimenu__header mb-6">
+			{showGreet && (
+				<div className="digimenu__greet">
+					<div className="digimenu__greet--content">
+						<h2 className="digimenu__greet--content-header">
+							Welcome to <span>{loc_id}</span>
+						</h2>
+						<h3 className="digimenu__greet--content-sub">
+							Table: <span>{table_id}</span>
+						</h3>
+					</div>
+				</div>
+			)}
+			<h1 className={`digimenu__header mb-6`}>
 				Welcome to <span>{loc_id} | </span> Table: <span>{table_id}</span>
 			</h1>
 
 			{/* Menu Tabs with Dropdowns */}
-			<div className="category-wrapper">
+			<div className={`category-wrapper`}>
 				{getMenus()?.map((menu) => (
 					<div
 						key={menu}
