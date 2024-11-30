@@ -1,0 +1,28 @@
+@import "variables.scss";
+
+.confirm-table {
+	background-color: $color-neu-one;
+	font-family: "Poppins", sans-serif;
+	&--header {
+		color: $oxford-blue;
+		text-shadow: 0 3px 4px rgba(0, 0, 0, 0.25);
+		margin-bottom: 24px;
+		font-family: "Poppins-Bold";
+	}
+	&--input {
+		background: $gradient-concave;
+		color: $yale-blue;
+		box-shadow: $shadow-lightest;
+		border: 2px solid $color-neu-one;
+		transition: all 0.15s ease;
+		&:focus {
+			outline: none;
+			box-shadow: $shadow-neu-mid;
+			caret-color: $yale-blue;
+			transform: translateY(-4px);
+		}
+	}
+	.thick-shadow {
+		box-shadow: $shadow-neu-thick;
+	}
+}
