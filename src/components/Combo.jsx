@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { getdetailedmenu } from "../services/supported_api";
+import { addenhancedetails, getdetailedmenu } from "../services/supported_api";
 import { useParams } from "react-router-dom";
 
 const ComboBanner = () => {
   const [comboName, setComboName] = useState("");
   const [itemCount, setItemCount] = useState(0);
   const [menuData, setMenuData] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [isActive, setIsActive] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { loc_id } = useParams();
-  console.log(loc_id);
 
   // Fetch menu data on component mount
   useEffect(() => {
@@ -27,7 +29,6 @@ const ComboBanner = () => {
     fetchMenuData();
   }, [loc_id]);
 
-  // Handle search logic
   const handleSearch = (query) => {
     setSearchQuery(query);
     if (query.trim() === "") {
@@ -41,7 +42,6 @@ const ComboBanner = () => {
     setSearchResults(results);
   };
 
-  // Handle adding an item to the selected list
   const handleAddItem = (item) => {
     if (selectedItems.length < itemCount) {
       setSelectedItems([...selectedItems, item]);
@@ -52,25 +52,58 @@ const ComboBanner = () => {
     setSearchResults([]); // Reset search results
   };
 
-  // Handle removing an item from the selected list
   const handleRemoveItem = (index) => {
     const updatedItems = [...selectedItems];
     updatedItems.splice(index, 1);
     setSelectedItems(updatedItems);
   };
 
+  const handleSubmit = async () => {
+    if (!comboName || itemCount <= 0) {
+      setError("Please fill all mandatory fields.");
+      return;
+    }
+    setError("");
+
+    const comboData = {
+      loc_id,
+      banner_name: comboName,
+      banner_type: "Combo",
+      item_count: itemCount,
+      associate_item: selectedItems,
+      isActive: isActive,
+    };
+
+    try {
+      const response = await addenhancedetails(comboData);
+      setSuccessMessage("Combo banner details saved successfully!");
+      console.log("API Response:", response);
+
+      // Reset fields after successful save
+      setComboName("");
+      setItemCount(0);
+      setSelectedItems([]);
+      setSearchQuery("");
+      setSearchResults([]);
+      setIsActive(false);
+    } catch (error) {
+      console.error("Error saving combo banner details:", error);
+      setError("Failed to save combo banner details. Please try again.");
+    }
+  };
+
   return (
-    <div className="combo-banner-container">
-      <label className="enhance-container--label">Combo Name</label>
+    <div>
+      <label className="enhance-container--label">Combo Name *</label>
       <input
         type="text"
         value={comboName}
         onChange={(e) => setComboName(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded-lg mb-4"
+        className="w-full p-2 border border-gray-300 rounded-lg"
         placeholder="Enter combo name"
       />
 
-      <label className="enhance-container--label">Item Count</label>
+      <label className="enhance-container--label">Number of Items *</label>
       <input
         type="number"
         value={itemCount}
@@ -79,6 +112,19 @@ const ComboBanner = () => {
         placeholder="Enter number of items"
         min="1"
       />
+
+      <label className="enhance-container--label flexbox items-center gap-2">
+        <input
+          type="checkbox"
+          checked={isActive}
+          onChange={(e) => setIsActive(e.target.checked)}
+          className="mr-2"
+        />
+        Active in Menu
+      </label>
+
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
 
       <div className="selected-items-box p-4 border border-gray-300 rounded-lg mb-4">
         <h4 className="font-semibold mb-2">Selected Items</h4>
@@ -92,11 +138,11 @@ const ComboBanner = () => {
                 className="item-box flexbox items-center gap-2 p-2 border border-gray-200 rounded-lg"
               >
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.image || "placeholder.jpg"}
+                  alt={item.name || "Unnamed Item"}
                   className="w-10 h-10 object-cover rounded"
                 />
-                <span>{item.name}</span>
+                <span>{item.name || "Unnamed Item"}</span>
                 <button
                   onClick={() => handleRemoveItem(index)}
                   className="text-red-500 text-sm font-semibold"
@@ -123,21 +169,28 @@ const ComboBanner = () => {
           ) : (
             searchResults.map((item) => (
               <div
-                key={item.name}
+                key={item.name || Math.random()}
                 onClick={() => handleAddItem(item)}
                 className="p-2 cursor-pointer hover:bg-gray-200 flexbox items-center gap-2"
               >
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.image || "placeholder.jpg"}
+                  alt={item.name || "Unnamed Item"}
                   className="w-8 h-8 object-cover rounded"
                 />
-                <span>{item.name}</span>
+                <span>{item.name || "Unnamed Item"}</span>
               </div>
             ))
           )}
         </div>
       </div>
+
+      <button
+        onClick={handleSubmit}
+        className="w-full bg-blue-500 text-white p-2 rounded-lg mt-4"
+      >
+        Save Combo Banner
+      </button>
     </div>
   );
 };

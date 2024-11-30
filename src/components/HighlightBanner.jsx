@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HighlightBannerPreview from "./HighlightBannerPreview";
-import { getdetailedmenu } from "../services/supported_api";
+import { addenhancedetails, getdetailedmenu } from "../services/supported_api";
 import { useParams } from "react-router-dom";
 
 const HighlightBanner = ({ onBannerDataChange }) => {
@@ -11,6 +11,9 @@ const HighlightBanner = ({ onBannerDataChange }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [isActive, setIsActive] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { loc_id } = useParams();
 
@@ -69,9 +72,45 @@ const HighlightBanner = ({ onBannerDataChange }) => {
     setSelectedItems(updatedItems);
   };
 
+  const handleSubmit = async () => {
+    if (!bannerName || !displayType || itemCount <= 0) {
+      setError("Please fill all mandatory fields.");
+      return;
+    }
+    setError("");
+
+    const bannerData = {
+      loc_id,
+      banner_name: bannerName,
+      banner_type: "Highlight",
+      item_count: itemCount,
+      associate_item: selectedItems,
+      display_type: displayType,
+      isActive,
+    };
+
+    try {
+      const response = await addenhancedetails(bannerData);
+      setSuccessMessage("Banner details saved successfully!");
+      console.log("API Response:", response);
+
+      // Reset fields after successful save
+      setBannerName("");
+      setDisplayType("");
+      setItemCount(0);
+      setSelectedItems([]);
+      setIsActive(false);
+      setSearchQuery("");
+      setSearchResults([]);
+    } catch (error) {
+      console.error("Error saving banner details:", error);
+      setError("Failed to save banner details. Please try again.");
+    }
+  };
+
   return (
     <div>
-      <label className="enhance-container--label input-label">Banner Name</label>
+      <label className="enhance-container--label input-label">Banner Name *</label>
       <input
         type="text"
         value={bannerName}
@@ -80,7 +119,7 @@ const HighlightBanner = ({ onBannerDataChange }) => {
         placeholder="Enter banner name"
       />
 
-      <label className="enhance-container--label input-label">Display Type</label>
+      <label className="enhance-container--label input-label">Display Type *</label>
       <select
         value={displayType}
         onChange={handleDisplayTypeChange}
@@ -91,7 +130,7 @@ const HighlightBanner = ({ onBannerDataChange }) => {
         <option value="slide">Slide</option>
       </select>
 
-      <label className="enhance-container--label input-label">Number of Items</label>
+      <label className="enhance-container--label input-label">Number of Items *</label>
       <input
         type="number"
         value={itemCount}
@@ -100,6 +139,18 @@ const HighlightBanner = ({ onBannerDataChange }) => {
         placeholder="Enter number of items"
         min="1"
       />
+
+      <label className="enhance-container--label input-label flexbox items-center gap-2">
+        <input
+          type="checkbox"
+          checked={isActive}
+          onChange={(e) => setIsActive(e.target.checked)}
+        />
+        Active in Menu
+      </label>
+
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
 
       <div className="selected-items-box p-4 border border-gray-300 rounded-lg mb-4">
         <h4 className="font-semibold mb-2">Selected Items</h4>
@@ -161,6 +212,13 @@ const HighlightBanner = ({ onBannerDataChange }) => {
       </div>
 
       {displayType && <HighlightBannerPreview displayType={displayType} />}
+
+      <button
+        onClick={handleSubmit}
+        className="w-full bg-blue-500 text-white p-2 rounded-lg mt-4"
+      >
+        Save Banner
+      </button>
     </div>
   );
 };

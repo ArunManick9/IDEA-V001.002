@@ -329,3 +329,20 @@ export async function updateBanner(bannerType, bannerData, loc_id) {
     throw error;
   }
 }
+
+export async function addenhancedetails(enhancedetails){
+  
+  const { data, error } = await supabase
+    .from('ENHANCE_TABLE')
+    .insert(enhancedetails);
+
+  if (error) {
+    console.error('Error inserting data:', error.message);
+  } else {
+    console.log('Data inserted successfully:', data);
+  }
+
+}
+
+
+
