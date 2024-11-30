@@ -16,7 +16,7 @@ const MenuItemCard = ({
 				className="w-14 h-14 object-cover rounded-md mr-3"
 			/>
 			<div className="flex-1">
-				<h2 className="text-md font-semibold text-gray-800 truncate">
+				<h2 className="text-md font-semibold text-gray-800 truncate item__name">
 					{item.name}
 				</h2>
 				<p className="text-sm text-gray-600 truncate">{item.description}</p>

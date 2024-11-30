@@ -15,6 +15,36 @@ $red-asterisk: #c40000;
 // -----------------------------------------------
 // neumorphism variables
 
+@font-face {
+	font-family: "Poppins";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../../public/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+	font-family: "Poppins-Medium";
+	font-style: normal;
+	font-weight: 500;
+	src: url("../../public/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+	font-family: "Poppins-SemiBold";
+	font-style: normal;
+	font-weight: 600;
+	src: url("../../public/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+	font-family: "Poppins-Bold";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../../public/Poppins-Bold.ttf") format("truetype");
+}
+@font-face {
+	font-family: "Poppins-ExtraBold";
+	font-style: normal;
+	font-weight: 800;
+	src: url("../../public/Poppins-ExtraBold.ttf") format("truetype");
+}
 $color-neu-one: #e0e1e1;
 $color-neu-two: #d1d3d7;
 // neumorphic shadows
