@@ -11,5 +11,106 @@ $color-grey-3: #343a40;
 $color-grey-4: #212529;
 $red-asterisk: #c40000;
 
-$gold-neon-highlight: 0 0 2px #ffd60aff, 0 0 4px #ffd60aff, 0 0 6px #ffd60aff,
-	0 0 8px #ffd60aff;
+// -----------------------------------------------
+// neumorphism variables
+
+$color-neu-one: #e0e1e1;
+$color-neu-two: #d1d3d7;
+// neumorphic shadows
+$shadow-neu-small: -0.5rem -0.8rem 2rem rgba(255, 255, 255, 0.6),
+	0.5rem 0.8rem 2rem rgba(0, 0, 0, 0.1);
+$shadow-neu-mid: -5px -8px 1.5rem rgba(255, 255, 255, 0.75),
+	5px 8px 1.5rem rgba(0, 0, 0, 0.3);
+$shadow-neu-thick: -2px -4px 8px rgba(255, 255, 255, 1),
+	2px 4px 8px rgba(0, 0, 0, 0.5);
+$shadow-neu-inset: -0.4rem -0.7rem 1rem rgba(255, 255, 255, 0.2) inset,
+	0.4rem 0.7rem 1rem rgba(0, 0, 0, 0.2) inset;
+$shadow-neu-float: -0.8rem -1.1rem 2rem rgba(255, 255, 255, 0.9),
+	0.8rem 1.1rem 2rem rgba(0, 0, 0, 0.4);
+
+// other shadows
+$shadow-lightest: 0 2px 4px rgba(0, 0, 0, 0.15);
+$shadow-bevel: 0 -1rem 1.5rem rgba(0, 0, 0, 0.2) inset;
+$shadow-concave: -0.4rem -0.7rem 1rem rgba(255, 255, 255, 0.2) inset,
+	0.4rem 0.7rem 1rem rgba(0, 0, 0, 0.2) inset;
+$shadow-carved: 4px 3px 7px rgba(0, 0, 0, 0.15) inset,
+	-4px -1px 5px rgba(0, 0, 0, 0.075) inset;
+
+// GRADIENTS
+$gradient-convex: linear-gradient(
+	-45deg,
+	rgba(0, 0, 0, 0.2),
+	rgba(255, 255, 255, 0.2)
+);
+$gradient-concave: linear-gradient(
+	135deg,
+	rgba(0, 0, 0, 0.075),
+	rgba(255, 255, 255, 0.15)
+);
+
+// animations
+
+@keyframes dashInFromLeft {
+	0% {
+		transform: translateX(-40px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(-50%);
+		opacity: 1;
+	}
+}
+@keyframes dashInFromLongLeft {
+	0% {
+		transform: translateX(-200px);
+		box-shadow: none;
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes dashInFromLongRight {
+	0% {
+		transform: translateX(200px);
+		box-shadow: none;
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes fadeUp {
+	0% {
+		bottom: -92px;
+		right: 16px;
+		opacity: 0;
+	}
+	100% {
+		bottom: 16px;
+		right: 16px;
+		opacity: 1;
+	}
+}
+@keyframes slideUp {
+	0% {
+		bottom: -300px;
+		opacity: 0;
+	}
+	100% {
+		bottom: 0px;
+		opacity: 1;
+	}
+}
+@keyframes slideDown {
+	0% {
+		bottom: 0px;
+		opacity: 1;
+	}
+	100% {
+		bottom: -600px;
+		opacity: 0;
+	}
+}
