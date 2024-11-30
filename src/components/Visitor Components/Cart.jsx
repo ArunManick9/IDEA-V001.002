@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Import the close icon
 import { ordersubmit } from "../../services/supported_api";
+// styles written in digimenu
 
 const Cart = ({
 	cartItems,
@@ -60,10 +61,10 @@ const Cart = ({
 	};
 
 	return (
-		<div className="relative p-6 bg-white shadow-xl rounded-lg">
+		<div className="relative cart">
 			{/* Close Button */}
 			<button
-				className="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-lg text-gray-600 hover:text-gray-900 transition-all"
+				className="cart__close-icon p-2 rounded-full text-gray-600 hover:text-gray-900 transition-all"
 				onClick={handleCloseCart}
 			>
 				<FaTimes className="w-4 h-4" />
@@ -76,14 +77,14 @@ const Cart = ({
 			{cartEntries.length === 0 ? (
 				<p className="text-gray-600">Your cart is empty</p>
 			) : (
-				<ul className="space-y-4">
+				<ul className="cart__items">
 					{cartEntries.map((item) => (
 						<li
 							key={item.id}
-							className="flex justify-between items-center border-b pb-4"
+							className="flexbox justify-between items-center cart__item pb-4"
 						>
 							{/* Item Details */}
-							<div className="flex items-center">
+							<div className="flexbox items-center">
 								<img
 									src={item.image}
 									alt={item.name}
@@ -96,17 +97,17 @@ const Cart = ({
 							</div>
 
 							{/* Quantity Controls */}
-							<div className="flex items-center space-x-2">
+							<div className="flexbox items-center cart__icons-flex">
 								<button
 									onClick={() => handleRemoveFromCart(item)}
-									className="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition-all"
+									className="cart__icon rounded-full transition-all"
 								>
 									-
 								</button>
 								<span className="font-semibold">{item.quantity}</span>
 								<button
 									onClick={() => handleAddToCart(item)}
-									className="bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 transition-all"
+									className="cart__icon rounded-full transition-all"
 								>
 									+
 								</button>
@@ -134,7 +135,7 @@ const Cart = ({
 			{/* Order Now Button */}
 			{cartEntries.length > 0 && (
 				<button
-					className="w-full bg-blue-600 text-white py-3 rounded-lg mt-6 hover:bg-blue-700 transition-all"
+					className="neu-button neu-button--submit"
 					onClick={handleOrderNow}
 				>
 					Order Now
@@ -143,20 +144,20 @@ const Cart = ({
 
 			{/* Confirmation Modal */}
 			{showConfirmation && (
-				<div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-					<div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md mx-auto">
+				<div className="fixed inset-0 flexbox items-center justify-center cart__confirmation-modal z-50">
+					<div className="cart__confirmation-modal--container text-center max-w-md mx-auto">
 						<h3 className="text-xl font-semibold mb-4">
 							Are you sure you want to place the order?
 						</h3>
-						<div className="flex justify-around mt-4">
+						<div className="flexbox justify-around mt-4">
 							<button
-								className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all"
+								className="neu-button neu-button__small neu-button--yale"
 								onClick={handleYes}
 							>
-								Yes
+								Proceed
 							</button>
 							<button
-								className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-all"
+								className="neu-button neu-button__small neu-button--grey"
 								onClick={() => setShowConfirmation(false)}
 							>
 								View Cart

@@ -70,7 +70,7 @@ export default function DigiMenu() {
 		setCartItems((prev) => {
 			const newCartItems = { ...prev };
 
-			if (newCartItems[item.id].quantity > 1) {
+			if (newCartItems[item.id]?.quantity > 1) {
 				newCartItems[item.id].quantity -= 1;
 			} else {
 				delete newCartItems[item.id];
@@ -80,8 +80,19 @@ export default function DigiMenu() {
 		});
 	};
 
+	const [cartWrapperClass, setCartWrapperClass] = useState("cart-wrapper");
+
 	const handleCloseCart = () => {
-		setShowCart(!showCart);
+		console.log(showCart, cartWrapperClass);
+		if (showCart) {
+			setCartWrapperClass("cart-wrapper cart-wrapper--disappear");
+			setTimeout(() => {
+				setShowCart(false);
+			}, 600);
+		} else {
+			setCartWrapperClass("cart-wrapper");
+			setShowCart(true);
+		}
 		console.log(cartItems);
 	};
 
@@ -123,7 +134,9 @@ export default function DigiMenu() {
 
 			{/* Cart Toggle */}
 			{showCart && (
-				<div className="fixed bottom-0 right-0 w-full md:w-1/3 h-2/3 bg-white shadow-lg p-6 overflow-y-auto">
+				<div
+					className={`fixed bottom-0 right-0 w-full md:w-1/3 h-4/5 ${cartWrapperClass} p-6 overflow-y-auto z-5`}
+				>
 					<Cart
 						cartItems={cartItems}
 						handleAddToCart={handleAddToCart}
@@ -136,8 +149,8 @@ export default function DigiMenu() {
 
 			{/* Floating Cart Button */}
 			<button
-				className=" p-5 rounded-full digimenu__cart"
-				onClick={() => setShowCart(!showCart)}
+				className=" p-5 rounded-full digimenu__cart z-4"
+				onClick={handleCloseCart}
 			>
 				<FaShoppingCart className="w-6 h-6" />
 			</button>
