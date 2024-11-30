@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getdetailedmenu, updateMenuItem } from "../services/supported_api"; // Import the API function
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import LogoutButton from "./LogoutButton";
 
 const MenuListDashboard = () => {
 	const location = useLocation();
-	const loc_id = location.state?.loc_id;
+	const { loc_id } = useParams(); 
 
 	const [menuData, setMenuData] = useState([]);
 	const [showEditModal, setShowEditModal] = useState(false);
@@ -122,7 +122,7 @@ const MenuListDashboard = () => {
 					</button>
 					<button
 		className="menuboard-btn menuboard-btn--enhance"
-		onClick={() => navigate(`${loc_id}/enhancemenu`)}
+		onClick={() => navigate(`/menuboard/${loc_id}/enhancemenu`)}
 	>
 		Enhance Menu
 	</button>

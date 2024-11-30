@@ -111,7 +111,7 @@ const MenuList = () => {
 	};
 
 	const handleViewOrEditButtonClick = () => {
-		navigate("/menuboard", { state: { loc_id: loc_id } });
+		navigate(`/${loc_id}/menuboard`);
 	};
 
 	const handleCreateQRCode = () => {
