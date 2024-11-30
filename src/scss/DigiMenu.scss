@@ -1,4 +1,12 @@
 @import "variables.scss";
+.font-semibold {
+	font-weight: 600;
+	font-family: "Poppins-SemiBold";
+}
+.font-bold {
+	font-weight: 700;
+	font-family: "Poppins-Bold";
+}
 .digimenu {
 	font-family: "Poppins", sans-serif;
 	background-color: $color-neu-one;
@@ -27,11 +35,13 @@
 			&-header {
 				font-size: 1.25rem;
 				font-weight: 500;
+				font-family: "Poppins-Medium";
 				color: $color-grey-2;
 				& > span {
 					display: block;
 					font-size: 2.25rem;
 					font-weight: 600;
+					font-family: "Poppins-SemiBold";
 					color: $oxford-blue;
 					text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 				}
@@ -49,6 +59,7 @@
 		font-size: 1.2rem;
 		& > span {
 			font-weight: 600;
+			font-family: "Poppins-SemiBold";
 		}
 	}
 	.category-wrapper {
@@ -69,6 +80,7 @@
 
 			&--active {
 				font-weight: 700;
+				font-family: "Poppins-Bold";
 				margin: 8px 16px;
 				transform: scale(1.2);
 				position: relative;
@@ -117,6 +129,9 @@
 			margin: 0 4px;
 			border-radius: 50%;
 		}
+		.item__name {
+			font-family: "Poppins-Bold", "Poppins", sans-serif;
+		}
 		.flex-1 {
 			flex: 0.6;
 			width: min-content;
@@ -162,6 +177,7 @@
 		background: $color-grey-1;
 		color: $color-white-blue;
 		font-weight: 500;
+		font-family: "Poppins-Medium";
 		font-size: 1rem;
 		height: 30px;
 		width: 30px;
