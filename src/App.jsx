@@ -31,7 +31,7 @@ const App = () => {
 						<Route path="/" element={<LoginScreen />} />
 						<Route path="/locations" element={<LocationCards />} />
 						<Route path="/location/:loc_id/menus" element={<MenuList />} />
-						<Route path="/menuboard" element={<MenuListDashboard />} />
+						<Route path="/:loc_id/menuboard" element={<MenuListDashboard />} />
 						<Route path="/additem/:loc_id" element={<AddItemForm />} />
 						<Route path="/location/:loc_id/createqr" element={<CreateQR />} />
 						<Route

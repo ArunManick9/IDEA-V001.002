@@ -234,7 +234,7 @@ const AddItemForm = () => {
 	return (
 		<div className="flex justify-center items-start min-h-screen whole-relative">
 			<div className="back-wrapper">
-				<Link style={{ textDecoration: "none" }} to="/menuboard">
+				<Link style={{ textDecoration: "none" }} to={`/${loc_id}/menuboard`}>
 					<button className="btn--back">
 						<FontAwesomeIcon className="btn--back-icon" icon={faBackward} />
 						Back to Menu Dashboard
