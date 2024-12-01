@@ -1,8 +1,8 @@
 // components/LogoutButton.jsx
 import React from "react";
-import supabase from "../services/supabase";
-import { useAdminAuth } from "../context/AdminPortalAuthContext";
-import "../scss/LogoutButton.scss";
+import supabase from "../../services/supabase";
+import { useAdminAuth } from "../../context/AdminPortalAuthContext";
+import "../../scss/LogoutButton.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";

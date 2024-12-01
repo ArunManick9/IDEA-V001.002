@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // Import useNavigate and useParams
 import { getagentlogin } from "../../services/supported_api";
-import LogoutButton from "../LogoutButton";
+import LogoutButton from "../Admin Portal Component/LogoutButton";
 
 export default function WaiterLogin() {
 	const [mbNum, setMbNum] = useState("");

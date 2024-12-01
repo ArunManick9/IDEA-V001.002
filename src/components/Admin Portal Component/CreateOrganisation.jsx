@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useLocations } from "../context/LocationContext";
-import { addlocationtodb } from "../services/supported_api";
+import { useLocations } from "../../context/LocationContext";
+import { addlocationtodb } from "../../services/supported_api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios"; // Import axios for API request
-import "../scss/CreateOrganization.scss";
+import "../../scss/CreateOrganization.scss";
 
 const CreateOrganization = ({ user_id, setCreateOrgClicked }) => {
 	//console.log(user_id.user_id)

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../scss/EnhanceMenu.scss";
+import "../../scss/EnhanceMenu.scss";
 import ComboBanner from "./Combo";
 import HighlightBanner from "./HighlightBanner";
 

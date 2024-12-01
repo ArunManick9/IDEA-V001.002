@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { getdetailedmenu, updateMenuItem } from "../services/supported_api"; // Import the API function
+import { getdetailedmenu, updateMenuItem } from "../../services/supported_api"; // Import the API function
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import EditMenuItemModal from "./EditMenuItems";
-import "../scss/MenuListDashboard.scss";
+import "../../scss/MenuListDashboard.scss";
 import LogoutButton from "./LogoutButton";
 
 const MenuListDashboard = () => {

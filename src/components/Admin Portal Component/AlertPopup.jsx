@@ -1,5 +1,5 @@
 import React from "react";
-import "../scss/AlertPopup.scss";
+import "../../scss/AlertPopup.scss";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

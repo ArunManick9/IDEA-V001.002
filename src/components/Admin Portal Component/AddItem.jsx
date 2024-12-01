@@ -3,9 +3,9 @@ import {
 	addmenuitem,
 	getdetailedmenu,
 	loadlocation,
-} from "../services/supported_api";
+} from "../../services/supported_api";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "../scss/AddItem.scss";
+import "../../scss/AddItem.scss";
 import AlertPopup from "./AlertPopup";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

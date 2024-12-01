@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { editmenulist } from "../services/supported_api";
+import { editmenulist } from "../../services/supported_api";
 
 const CategoryList = ({ data, menus, selectedMenu, loc_id }) => {
 	const [categories, setCategories] = useState(data.categories || []);

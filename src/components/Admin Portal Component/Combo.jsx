@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import HighlightBannerPreview from "./HighlightBannerPreview";
-import { addenhancedetails, getdetailedmenu } from "../services/supported_api";
+import { addenhancedetails, getdetailedmenu } from "../../services/supported_api";
 import { useParams } from "react-router-dom";
 
-const HighlightBanner = ({ onBannerDataChange }) => {
-  const [bannerName, setBannerName] = useState("");
-  const [displayType, setDisplayType] = useState("");
+const ComboBanner = () => {
+  const [comboName, setComboName] = useState("");
   const [itemCount, setItemCount] = useState(0);
   const [menuData, setMenuData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,18 +28,6 @@ const HighlightBanner = ({ onBannerDataChange }) => {
 
     fetchMenuData();
   }, [loc_id]);
-
-  const handleNameChange = (e) => {
-    const name = e.target.value;
-    setBannerName(name);
-    onBannerDataChange({ name, display: displayType });
-  };
-
-  const handleDisplayTypeChange = (e) => {
-    const type = e.target.value;
-    setDisplayType(type);
-    onBannerDataChange({ name: bannerName, display: type });
-  };
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -73,64 +59,51 @@ const HighlightBanner = ({ onBannerDataChange }) => {
   };
 
   const handleSubmit = async () => {
-    if (!bannerName || !displayType || itemCount <= 0) {
+    if (!comboName || itemCount <= 0) {
       setError("Please fill all mandatory fields.");
       return;
     }
     setError("");
 
-    const bannerData = {
+    const comboData = {
       loc_id,
-      banner_name: bannerName,
-      banner_type: "Highlight",
+      banner_name: comboName,
+      banner_type: "Combo",
       item_count: itemCount,
       associate_item: selectedItems,
-      display_type: displayType,
-      isActive,
+      isActive: isActive,
     };
 
     try {
-      const response = await addenhancedetails(bannerData);
-      setSuccessMessage("Banner details saved successfully!");
+      const response = await addenhancedetails(comboData);
+      setSuccessMessage("Combo banner details saved successfully!");
       console.log("API Response:", response);
 
       // Reset fields after successful save
-      setBannerName("");
-      setDisplayType("");
+      setComboName("");
       setItemCount(0);
       setSelectedItems([]);
-      setIsActive(false);
       setSearchQuery("");
       setSearchResults([]);
+      setIsActive(false);
     } catch (error) {
-      console.error("Error saving banner details:", error);
-      setError("Failed to save banner details. Please try again.");
+      console.error("Error saving combo banner details:", error);
+      setError("Failed to save combo banner details. Please try again.");
     }
   };
 
   return (
     <div>
-      <label className="enhance-container--label input-label">Banner Name *</label>
+      <label className="enhance-container--label">Combo Name *</label>
       <input
         type="text"
-        value={bannerName}
-        onChange={handleNameChange}
+        value={comboName}
+        onChange={(e) => setComboName(e.target.value)}
         className="w-full p-2 border border-gray-300 rounded-lg"
-        placeholder="Enter banner name"
+        placeholder="Enter combo name"
       />
 
-      <label className="enhance-container--label input-label">Display Type *</label>
-      <select
-        value={displayType}
-        onChange={handleDisplayTypeChange}
-        className="w-full p-2 border border-gray-300 rounded-lg"
-      >
-        <option value="">Select Display Type</option>
-        <option value="scroll">Scroll</option>
-        <option value="slide">Slide</option>
-      </select>
-
-      <label className="enhance-container--label input-label">Number of Items *</label>
+      <label className="enhance-container--label">Number of Items *</label>
       <input
         type="number"
         value={itemCount}
@@ -140,11 +113,12 @@ const HighlightBanner = ({ onBannerDataChange }) => {
         min="1"
       />
 
-      <label className="enhance-container--label input-label flexbox items-center gap-2">
+      <label className="enhance-container--label flexbox items-center gap-2">
         <input
           type="checkbox"
           checked={isActive}
           onChange={(e) => setIsActive(e.target.checked)}
+          className="mr-2"
         />
         Active in Menu
       </label>
@@ -164,11 +138,11 @@ const HighlightBanner = ({ onBannerDataChange }) => {
                 className="item-box flexbox items-center gap-2 p-2 border border-gray-200 rounded-lg"
               >
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.image || "placeholder.jpg"}
+                  alt={item.name || "Unnamed Item"}
                   className="w-10 h-10 object-cover rounded"
                 />
-                <span>{item.name}</span>
+                <span>{item.name || "Unnamed Item"}</span>
                 <button
                   onClick={() => handleRemoveItem(index)}
                   className="text-red-500 text-sm font-semibold"
@@ -195,32 +169,30 @@ const HighlightBanner = ({ onBannerDataChange }) => {
           ) : (
             searchResults.map((item) => (
               <div
-                key={item.name}
+                key={item.name || Math.random()}
                 onClick={() => handleAddItem(item)}
                 className="p-2 cursor-pointer hover:bg-gray-200 flexbox items-center gap-2"
               >
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.image || "placeholder.jpg"}
+                  alt={item.name || "Unnamed Item"}
                   className="w-8 h-8 object-cover rounded"
                 />
-                <span>{item.name}</span>
+                <span>{item.name || "Unnamed Item"}</span>
               </div>
             ))
           )}
         </div>
       </div>
 
-      {displayType && <HighlightBannerPreview displayType={displayType} />}
-
       <button
         onClick={handleSubmit}
         className="w-full bg-blue-500 text-white p-2 rounded-lg mt-4"
       >
-        Save Banner
+        Save Combo Banner
       </button>
     </div>
   );
 };
 
-export default HighlightBanner;
+export default ComboBanner;
