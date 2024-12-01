@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import HighlightBannerPreview from "./HighlightBannerPreview";
 import { addenhancedetails, getdetailedmenu } from "../../services/supported_api";
 import { useParams } from "react-router-dom";
+import HighlightBannerPreview from "./HighlightBannerPreview";
 
 const HighlightBanner = ({ onBannerDataChange }) => {
   const [bannerName, setBannerName] = useState("");

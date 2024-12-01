@@ -1,5 +1,4 @@
 // HighlightBannerPreview.js
-import React from "react";
 
 const HighlightBannerPreview = ({ displayType }) => {
   return (

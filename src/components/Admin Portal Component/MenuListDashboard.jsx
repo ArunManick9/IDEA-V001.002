@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getdetailedmenu, updateMenuItem } from "../../services/supported_api"; // Import the API function
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
