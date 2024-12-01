@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocations } from "../../context/LocationContext.jsx";
 import { deletelocation, getlocations } from "../../services/supported_api.js";

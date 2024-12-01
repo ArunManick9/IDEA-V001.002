@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AdminPortalAuthProvider } from "./context/AdminPortalAuthContext";
 import { LocationProvider } from "./context/LocationContext"; // Import LocationContext
-import ProtectedAdminRoute from "./context/ProtectedAdminRoute";
 
-// Components
-import CreateOrganization from "./components/Admin Portal Component/CreateOrganisation";
+//Components
+
 import LoginScreen from "./components/Admin Portal Component/LoginScreen";
 import MenuList from "./components/Admin Portal Component/MenuList";
 import MenuListDashboard from "./components/Admin Portal Component/MenuListDashboard";
@@ -18,6 +17,7 @@ import ConfirmTable from "./components/Visitor Components/ConfirmTable";
 import OrderModal from "./components/Waiter Portal Components/OrderModal";
 import EnhanceMenu from "./components/Admin Portal Component/EnhanceMenu";
 import LocationCards from "./components/Admin Portal Component/LocationCards";
+import Dummy from "./components/Dummy";
 
 const App = () => {
 	return (
@@ -28,6 +28,7 @@ const App = () => {
 				<Router>
 					<Routes>
 						{/* Public Routes */}
+						<Route path="/dummy" element={<Dummy/>} />
 						<Route path="/" element={<LoginScreen/>} />
 						<Route path="/locations" element={<LocationCards />} />
 						<Route path="/location/:loc_id/menus" element={<MenuList />} />

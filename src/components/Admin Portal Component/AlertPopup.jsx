@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import "../../scss/AlertPopup.scss";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";

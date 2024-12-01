@@ -1,5 +1,4 @@
-// components/LogoutButton.jsx
-import React from "react";
+
 import supabase from "../../services/supabase";
 import { useAdminAuth } from "../../context/AdminPortalAuthContext";
 import "../../scss/LogoutButton.scss";

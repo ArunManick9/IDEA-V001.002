@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { login } from "../../services/auth";
 import { useNavigate } from "react-router-dom";
 import "../../scss/LoginScreen.scss";

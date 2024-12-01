@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { addenhancedetails, getdetailedmenu } from "../../services/supported_api";
 import { useParams } from "react-router-dom";
 
