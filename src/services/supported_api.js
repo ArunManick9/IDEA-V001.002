@@ -1,3 +1,4 @@
+import { IconUfo } from "@tabler/icons-react";
 import supabase from "./supabase";
 
 export async function addlocationtodb(locationData) {
@@ -286,6 +287,22 @@ export async function addenhancedetails(enhancedetails) {
 		console.error("Error inserting data:", error.message);
 	} else {
 		console.log("Data inserted successfully:", data);
+	}
+}
+
+export async function fetchMenuItem(menuItemId, locationId) {
+	const { data, error } = await supabase
+		.from("MENU_LIST")
+		.select("*")
+		.eq("menu_id", menuItemId)
+		.eq("inlocation", locationId);
+	if (error) {
+		console.error(`Error updating banner: ${error.message}`);
+		throw error;
+	} else if (data.length) {
+		return data[0];
+	} else {
+		return {};
 	}
 }
 

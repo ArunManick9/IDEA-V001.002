@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchAllMenuCardData } from "../../services/supported_api";
-import { FaShoppingCart, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import MenuItemCard from "./MenuItemCard";
 import Cart from "./Cart";
 import "../../scss/DigiMenu.scss";
