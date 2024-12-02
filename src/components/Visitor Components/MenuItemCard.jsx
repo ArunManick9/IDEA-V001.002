@@ -10,22 +10,24 @@ const MenuItemCard = ({
 	cartItems,
 }) => {
 	return (
-		<Link
-			className="flexbox items-center p-4 menu-item"
-			to={`/digimenu/${item.inlocation}/menuitem/${item.menu_id}`}
-		>
-			<img
-				src={item.image}
-				alt={item.name}
-				className="w-14 h-14 object-cover rounded-md mr-3"
-			/>
-			<div className="flex-1">
+		<div className="flexbox items-center p-4 menu-item">
+			<Link to={`/digimenu/${item.inlocation}/menuitem/${item.menu_id}`}>
+				<img
+					src={item.image}
+					alt={item.name}
+					className="w-14 h-14 object-cover rounded-md mr-3"
+				/>
+			</Link>
+			<Link
+				to={`/digimenu/${item.inlocation}/menuitem/${item.menu_id}`}
+				className="flex-1"
+			>
 				<h2 className="text-md font-semibold text-gray-800 truncate item__name">
 					{item.name}
 				</h2>
 				<p className="text-sm text-gray-600 truncate">{item.description}</p>
 				<span className="text-lg font-bold text-gray-900">${item.price}</span>
-			</div>
+			</Link>
 			<div className="flexbox items-center ml-3 icons-wrapper">
 				<button
 					onClick={() => handleRemoveFromCart(item)}
@@ -43,7 +45,7 @@ const MenuItemCard = ({
 					<FaPlus />
 				</button>
 			</div>
-		</Link>
+		</div>
 	);
 };
 
