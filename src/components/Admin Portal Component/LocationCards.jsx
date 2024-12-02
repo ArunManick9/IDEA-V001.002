@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocations } from "../context/LocationContext.jsx";
-import { deletelocation, getlocations } from "../services/supported_api";
+import { useLocations } from "../../context/LocationContext.jsx";
+import { deletelocation, getlocations } from "../../services/supported_api.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Loading from "./Loading.jsx";
 import { useLocation } from "react-router-dom";
 import CreateOrganization from "./CreateOrganisation.jsx";
-import "../scss/LocationCards.scss";
+import "../../scss/LocationCards.scss";
 import LogoutButton from "./LogoutButton.jsx";
 
 const LocationCards = () => {

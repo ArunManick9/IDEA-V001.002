@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // Import to get route parameters
-import { addagent } from "../services/supported_api";
+import { addagent } from "../../services/supported_api";
 import LogoutButton from "./LogoutButton";
-import "../scss/CreateAgent.scss";
+import "../../scss/CreateAgent.scss";
 
 export default function CreateAgent() {
 	const { loc_id } = useParams(); // Get location_id from URL

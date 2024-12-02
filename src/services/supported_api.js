@@ -329,3 +329,81 @@ export async function updateBanner(bannerType, bannerData, loc_id) {
     throw error;
   }
 }
+
+export async function addenhancedetails(enhancedetails){
+  
+  const { data, error } = await supabase
+    .from('ENHANCE_TABLE')
+    .insert(enhancedetails);
+
+  if (error) {
+    console.error('Error inserting data:', error.message);
+  } else {
+    console.log('Data inserted successfully:', data);
+  }
+
+}
+
+
+//Get menulist, location base, and enhance details
+
+
+
+export async function fetchAllMenuCardData(loc_id) {
+  try {
+    // Fetch location details
+    const { data: locationData, error: locationError } = await supabase
+      .from('HOTEL_BASE')
+      .select('*')
+      .eq('loc_id', loc_id);
+
+    if (locationError) {
+      console.error('Error fetching location details:', locationError);
+      throw new Error('Failed to fetch location details');
+    }
+
+    // Fetch detailed menu
+    const { data: menuList, error: menuError } = await supabase
+      .from('MENU_LIST')
+      .select('*')
+      .eq('inlocation', loc_id);
+
+    if (menuError) {
+      console.error('Error fetching menu list:', menuError);
+      throw new Error('Failed to fetch menu list');
+    }
+
+    // Fetch enhance table data
+    const { data: enhanceTableData, error: enhanceError } = await supabase
+      .from('ENHANCE_TABLE')
+      .select('*')
+      .eq('loc_id', loc_id);
+
+    if (enhanceError) {
+      console.error('Error fetching enhance table data:', enhanceError);
+      throw new Error('Failed to fetch enhance table data');
+    }
+
+    let result = {
+      locationDetails: locationData,
+      menuDetails: menuList,
+      enhanceDetails: enhanceTableData,
+
+    }
+
+    console.log(result)
+
+    // Combine all responses into one object with identifiable keys
+    return result
+
+   
+  } catch (error) {
+    console.error('Error in fetchAllData wrapper:', error);
+    throw error;
+  }
+}
+
+
+
+
+

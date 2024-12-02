@@ -1,23 +1,23 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AdminPortalAuthProvider } from "./context/AdminPortalAuthContext";
 import { LocationProvider } from "./context/LocationContext"; // Import LocationContext
-import ProtectedAdminRoute from "./context/ProtectedAdminRoute";
 
-// Components
-import LoginScreen from "./components/LoginScreen";
-import CreateOrganization from "./components/CreateOrganisation";
-import LocationCards from "./components/LocationCards";
-import MenuList from "./components/MenuList";
-import MenuListDashboard from "./components/MenuListDashboard";
-import AddItemForm from "./components/AddItem";
-import CreateQR from "./components/CreateQR";
+//Components
+
+import LoginScreen from "./components/Admin Portal Component/LoginScreen";
+import MenuList from "./components/Admin Portal Component/MenuList";
+import MenuListDashboard from "./components/Admin Portal Component/MenuListDashboard";
+import AddItemForm from "./components/Admin Portal Component/AddItem";
+import CreateQR from "./components/Admin Portal Component/CreateQR";
 import Orders from "./components/Order Management Components/Orders";
-import CreateAgent from "./components/CreateAgent";
+import CreateAgent from "./components/Admin Portal Component/CreateAgent";
 import WaiterLogin from "./components/Waiter Portal Components/WaiterLogin";
 import AgentHome from "./components/Waiter Portal Components/AgentHome";
 import ConfirmTable from "./components/Visitor Components/ConfirmTable";
 import OrderModal from "./components/Waiter Portal Components/OrderModal";
-import EnhanceMenu from "./components/EnhanceMenu";
+import EnhanceMenu from "./components/Admin Portal Component/EnhanceMenu";
+import LocationCards from "./components/Admin Portal Component/LocationCards";
+import Dummy from "./components/Dummy";
 
 const App = () => {
 	return (
@@ -28,10 +28,11 @@ const App = () => {
 				<Router>
 					<Routes>
 						{/* Public Routes */}
-						<Route path="/" element={<LoginScreen />} />
+						<Route path="/dummy" element={<Dummy/>} />
+						<Route path="/" element={<LoginScreen/>} />
 						<Route path="/locations" element={<LocationCards />} />
 						<Route path="/location/:loc_id/menus" element={<MenuList />} />
-						<Route path="/menuboard" element={<MenuListDashboard />} />
+						<Route path="/:loc_id/menuboard" element={<MenuListDashboard />} />
 						<Route path="/additem/:loc_id" element={<AddItemForm />} />
 						<Route path="/location/:loc_id/createqr" element={<CreateQR />} />
 						<Route

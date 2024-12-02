@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {
 	addmenuitem,
 	getdetailedmenu,
 	loadlocation,
-} from "../services/supported_api";
+} from "../../services/supported_api";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "../scss/AddItem.scss";
+import "../../scss/AddItem.scss";
 import AlertPopup from "./AlertPopup";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -234,7 +234,7 @@ const AddItemForm = () => {
 	return (
 		<div className="flex justify-center items-start min-h-screen whole-relative">
 			<div className="back-wrapper">
-				<Link style={{ textDecoration: "none" }} to="/menuboard">
+				<Link style={{ textDecoration: "none" }} to={`/${loc_id}/menuboard`}>
 					<button className="btn--back">
 						<FontAwesomeIcon className="btn--back-icon" icon={faBackward} />
 						Back to Menu Dashboard

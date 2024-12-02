@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CategoryList from "./CategoryList";
-import { editmenulist, loadlocation } from "../services/supported_api";
+import { editmenulist, loadlocation } from "../../services/supported_api";
 import Loading from "./Loading";
 import LogoutButton from "./LogoutButton";
-import "../scss/MenuList.scss";
+import "../../scss/MenuList.scss";
 
 const MenuList = () => {
 	const { loc_id } = useParams(); // Get loc_id from the URL
@@ -111,7 +111,7 @@ const MenuList = () => {
 	};
 
 	const handleViewOrEditButtonClick = () => {
-		navigate("/menuboard", { state: { loc_id: loc_id } });
+		navigate(`/${loc_id}/menuboard`);
 	};
 
 	const handleCreateQRCode = () => {
