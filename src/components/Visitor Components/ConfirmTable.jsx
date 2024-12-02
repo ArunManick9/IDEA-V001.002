@@ -13,6 +13,13 @@ export default function ConfirmTable() {
 	const inputRefs = useRef([]); // Refs to handle focus on each input
 
 	useEffect(() => {
+		// Check local storage for authentication
+		const isCustomerAuthenticated = localStorage.getItem("iscustomerauthenticated");
+		if (isCustomerAuthenticated === "true") {
+			setIsAuthenticated(true);
+			return; // Skip the rest of the logic
+		}
+
 		if (hasInserted) return; // Prevent duplicate insertion
 
 		// Generate a random 5-digit passkey
@@ -48,13 +55,14 @@ export default function ConfirmTable() {
 		// Run insert function on component mount
 		insertPassKey();
 
-		inputRefs.current[0].focus();
+		inputRefs.current[0]?.focus();
 	}, [loc_id, table_id, hasInserted]);
 
 	const handleAuthenticate = () => {
 		const userEnteredKey = enteredKey.join("");
 		if (userEnteredKey === passKey) {
 			setIsAuthenticated(true);
+			localStorage.setItem("iscustomerauthenticated", "true"); // Save to local storage
 		} else {
 			alert("Incorrect Key! Please try again.");
 		}
@@ -67,13 +75,13 @@ export default function ConfirmTable() {
 
 		// Move to the next input if a digit was entered and it's not the last box
 		if (e.target.value && index < 4) {
-			inputRefs.current[index + 1].focus();
+			inputRefs.current[index + 1]?.focus();
 		}
 	};
 
 	const handleKeyDown = (e, index) => {
 		if (e.key === "Backspace" && index > 0 && !enteredKey[index]) {
-			inputRefs.current[index - 1].focus();
+			inputRefs.current[index - 1]?.focus();
 		} else if (e.key === "Enter" && index === 4) {
 			handleAuthenticate();
 		}
