@@ -30,7 +30,11 @@ const MenuItemCard = ({
 			</Link>
 			<div className="flexbox items-center ml-3 icons-wrapper">
 				<button
-					onClick={() => handleRemoveFromCart(item)}
+					onClick={() =>
+						setTimeout(() => {
+							handleRemoveFromCart(item);
+						}, 200)
+					}
 					className=" p-2 rounded-lg menu-item--icons transition-all duration-200"
 				>
 					<FaMinus />
@@ -39,7 +43,11 @@ const MenuItemCard = ({
 					{cartItems[item.id]?.quantity || 0}
 				</span>
 				<button
-					onClick={() => handleAddToCart(item)}
+					onClick={() =>
+						setTimeout(() => {
+							handleAddToCart(item);
+						}, 200)
+					}
 					className=" p-2 rounded-lg menu-item--icons transition-all duration-200"
 				>
 					<FaPlus />

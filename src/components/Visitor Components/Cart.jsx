@@ -99,14 +99,22 @@ const Cart = ({
 							{/* Quantity Controls */}
 							<div className="flexbox items-center cart__icons-flex">
 								<button
-									onClick={() => handleRemoveFromCart(item)}
+									onClick={() =>
+										setTimeout(() => {
+											handleRemoveFromCart(item);
+										}, 200)
+									}
 									className="cart__icon rounded-full transition-all"
 								>
 									-
 								</button>
 								<span className="font-semibold">{item.quantity}</span>
 								<button
-									onClick={() => handleAddToCart(item)}
+									onClick={() =>
+										setTimeout(() => {
+											handleAddToCart(item);
+										}, 200)
+									}
 									className="cart__icon rounded-full transition-all"
 								>
 									+

@@ -38,14 +38,6 @@ export default function DigiMenu() {
 		return ["All", ...new Set(menuData.map((item) => item.inmenu))];
 	};
 
-	const getCategories = (menu) => {
-		const filteredData =
-			menu === "All"
-				? menuData
-				: menuData.filter((item) => item.inmenu === menu);
-		return [...new Set(filteredData.map((item) => item.incategory))];
-	};
-
 	const getMenuItems = () => {
 		return menuData.filter(
 			(item) => selectedMenu === "All" || item.inmenu === selectedMenu
