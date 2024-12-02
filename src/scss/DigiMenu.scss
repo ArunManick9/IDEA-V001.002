@@ -30,8 +30,8 @@
 			align-items: center;
 			background-color: $color-white-blue;
 			box-shadow: $shadow-neu-mid;
-			animation: circularExpansion 0.5s ease forwards,
-				circularShrink 0.5s ease forwards 2s;
+			animation: circularExpansion 0.3s ease forwards,
+				circularShrink 0.3s ease forwards 2s;
 			&-header {
 				font-size: 1.25rem;
 				font-weight: 500;

@@ -18,6 +18,7 @@ import OrderModal from "./components/Waiter Portal Components/OrderModal";
 import EnhanceMenu from "./components/Admin Portal Component/EnhanceMenu";
 import LocationCards from "./components/Admin Portal Component/LocationCards";
 import Dummy from "./components/Dummy";
+import MenuDetail from "./components/Visitor Components/MenuDetail";
 
 const App = () => {
 	return (
@@ -28,8 +29,8 @@ const App = () => {
 				<Router>
 					<Routes>
 						{/* Public Routes */}
-						<Route path="/dummy" element={<Dummy/>} />
-						<Route path="/" element={<LoginScreen/>} />
+						<Route path="/dummy" element={<Dummy />} />
+						<Route path="/" element={<LoginScreen />} />
 						<Route path="/locations" element={<LocationCards />} />
 						<Route path="/location/:loc_id/menus" element={<MenuList />} />
 						<Route path="/:loc_id/menuboard" element={<MenuListDashboard />} />
@@ -56,7 +57,11 @@ const App = () => {
 						/>
 						<Route
 							path="menuboard/:loc_id/enhancemenu"
-							element={<EnhanceMenu/>}
+							element={<EnhanceMenu />}
+						/>
+						<Route
+							path="/digimenu/:loc_id/menuitem/:menu_id"
+							element={<MenuDetail />}
 						/>
 					</Routes>
 				</Router>

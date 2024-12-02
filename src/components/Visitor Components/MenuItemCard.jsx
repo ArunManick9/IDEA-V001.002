@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 // styling is written in DigiMenu.scss
 
 const MenuItemCard = ({
@@ -9,7 +10,10 @@ const MenuItemCard = ({
 	cartItems,
 }) => {
 	return (
-		<div className="flexbox items-center p-4 menu-item">
+		<Link
+			className="flexbox items-center p-4 menu-item"
+			to={`/digimenu/${item.inlocation}/menuitem/${item.menu_id}`}
+		>
 			<img
 				src={item.image}
 				alt={item.name}
@@ -39,7 +43,7 @@ const MenuItemCard = ({
 					<FaPlus />
 				</button>
 			</div>
-		</div>
+		</Link>
 	);
 };
 
