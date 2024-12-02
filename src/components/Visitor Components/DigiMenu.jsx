@@ -1,27 +1,27 @@
 // DigiMenu.js
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getdetailedmenu } from "../../services/supported_api";
-import { FaShoppingCart, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { fetchAllMenuCardData } from "../../services/supported_api";
+import { FaShoppingCart } from "react-icons/fa";
 import MenuItemCard from "./MenuItemCard";
 import Cart from "./Cart";
 import "../../scss/DigiMenu.scss";
 
 export default function DigiMenu() {
 	const { loc_id, table_id } = useParams();
+	const [locationName, setLocationName] = useState("");
 	const [menuData, setMenuData] = useState([]);
 	const [selectedMenu, setSelectedMenu] = useState("All");
-	const [selectedCategory, setSelectedCategory] = useState("");
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
-	const [openMenus, setOpenMenus] = useState({});
 	const [showGreet, setShowGreet] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const result = await getdetailedmenu(loc_id);
-				setMenuData(result);
+				const result = await fetchAllMenuCardData(loc_id);
+				setMenuData(result.menuDetails);
+				setLocationName(result.locationDetails?.name || "");
 				setShowGreet(true);
 				setTimeout(() => {
 					setShowGreet(false);
@@ -48,17 +48,8 @@ export default function DigiMenu() {
 
 	const getMenuItems = () => {
 		return menuData.filter(
-			(item) =>
-				(selectedMenu === "All" || item.inmenu === selectedMenu) &&
-				(!selectedCategory || item.incategory === selectedCategory)
+			(item) => selectedMenu === "All" || item.inmenu === selectedMenu
 		);
-	};
-
-	const toggleMenuDropdown = (menu) => {
-		setOpenMenus((prev) => ({
-			...prev,
-			[menu]: !prev[menu],
-		}));
 	};
 
 	const handleAddToCart = (item) => {
@@ -106,7 +97,7 @@ export default function DigiMenu() {
 				<div className="digimenu__greet">
 					<div className="digimenu__greet--content">
 						<h2 className="digimenu__greet--content-header">
-							Welcome to <span>{loc_id}</span>
+							Welcome to <span>{locationName}</span>
 						</h2>
 						<h3 className="digimenu__greet--content-sub">
 							Table: <span>{table_id}</span>
@@ -115,7 +106,7 @@ export default function DigiMenu() {
 				</div>
 			)}
 			<h1 className={`digimenu__header mb-6`}>
-				Welcome to <span>{loc_id} | </span> Table: <span>{table_id}</span>
+				Welcome to <span>{locationName} | </span> Table: <span>{table_id}</span>
 			</h1>
 
 			{/* Menu Tabs with Dropdowns */}
