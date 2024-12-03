@@ -222,6 +222,10 @@
 		background-color: $color-grey-2;
 		color: $color-white-blue;
 	}
+	&--black {
+		background-color: $rich-black;
+		color: $color-white-blue;
+	}
 	&__small {
 		font-size: 14px;
 		padding: 8px 12px;
