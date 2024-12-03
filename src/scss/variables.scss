@@ -22,6 +22,12 @@ $red-asterisk: #c40000;
 	src: url("/Poppins-Regular.ttf") format("truetype");
 }
 @font-face {
+	font-family: "Poppins-Light";
+	font-style: normal;
+	font-weight: 300;
+	src: url("/Poppins-Light.ttf") format("truetype");
+}
+@font-face {
 	font-family: "Poppins-Medium";
 	font-style: normal;
 	font-weight: 500;
@@ -47,6 +53,8 @@ $red-asterisk: #c40000;
 }
 $color-neu-one: #e0e1e1;
 $color-neu-two: #d1d3d7;
+$color-neu-three: #f8efef;
+$color-neu-four: #e5e4e4;
 // neumorphic shadows
 $shadow-neu-small: -0.5rem -0.8rem 2rem rgba(255, 255, 255, 0.6),
 	0.5rem 0.8rem 2rem rgba(0, 0, 0, 0.1);
@@ -54,10 +62,16 @@ $shadow-neu-mid: -5px -8px 1.5rem rgba(255, 255, 255, 0.75),
 	5px 8px 1.5rem rgba(0, 0, 0, 0.3);
 $shadow-neu-thick: -2px -4px 8px rgba(255, 255, 255, 1),
 	2px 4px 8px rgba(0, 0, 0, 0.5);
+$shadow-neu-thick-spread: -2px -4px 16px rgba(255, 255, 255, 1),
+	2px 4px 16px rgba(0, 0, 0, 0.3);
 $shadow-neu-inset: -0.4rem -0.7rem 1rem rgba(255, 255, 255, 0.2) inset,
 	0.4rem 0.7rem 1rem rgba(0, 0, 0, 0.2) inset;
+$shadow-neu-inset-small: -2px -4px 8px 12px rgba(255, 255, 255, 0.2) inset,
+	2px 4px 8px rgba(0, 0, 0, 0.2) inset;
 $shadow-neu-float: -0.8rem -1.1rem 2rem rgba(255, 255, 255, 0.9),
 	0.8rem 1.1rem 2rem rgba(0, 0, 0, 0.4);
+$shadow-neu-float-light: -0.8rem -1.1rem 3rem rgba(255, 255, 255, 0.9),
+	0.8rem 1.1rem 3rem rgba(0, 0, 0, 0.2);
 
 // other shadows
 $shadow-lightest: 0 2px 4px rgba(0, 0, 0, 0.15);
