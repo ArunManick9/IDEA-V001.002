@@ -40,7 +40,7 @@ export default function MenuDetail() {
 						/>
 						<div
 							className={`menu-details--content__box--icon ${
-								menuItem.veg_or_nonveg === "Veg" ? "icon--red" : "icon--red"
+								menuItem.veg_or_nonveg === "Veg" ? "icon--green" : "icon--red"
 							}`}
 						>
 							<FontAwesomeIcon icon={faBowlFood} />
@@ -75,6 +75,9 @@ export default function MenuDetail() {
 									</button>
 								</div>
 							)}
+						</div>
+						<div className="content__box--bottom-3">
+							Price: <span>${menuItem.price?.toFixed(2)}</span>
 						</div>
 					</div>
 					<div className="content__box--button">
