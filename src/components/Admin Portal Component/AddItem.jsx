@@ -10,6 +10,8 @@ import AlertPopup from "./AlertPopup";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LogoutButton from "./LogoutButton";
+import QuantityDetailsModal from "./QuantityDetailsModal";
+import AddonsModal from "./AddOnModals";
 
 const AddItemForm = () => {
 	const [data, setData] = useState(null);
@@ -25,6 +27,8 @@ const AddItemForm = () => {
 		inmenu: "",
 		incategory: "",
 		inlocation: "",
+		quantity_component: "",
+		addons_list: "",
 	});
 	const [availableCategories, setAvailableCategories] = useState([]);
 	const [imageFile, setImageFile] = useState(null);
@@ -34,7 +38,23 @@ const AddItemForm = () => {
 	const [nameFlag, setNameFlag] = useState(false);
 	const [descriptionFlag, setDescriptionFlag] = useState(false);
 	const [saving, setSaving] = useState(false);
+	const [showQModal, setShowQModal] = useState(true);
+	const [showAddonsModal, setShowAddonsModal] = useState(false);
+
+
+
+	const handleSaveQuantities = (updatedForm) => {
+		setForm(updatedForm);
+	  };
+	const handleSaveAddons = (updatedForm) => {
+		setForm(updatedForm);
+	  };
+
+
+
+
 	const { loc_id } = useParams();
+
 
 	const navigate = useNavigate();
 
@@ -390,6 +410,24 @@ const AddItemForm = () => {
 							</select>
 						</div>
 
+						<div className="flexbox justify-center gap-4 mt-4">
+							<button className="menuboard-btn menuboard-btn--add" type="button" onClick={()=>setShowQModal(true)}>Quantity Element</button>
+							{showQModal && (
+        <QuantityDetailsModal
+          form={form}
+          onQuantsDetailsSaved={handleSaveQuantities}
+          onClose={() => setShowQModal(false)}
+        />
+      )}
+						<button className="menuboard-btn menuboard-btn--add" type="button" onClick={() => setShowAddonsModal(true)}>Add on Elements</button>
+</div>
+{showAddonsModal && (
+        <AddonsModal
+          form={form}
+          onAddonsSaved={handleSaveAddons}
+          onClose={() => setShowAddonsModal(false)}
+        />
+      )}
 						<button
 							type="submit"
 							disabled={saving}
@@ -397,6 +435,7 @@ const AddItemForm = () => {
 						>
 							{!saving ? "Add Item" : "Submitting..."}
 						</button>
+					
 					</form>
 				</div>
 			</div>

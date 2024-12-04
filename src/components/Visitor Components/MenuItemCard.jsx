@@ -9,13 +9,15 @@ const MenuItemCard = ({
 	handleRemoveFromCart,
 	cartItems,
 }) => {
+
+	console.log(item)
 	return (
 		<div className="flexbox items-center p-4 menu-item">
 			<Link to={`/digimenu/${item.inlocation}/menuitem/${item.menu_id}`}>
 				<img
 					src={item.image}
 					alt={item.name}
-					className="w-14 h-14 object-cover rounded-md mr-3"
+					className="w-16 h-16 object-cover rounded-md mr-3"
 				/>
 			</Link>
 			<Link
