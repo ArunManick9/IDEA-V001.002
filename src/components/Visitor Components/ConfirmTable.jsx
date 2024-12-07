@@ -88,6 +88,7 @@ export default function ConfirmTable() {
 	};
 
 	if (isAuthenticated) {
+
 		return <DigiMenu />;
 	}
 
