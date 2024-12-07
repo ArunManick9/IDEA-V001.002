@@ -21,6 +21,7 @@ import Dummy from "./components/Dummy";
 import MenuDetail from "./components/Visitor Components/MenuDetail";
 
 const App = () => {
+
 	return (
 		<AdminPortalAuthProvider>
 			<LocationProvider>
