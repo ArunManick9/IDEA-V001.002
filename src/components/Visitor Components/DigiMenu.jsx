@@ -1,5 +1,5 @@
 // DigiMenu.js
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { fetchAllMenuCardData } from "../../services/supported_api";
 import { FaShoppingCart } from "react-icons/fa";
@@ -7,7 +7,7 @@ import MenuItemCard from "./MenuItemCard";
 import Cart from "./Cart";
 import "../../scss/DigiMenu.scss";
 
-export default function DigiMenu() {
+export default function DigiMenu({ activeMenu, activeItemId }) {
 	const { loc_id, table_id } = useParams();
 	const [locationName, setLocationName] = useState("");
 	const [menuData, setMenuData] = useState([]);
@@ -15,6 +15,19 @@ export default function DigiMenu() {
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
 	const [showGreet, setShowGreet] = useState(false);
+	const menuRefs = useRef({});
+
+	useEffect(() => {
+		if (activeMenu) {
+			setSelectedMenu(activeMenu);
+		}
+		if (activeItemId) {
+			menuRefs.current[activeItemId].scrollIntoView({
+				behavior: "smooth", // Optional for smooth scrolling
+				block: "center",
+			});
+		}
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -22,10 +35,13 @@ export default function DigiMenu() {
 				const result = await fetchAllMenuCardData(loc_id);
 				setMenuData(result.menuDetails);
 				setLocationName(result.locationDetails?.name || "");
-				setShowGreet(true);
-				setTimeout(() => {
-					setShowGreet(false);
-				}, 2500);
+				if (!localStorage.getItem("greeted")) {
+					setShowGreet(true);
+					localStorage.setItem("greeted", "true");
+					setTimeout(() => {
+						setShowGreet(false);
+					}, 2500);
+				}
 			} catch (error) {
 				console.error("Error loading menus:", error);
 			}
@@ -119,10 +135,11 @@ export default function DigiMenu() {
 			</div>
 
 			{/* Menu Items */}
-			<div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-				{getMenuItems().map((item) => (
+			<div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6 menu-items--grid">
+				{getMenuItems()?.map((item) => (
 					<MenuItemCard
 						key={item.id}
+						ref={(el) => (menuRefs.current[item.id] = el)}
 						item={item}
 						handleAddToCart={handleAddToCart}
 						handleRemoveFromCart={handleRemoveFromCart}
