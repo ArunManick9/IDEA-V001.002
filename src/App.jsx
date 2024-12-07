@@ -60,10 +60,6 @@ const App = () => {
 							path="menuboard/:loc_id/enhancemenu"
 							element={<EnhanceMenu />}
 						/>
-						<Route
-							path="/digimenu/:loc_id/menuitem/:menu_id"
-							element={<MenuDetail />}
-						/>
 					</Routes>
 				</Router>
 			</LocationProvider>{" "}

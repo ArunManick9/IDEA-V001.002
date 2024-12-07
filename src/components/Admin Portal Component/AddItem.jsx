@@ -38,7 +38,7 @@ const AddItemForm = () => {
 	const [nameFlag, setNameFlag] = useState(false);
 	const [descriptionFlag, setDescriptionFlag] = useState(false);
 	const [saving, setSaving] = useState(false);
-	const [showQModal, setShowQModal] = useState(true);
+	const [showQModal, setShowQModal] = useState(false);
 	const [showAddonsModal, setShowAddonsModal] = useState(false);
 
 

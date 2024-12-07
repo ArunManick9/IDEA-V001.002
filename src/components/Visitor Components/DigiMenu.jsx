@@ -29,6 +29,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 		}
 	}, []);
 
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -144,6 +145,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 						handleAddToCart={handleAddToCart}
 						handleRemoveFromCart={handleRemoveFromCart}
 						cartItems={cartItems}
+						loc_id={loc_id}
 					/>
 				))}
 			</div>
