@@ -15,20 +15,6 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
 	const [showGreet, setShowGreet] = useState(false);
-	const menuRefs = useRef({});
-
-	useEffect(() => {
-		if (activeMenu) {
-			setSelectedMenu(activeMenu);
-		}
-		if (activeItemId) {
-			menuRefs.current[activeItemId].scrollIntoView({
-				behavior: "smooth", // Optional for smooth scrolling
-				block: "center",
-			});
-		}
-	}, []);
-
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -139,8 +125,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 			<div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6 menu-items--grid">
 				{getMenuItems()?.map((item) => (
 					<MenuItemCard
-						key={item.id}
-						ref={(el) => (menuRefs.current[item.id] = el)}
+						key={item.id + selectedMenu}
 						item={item}
 						handleAddToCart={handleAddToCart}
 						handleRemoveFromCart={handleRemoveFromCart}
