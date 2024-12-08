@@ -90,6 +90,41 @@ export async function editmenulist(modifieddata, loc_id) {
 	}
 }
 
+// Update the waiter_support field
+export async function editWaiterSupport(waiterSupport, loc_id) {
+	console.log("Updating waiter_support:", waiterSupport, "for loc_id:", loc_id);
+  
+	const { data, error } = await supabase
+	  .from("HOTEL_BASE")
+	  .update({ waiter_support: waiterSupport })
+	  .eq("loc_id", loc_id)
+	  .select();
+  
+	if (error) {
+	  console.log(`Error updating waiter_support: ${error.message}`);
+	} else {
+	  console.log(`Waiter support updated successfully:`, data);
+	}
+  }
+  
+  // Update the menu_otp field
+  export async function editMenuOtp(menuOtp, loc_id) {
+	console.log("Updating menu_otp:", menuOtp, "for loc_id:", loc_id);
+  
+	const { data, error } = await supabase
+	  .from("HOTEL_BASE")
+	  .update({ menu_otp: menuOtp })
+	  .eq("loc_id", loc_id)
+	  .select();
+  
+	if (error) {
+	  console.log(`Error updating menu_otp: ${error.message}`);
+	} else {
+	  console.log(`Menu OTP updated successfully:`, data);
+	}
+  }
+  
+
 //get Menulistboard
 
 export async function getdetailedmenu(loc_id) {
