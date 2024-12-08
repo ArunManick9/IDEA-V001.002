@@ -140,8 +140,8 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 						{menuItem.category}
 					</div>
 					<div
-						className={`grid grid-cols-${
-							menuItemsFormat === "grid" ? "3 menu-items--grid" : "1"
+						className={`grid ${
+							menuItemsFormat === "grid" ? "menu-items--grid" : "grid-cols-1"
 						} sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
 					>
 						{menuItem.menuItems?.map((item) => (
