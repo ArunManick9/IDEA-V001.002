@@ -106,6 +106,7 @@
 		column-gap: 4px;
 		margin: 0 -12px;
 		justify-items: center;
+		grid-template-columns: 1fr 1fr 1fr;
 	}
 	.menu-items__category {
 		margin-bottom: 24px;
