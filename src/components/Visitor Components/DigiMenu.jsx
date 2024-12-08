@@ -1,6 +1,6 @@
 // DigiMenu.js
-import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { fetchAllMenuCardData } from "../../services/supported_api";
 import { FaShoppingCart } from "react-icons/fa";
 import MenuItemCard from "./MenuItemCard";
@@ -15,6 +15,8 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
 	const [showGreet, setShowGreet] = useState(false);
+	const [searchParams] = useSearchParams();
+	const menuItemsFormat = searchParams.get("displayType") || "grid";
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -37,15 +39,25 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 		fetchData();
 	}, [loc_id]);
 
-	const getMenus = () => {
-		return ["All", ...new Set(menuData.map((item) => item.inmenu))];
-	};
+	const getMenus = () => [
+		"All",
+		...new Set(menuData.map((item) => item.inmenu)),
+	];
 
-	const getMenuItems = () => {
-		return menuData.filter(
+	const getAllCategories = () => [
+		...new Set(getMenuItems().map((item) => item.incategory)),
+	];
+
+	const getMenuItemsToDisplay = () =>
+		getAllCategories().map((category) => ({
+			category,
+			menuItems: getMenuItems().filter((item) => item.incategory === category),
+		}));
+
+	const getMenuItems = () =>
+		menuData.filter(
 			(item) => selectedMenu === "All" || item.inmenu === selectedMenu
 		);
-	};
 
 	const handleAddToCart = (item) => {
 		setCartItems((prev) => ({
@@ -122,18 +134,30 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 			</div>
 
 			{/* Menu Items */}
-			<div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6 menu-items--grid">
-				{getMenuItems()?.map((item) => (
-					<MenuItemCard
-						key={item.id + selectedMenu}
-						item={item}
-						handleAddToCart={handleAddToCart}
-						handleRemoveFromCart={handleRemoveFromCart}
-						cartItems={cartItems}
-						loc_id={loc_id}
-					/>
-				))}
-			</div>
+			{getMenuItemsToDisplay().map((menuItem) => (
+				<div className="menu-items__category" key={menuItem.category}>
+					<div className="menu-items__category--header">
+						{menuItem.category}
+					</div>
+					<div
+						className={`grid grid-cols-${
+							menuItemsFormat === "grid" ? "3 menu-items--grid" : "1"
+						} sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
+					>
+						{menuItem.menuItems?.map((item) => (
+							<MenuItemCard
+								key={item.id + selectedMenu}
+								item={item}
+								menuItemsFormat={menuItemsFormat}
+								handleAddToCart={handleAddToCart}
+								handleRemoveFromCart={handleRemoveFromCart}
+								cartItems={cartItems}
+								loc_id={loc_id}
+							/>
+						))}
+					</div>
+				</div>
+			))}
 
 			{/* Cart Toggle */}
 			{showCart && (
