@@ -236,7 +236,6 @@
 }
 .cart-wrapper {
 	animation: slideUp 0.4s ease both;
-	max-height: max-content;
 	background-color: $color-neu-two;
 	box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.15);
 	&--disappear {
