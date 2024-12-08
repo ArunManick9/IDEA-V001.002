@@ -358,3 +358,29 @@ export async function fetchAllMenuCardData(loc_id) {
 		throw error;
 	}
 }
+
+export async function getagentslist(loc_id) {
+	let { data, error } = await supabase
+	.from("AGENT_DB")
+	.select("*")
+	.eq("location_id", loc_id); 
+	if (error) {
+		console.error("Error fetching locations:", error.message);
+	} else {
+		console.log("Data  successfully:", data);
+	}
+
+	return data;
+}
+
+export const updateAssignedTables = async (agentId, assignedTables) => {
+	const { data, error } = await supabase
+	  .from("AGENT_DB") // Replace "agents" with your table name
+	  .update({ assignedtables: JSON.stringify(assignedTables) }) // Update the assignedtables field
+	  .eq("agent_id", agentId);
+  
+	if (error) {
+	  throw new Error(error.message);
+	}
+	return data;
+  };
