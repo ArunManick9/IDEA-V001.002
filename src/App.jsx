@@ -18,7 +18,7 @@ import OrderModal from "./components/Waiter Portal Components/OrderModal";
 import EnhanceMenu from "./components/Admin Portal Component/EnhanceMenu";
 import LocationCards from "./components/Admin Portal Component/LocationCards";
 import Dummy from "./components/Dummy";
-import MenuDetail from "./components/Visitor Components/MenuDetail";
+import AllAgents from "./components/Admin Portal Component/AllAgents";
 
 const App = () => {
 
@@ -47,6 +47,13 @@ const App = () => {
 							path="/location/:loc_id/createagent"
 							element={<CreateAgent />}
 						/>
+						<Route
+							path="/location/:loc_id/allagents"
+							element={<AllAgents/>}
+						/>
+
+
+
 						<Route path="/location/:loc_id/:agent_id" element={<AgentHome />} />
 						<Route
 							path="/digimenu/:loc_id/:table_id"

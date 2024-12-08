@@ -104,7 +104,7 @@ export default function CreateAgent() {
 				</button>
 				<button
 					className="btn"
-					onClick={() => alert("View All Agents functionality coming soon!")}
+					onClick={() => navigate(`/location/${loc_id}/allagents`)}
 				>
 					View All Agents
 				</button>
