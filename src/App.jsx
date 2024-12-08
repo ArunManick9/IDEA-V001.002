@@ -19,6 +19,7 @@ import EnhanceMenu from "./components/Admin Portal Component/EnhanceMenu";
 import LocationCards from "./components/Admin Portal Component/LocationCards";
 import Dummy from "./components/Dummy";
 import AllAgents from "./components/Admin Portal Component/AllAgents";
+import LocationSettings from "./components/Admin Portal Component/LocationSettings";
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
 						<Route path="/" element={<LoginScreen />} />
 						<Route path="/locations" element={<LocationCards />} />
 						<Route path="/location/:loc_id/menus" element={<MenuList />} />
+						<Route path="/location/:loc_id/locationsettiNgs" element={<LocationSettings />} />
 						<Route path="/:loc_id/menuboard" element={<MenuListDashboard />} />
 						<Route path="/additem/:loc_id" element={<AddItemForm />} />
 						<Route path="/location/:loc_id/createqr" element={<CreateQR />} />

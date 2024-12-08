@@ -130,8 +130,8 @@ export default function Orders() {
               highlightedOrderId === order.order_id ? 'bg-yellow-100' : 'bg-gray-50'
             }`}
           >
-            <div className="flex flex-col space-y-2">
-              <div className="flex justify-between">
+            <div className="flexbox flex-col space-y-2">
+              <div className="flexbox justify-between">
                 <p className="text-lg font-semibold text-gray-700">Order ID: {order.order_id}</p>
                 <div className="bg-blue-500 text-white font-bold text-lg px-4 py-2 rounded-md shadow-md">
                   Table: {order.table_id}
