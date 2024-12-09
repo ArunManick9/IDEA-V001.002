@@ -165,12 +165,13 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 					className={`fixed bottom-0 right-0 w-full md:w-1/3 h-4/5 ${cartWrapperClass} p-6 overflow-y-auto z-5`}
 				>
 					<Cart
-						cartItems={cartItems}
-						handleAddToCart={handleAddToCart}
-						handleRemoveFromCart={handleRemoveFromCart}
-						handleCloseCart={handleCloseCart}
-						table_id={table_id}
-					/>
+  cartItems={cartItems}
+  handleAddToCart={handleAddToCart}
+  handleRemoveFromCart={handleRemoveFromCart}
+  handleCloseCart={handleCloseCart}
+  table_id={table_id}
+  clearCart={() => setCartItems({})} // Clear the cart
+/>
 				</div>
 			)}
 

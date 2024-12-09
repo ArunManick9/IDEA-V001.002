@@ -20,6 +20,7 @@ import LocationCards from "./components/Admin Portal Component/LocationCards";
 import Dummy from "./components/Dummy";
 import AllAgents from "./components/Admin Portal Component/AllAgents";
 import LocationSettings from "./components/Admin Portal Component/LocationSettings";
+import ThankYouScreen from "./components/Visitor Components/ThankYou";
 
 const App = () => {
 
@@ -68,6 +69,10 @@ const App = () => {
 						<Route
 							path="menuboard/:loc_id/enhancemenu"
 							element={<EnhanceMenu />}
+						/>
+						<Route
+							path="digimenu/thank-you"
+							element={<ThankYouScreen/>}
 						/>
 					</Routes>
 				</Router>
