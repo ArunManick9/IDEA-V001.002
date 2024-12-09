@@ -2,28 +2,29 @@ import React, { useEffect, useState } from "react";
 import supabase from "../../services/supabase";
 import { useNavigate } from "react-router-dom";
 
-export default function OrdersHandlerScreen({ loc_id }) {
+export default function OrdersHandlerScreen({ loc_id, onCountChange }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // Fetch initial orders
+  const fetchOrders = async () => {
+    const { data, error } = await supabase
+      .from("ORDER_DB")
+      .select("order_id, table_id, status")
+      .eq("loc_id", loc_id)
+      .eq("status", "New");
+
+    if (error) {
+      console.error("Error fetching orders:", error);
+    } else {
+      setOrders(data);
+      onCountChange(data.length); // Update the counter
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    // Fetch initial orders
-    const fetchOrders = async () => {
-      const { data, error } = await supabase
-        .from("ORDER_DB")
-        .select("order_id, table_id, status")
-        .eq("loc_id", loc_id)
-        .eq("status", "New");
-
-      if (error) {
-        console.error("Error fetching orders:", error);
-      } else {
-        setOrders(data);
-      }
-      setLoading(false);
-    };
-
     fetchOrders();
 
     // Subscribe to INSERT events for new orders
@@ -35,10 +36,11 @@ export default function OrdersHandlerScreen({ loc_id }) {
           event: "INSERT",
           schema: "public",
           table: "ORDER_DB",
-          filter: `loc_id=eq.${loc_id}`
+          filter: `loc_id=eq.${loc_id}`,
         },
         (payload) => {
-          setOrders((prevOrders) => [payload.new, ...prevOrders]); // Add the new order to the state
+          setOrders((prevOrders) => [payload.new, ...prevOrders]);
+          onCountChange((prevCount) => prevCount + 1); // Increment the counter
           showOrderNotification(payload.new);
         }
       )
@@ -48,7 +50,7 @@ export default function OrdersHandlerScreen({ loc_id }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [loc_id]);
+  }, [loc_id, onCountChange]);
 
   // Show a desktop notification for new orders
   const showOrderNotification = (order) => {
@@ -60,7 +62,7 @@ export default function OrdersHandlerScreen({ loc_id }) {
     }
   };
 
-  // Handle the navigation to order details
+  // Handle navigation to order details
   const handleViewOrder = (order) => {
     navigate(`/location/${loc_id}/orders/${order.order_id}`);
   };

@@ -123,6 +123,10 @@ const MenuList = () => {
 		navigate(`/location/${loc_id}/createagent`);
 	};
 
+	const handleSettingsClick = () => {
+		navigate(`/location/${loc_id}/locationsettings`);
+	};
+
 	if (loading) {
 		return <Loading />; // Show the Loading component while data is being fetched
 	}
@@ -143,23 +147,22 @@ const MenuList = () => {
 				<span className="fg-mikado">{data[0]?.name}</span>
 			</h1>
 
-			{/* Button Group: View/Edit All Menus, Create QR for Menu, and Create Agent(s) */}
+			{/* Button Group: View/Edit All Menus, Create QR for Menu, Create Agent(s), and Settings */}
 			<div className="flexbox space-x-4 mt-4">
-				{/* View/Edit All Menus Button */}
 				<button className="btn" onClick={handleViewOrEditButtonClick}>
 					View/Edit All Menus
 				</button>
-
-				{/* Create QR for Menu Button */}
 				<button className="btn" onClick={handleCreateQRCode}>
 					Create QR for Menu
 				</button>
-
-				{/* Create Agent(s) Button */}
 				<button className="btn" onClick={handleCreateAgents}>
 					Create Agent(s)
 				</button>
+				<button className="btn btn--settings" onClick={handleSettingsClick}>
+					<i className="fas fa-cog"></i> Settings
+				</button>
 			</div>
+
 
 			{/* Menus and Categories */}
 			<div className="w-full flexbox justify-center items-start space-x-6 transition-all duration-300">
