@@ -77,27 +77,14 @@
 			margin: 8px;
 			transition: all 0.1s ease;
 			cursor: pointer;
+			padding: 7px 12px;
+			border-radius: 15px;
+			box-shadow: $shadow-neu-thick-mid;
 
 			&--active {
-				font-weight: 700;
-				font-family: "Poppins-Bold";
-				margin: 8px 16px;
-				transform: scale(1.2);
+				font-family: "Poppins";
+				box-shadow: $shadow-neu-inset-small;
 				position: relative;
-				&::after {
-					padding: 3px;
-					background: $red-asterisk;
-					border-radius: 50%;
-					content: "";
-					position: absolute;
-					bottom: -7px;
-					left: 50%;
-					opacity: 0;
-					transform: translate(-40px, 0);
-					animation: dashInFromLeft 0.25s cubic-bezier(0.63, 1.13, 0.63, 0.99);
-					animation-delay: 0.1s;
-					animation-fill-mode: forwards;
-				}
 			}
 		}
 	}
