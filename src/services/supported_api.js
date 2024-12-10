@@ -61,6 +61,35 @@ export async function loadlocation(loc_id) {
 	return data;
 }
 
+export async function getMenuOtp(loc_id) {
+	try {
+	  let { data, error } = await supabase
+		.from("HOTEL_BASE")
+		.select("menu_otp") // Only select the menu_otp field
+		.eq("loc_id", loc_id);
+  
+	  if (error) {
+		console.error("Error fetching menu_otp:", error);
+		return null; // Return null if there is an error
+	  }
+  
+	  if (data && data.length > 0) {
+		const menuOtp = data[0].menu_otp; // Extract the menu_otp value
+		console.log("menu_otp fetched successfully:", menuOtp);
+		return menuOtp; // Return the extracted value
+	  } else {
+		console.warn("No menu_otp found for the provided loc_id.");
+		return null; // Return null if no data is found
+	  }
+	} catch (err) {
+	  console.error("Unexpected error fetching menu_otp:", err);
+	  return null; // Return null for unexpected errors
+	}
+  }
+  
+
+
+
 export async function addmenuitem(newmenu) {
 	const { data, error } = await supabase.from("MENU_LIST").insert(newmenu);
 
