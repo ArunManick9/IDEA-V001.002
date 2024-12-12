@@ -62,12 +62,14 @@ $shadow-neu-mid: -5px -8px 1.5rem rgba(255, 255, 255, 0.75),
 	5px 8px 1.5rem rgba(0, 0, 0, 0.3);
 $shadow-neu-thick: -2px -4px 8px rgba(255, 255, 255, 1),
 	2px 4px 8px rgba(0, 0, 0, 0.5);
+$shadow-neu-thick-mid: -2px -4px 12px rgba(255, 255, 255, 1),
+	2px 4px 12px rgba(0, 0, 0, 0.4);
 $shadow-neu-thick-spread: -2px -4px 16px rgba(255, 255, 255, 1),
 	2px 4px 16px rgba(0, 0, 0, 0.3);
 $shadow-neu-inset: -0.4rem -0.7rem 1rem rgba(255, 255, 255, 0.2) inset,
 	0.4rem 0.7rem 1rem rgba(0, 0, 0, 0.2) inset;
-$shadow-neu-inset-small: -2px -4px 8px 12px rgba(255, 255, 255, 0.2) inset,
-	2px 4px 8px rgba(0, 0, 0, 0.2) inset;
+$shadow-neu-inset-small: -2px -4px 8px 12px rgba(255, 255, 255, 0.1) inset,
+	2px 4px 8px rgba(0, 0, 0, 0.3) inset;
 $shadow-neu-float: -0.8rem -1.1rem 2rem rgba(255, 255, 255, 0.9),
 	0.8rem 1.1rem 2rem rgba(0, 0, 0, 0.4);
 $shadow-neu-float-light: -0.8rem -1.1rem 3rem rgba(255, 255, 255, 0.9),
