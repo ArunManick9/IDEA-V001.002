@@ -8,6 +8,7 @@ const Cart = ({
   handleRemoveFromCart,
   handleCloseCart,
   table_id,
+  waiter_sup,
   clearCart, // New function to clear the cart
 }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -24,29 +25,29 @@ const Cart = ({
 
   const handleYes = () => {
     if (cartEntries.length > 0) {
-      const loc_id = cartEntries[0].inlocation;
-      const order_id = generateOrderId(loc_id);
-      const orderRequestBody = {
-        order_id,
-        table_id,
-        loc_id,
-        order_list: cartEntries.map((item) => ({
-          item_id: item.id,
-          item_name: item.name,
-          quantity: item.quantity,
-          price: item.price,
-        })),
-        visitorid,
-        status: "New",
-      };
+        const loc_id = cartEntries[0].inlocation;
+        const order_id = generateOrderId(loc_id);
+        const orderRequestBody = {
+            order_id,
+            table_id,
+            loc_id,
+            order_list: cartEntries.map((item) => ({
+                item_id: item.id,
+                item_name: item.name,
+                quantity: item.quantity,
+                price: item.price,
+            })),
+            visitorid,
+            status: waiter_sup ? "New" : "Verified" , // Conditional status assignment
+        };
 
-      console.log("Order Request Body:", orderRequestBody);
+        console.log("Order Request Body:", orderRequestBody);
 
-      ordersubmit(orderRequestBody);
-      setShowConfirmation(false);
-      setShowOverlay(true); // Show overlay after order submission
+        ordersubmit(orderRequestBody);
+        setShowConfirmation(false);
+        setShowOverlay(true); // Show overlay after order submission
     }
-  };
+};
 
   return (
     <div className="relative cart">
