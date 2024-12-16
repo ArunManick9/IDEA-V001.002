@@ -6,13 +6,15 @@ import { FaShoppingCart } from "react-icons/fa";
 import MenuItemCard from "./MenuItemCard";
 import Cart from "./Cart";
 import "../../scss/DigiMenu.scss";
+import HighlightBanner from "./HighlightBanner";
 
 export default function DigiMenu({ activeMenu, activeItemId }) {
 	const { loc_id, table_id } = useParams();
 	const [locationName, setLocationName] = useState("");
 	const [menuData, setMenuData] = useState([]);
-	const[locationData, setLocationData] = useState({})
+	const [locationData, setLocationData] = useState({});
 	const [selectedMenu, setSelectedMenu] = useState("All");
+	const [enhanceDetails, setEnhanceDetails] = useState([]);
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
 	const [showGreet, setShowGreet] = useState(false);
@@ -25,7 +27,8 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 				const result = await fetchAllMenuCardData(loc_id);
 				setMenuData(result.menuDetails);
 				setLocationName(result.locationDetails?.name || "");
-				setLocationData(result.locationDetails)
+				setLocationData(result.locationDetails);
+				setEnhanceDetails(result.enhanceDetails || []);
 				if (!localStorage.getItem("greeted")) {
 					setShowGreet(true);
 					localStorage.setItem("greeted", "true");
@@ -41,7 +44,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 		fetchData();
 	}, [loc_id]);
 
-	const waiter_sup = locationData.waiter_support
+	const waiter_sup = locationData.waiter_support;
 
 	const getMenus = () => [
 		"All",
@@ -62,6 +65,9 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 		menuData.filter(
 			(item) => selectedMenu === "All" || item.inmenu === selectedMenu
 		);
+
+	const getHighlightBanners = () =>
+		enhanceDetails.filter((item) => item.banner_type === "Highlight");
 
 	const handleAddToCart = (item) => {
 		setCartItems((prev) => ({
@@ -119,7 +125,13 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 			<h1 className={`digimenu__header mb-6`}>
 				Welcome to <span>{locationName} | </span> Table: <span>{table_id}</span>
 			</h1>
-
+			<div className="digimenu__highlights-container">
+				{getHighlightBanners().map((banner) => (
+					<div className="digimenu__highlight-container" key={banner.id}>
+						<HighlightBanner highlightDetails={banner} />
+					</div>
+				))}
+			</div>
 			{/* Menu Tabs with Dropdowns */}
 			<div className={`category-wrapper`}>
 				{getMenus()?.map((menu) => (
@@ -136,7 +148,6 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 					</div>
 				))}
 			</div>
-
 			{/* Menu Items */}
 			{getMenuItemsToDisplay().map((menuItem) => (
 				<div className="menu-items__category" key={menuItem.category}>
@@ -162,24 +173,22 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 					</div>
 				</div>
 			))}
-
 			{/* Cart Toggle */}
 			{showCart && (
 				<div
 					className={`fixed bottom-0 right-0 w-full md:w-1/3 h-4/5 ${cartWrapperClass} p-6 overflow-y-auto z-5`}
 				>
 					<Cart
-  cartItems={cartItems}
-  handleAddToCart={handleAddToCart}
-  handleRemoveFromCart={handleRemoveFromCart}
-  handleCloseCart={handleCloseCart}
-  table_id={table_id}
-  waiter_sup={waiter_sup}
-  clearCart={() => setCartItems({})} // Clear the cart
-/>
+						cartItems={cartItems}
+						handleAddToCart={handleAddToCart}
+						handleRemoveFromCart={handleRemoveFromCart}
+						handleCloseCart={handleCloseCart}
+						table_id={table_id}
+						waiter_sup={waiter_sup}
+						clearCart={() => setCartItems({})} // Clear the cart
+					/>
 				</div>
 			)}
-
 			{/* Floating Cart Button */}
 			<button
 				className=" p-5 rounded-full digimenu__cart z-4"
