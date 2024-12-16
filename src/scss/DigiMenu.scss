@@ -234,6 +234,16 @@
 			font-size: 14px;
 		}
 	}
+	&__highlights-container {
+		margin: 0 -16px;
+		display: grid;
+		gap: 16px;
+		row-gap: 32px;
+		grid-template-columns: 1fr 1fr;
+	}
+	&__highlight-container {
+		position: relative;
+	}
 }
 .cart-wrapper {
 	animation: slideUp 0.4s ease both;

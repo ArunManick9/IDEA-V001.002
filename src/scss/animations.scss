@@ -136,3 +136,26 @@
 		backdrop-filter: none;
 	}
 }
+
+@keyframes whiteFade {
+	0% {
+		opacity: 0.2;
+		background: rgba(255, 255, 255);
+	}
+	100% {
+		opacity: 1;
+		filter: blur(0px);
+		background: transparent;
+	}
+}
+
+@keyframes progress {
+	from {
+		width: 0%;
+		background-color: #adb5bd;
+	}
+	to {
+		width: 100%;
+		background-color: #f8f9fa;
+	}
+}
