@@ -5,31 +5,53 @@
 	height: 100px;
 	position: relative;
 	border-radius: 10px;
+	width: 180px;
 	box-shadow: $shadow-neu-thick-mid;
 	font-family: "Poppins", sans-serif;
 	overflow: hidden;
 	display: flex;
-	flex-direction: column;
 	justify-content: space-between;
 	padding-bottom: 0;
 	animation: none;
+	&-items {
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+	}
+	&__content {
+		width: 180px;
+		scroll-snap-align: start;
+		position: relative;
+		height: 100%;
+		z-index: 10;
+		flex-shrink: 0;
+	}
+	&__content--active {
+		z-index: 25;
+	}
 
 	&__background {
 		position: absolute;
-		z-index: 0;
-		width: 100%;
+		width: 180px;
 		height: 100%;
 		top: 0;
 		left: 0;
 		opacity: 0.75;
 		&--image {
 			height: 100px;
-			width: 100%;
+			width: 180px;
 			z-index: 0;
 			object-fit: cover;
 		}
 	}
 	&__name {
+		position: absolute;
+		top: 0;
 		padding: 4px;
 		z-index: 2;
 		color: $color-white-blue;
@@ -44,11 +66,12 @@
 		text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 	}
 	&__icons {
+		position: absolute;
 		padding: 0 4px;
-		z-index: 2;
+		z-index: 50;
 		width: 100%;
 		font-size: 14px;
-		flex: 0.425;
+		top: 50%;
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
@@ -59,13 +82,15 @@
 		}
 	}
 	&__dots {
+		position: absolute;
+		bottom: 8px;
 		display: flex;
 		width: 100%;
-		z-index: 2;
+		z-index: 50;
 		align-items: center;
 		transition: all 0.2s ease;
 		justify-content: center;
-		padding-bottom: 8px;
+		bottom: 8px;
 		&-unit {
 			height: 3.5px;
 			margin-right: 6px;

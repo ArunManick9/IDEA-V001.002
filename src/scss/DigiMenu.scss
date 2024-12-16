@@ -10,6 +10,7 @@
 .digimenu {
 	font-family: "Poppins", sans-serif;
 	background-color: $color-neu-one;
+	overflow-x: hidden;
 	&__greet {
 		height: 100%;
 		position: absolute;
