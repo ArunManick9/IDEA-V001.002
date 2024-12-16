@@ -23,6 +23,13 @@ const HighlightBanner = ({ highlightDetails }) => {
 		setCurrent((prev) => (prev - 1 + items.length) % items.length);
 	};
 
+	useEffect(() => {
+		if (items.length > 0) {
+			startTimer();
+		}
+		return () => clearInterval(timerRef.current);
+	}, [items]);
+
 	const getCurrentItem = () => items[current] || {};
 	const [animationClass, setAnimationClass] = useState("");
 	const ref = useRef(false);
