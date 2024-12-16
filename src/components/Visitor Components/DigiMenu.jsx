@@ -11,6 +11,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 	const { loc_id, table_id } = useParams();
 	const [locationName, setLocationName] = useState("");
 	const [menuData, setMenuData] = useState([]);
+	const[locationData, setLocationData] = useState({})
 	const [selectedMenu, setSelectedMenu] = useState("All");
 	const [cartItems, setCartItems] = useState({});
 	const [showCart, setShowCart] = useState(false);
@@ -24,6 +25,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 				const result = await fetchAllMenuCardData(loc_id);
 				setMenuData(result.menuDetails);
 				setLocationName(result.locationDetails?.name || "");
+				setLocationData(result.locationDetails)
 				if (!localStorage.getItem("greeted")) {
 					setShowGreet(true);
 					localStorage.setItem("greeted", "true");
@@ -38,6 +40,8 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 
 		fetchData();
 	}, [loc_id]);
+
+	const waiter_sup = locationData.waiter_support
 
 	const getMenus = () => [
 		"All",
@@ -170,6 +174,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
   handleRemoveFromCart={handleRemoveFromCart}
   handleCloseCart={handleCloseCart}
   table_id={table_id}
+  waiter_sup={waiter_sup}
   clearCart={() => setCartItems({})} // Clear the cart
 />
 				</div>
