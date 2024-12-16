@@ -1,0 +1,94 @@
+@import "variables.scss";
+@import "animations.scss";
+
+.banner {
+	height: 100px;
+	position: relative;
+	border-radius: 10px;
+	box-shadow: $shadow-neu-thick-mid;
+	font-family: "Poppins", sans-serif;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-bottom: 0;
+	animation: none;
+
+	&__background {
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		opacity: 0.75;
+		&--image {
+			height: 100px;
+			width: 100%;
+			z-index: 0;
+			object-fit: cover;
+		}
+	}
+	&__name {
+		padding: 4px;
+		z-index: 2;
+		color: $color-white-blue;
+		font-size: 12px;
+		flex: 0.5;
+		font-family: "Poppins-Medium";
+		line-height: 18px;
+		max-width: 175px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+	}
+	&__icons {
+		padding: 0 4px;
+		z-index: 2;
+		width: 100%;
+		font-size: 14px;
+		flex: 0.425;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		color: $color-white-blue;
+		& > svg {
+			filter: drop-shadow($shadow-lightest);
+			cursor: pointer;
+		}
+	}
+	&__dots {
+		display: flex;
+		width: 100%;
+		z-index: 2;
+		align-items: center;
+		transition: all 0.2s ease;
+		justify-content: center;
+		padding-bottom: 8px;
+		&-unit {
+			height: 3.5px;
+			margin-right: 6px;
+			width: 3.5px;
+			background: $color-grey-1;
+			border-radius: 50%;
+			box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+		}
+		&-unit--active {
+			background: $color-white-blue;
+			transform: scale(2);
+			box-shadow: 0 3px 4px rgba(0, 0, 0, 0.6);
+		}
+	}
+	&__progress {
+		height: 4px;
+		width: 100%;
+		z-index: 2;
+		margin-top: auto;
+		background-color: $color-grey-2;
+		animation: progress 10s ease-out forwards;
+	}
+}
+.white-fade {
+	animation: whiteFade 1s forwards;
+}
