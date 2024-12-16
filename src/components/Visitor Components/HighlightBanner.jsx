@@ -23,12 +23,12 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 	};
 
 	const previousSlide = () => {
-		setCurrent((prev) => (prev - 1 + items.length) % items.length);
+		setCurrent((prev) => (prev + 1) % items.length);
 		startTimer();
 	};
 
 	const nextSlide = () => {
-		setCurrent((prev) => (prev + 1) % items.length);
+		setCurrent((prev) => (prev - 1 + items.length) % items.length);
 		startTimer();
 	};
 
@@ -112,7 +112,7 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 					<div
 						key={current}
 						className="banner__progress"
-						style={{ height: bannerHeight === 100 ? "4px" : "5px" }}
+						style={{ height: bannerHeight === 100 ? "2px" : "4px" }}
 					></div>
 				</>
 			)}
