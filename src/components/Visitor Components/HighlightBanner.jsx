@@ -32,6 +32,13 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 		startTimer();
 	};
 
+	useEffect(() => {
+		if (items.length > 0) {
+			startTimer();
+		}
+		return () => clearInterval(timerRef.current);
+	}, [items]);
+
 	const getCurrentItem = () => items[current] || {};
 	const [animationClass, setAnimationClass] = useState("");
 	const ref = useRef(false);
