@@ -67,7 +67,11 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 		);
 
 	const getHighlightBanners = () =>
-		enhanceDetails.filter((item) => item.banner_type === "Highlight");
+		enhanceDetails.filter(
+			(item) => item.banner_type === "Highlight" && item.isActive
+		);
+
+	const isMoreThanOneHighlightBanners = () => getHighlightBanners().length > 1;
 
 	const handleAddToCart = (item) => {
 		setCartItems((prev) => ({
@@ -126,9 +130,18 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 				Welcome to <span>{locationName} | </span> Table: <span>{table_id}</span>
 			</h1>
 			<div className="digimenu__highlights-container">
-				{getHighlightBanners().map((banner) => (
-					<div className="digimenu__highlight-container" key={banner.id}>
-						<HighlightBanner highlightDetails={banner} />
+				{getHighlightBanners()?.map((banner) => (
+					<div
+						className="digimenu__highlight-container"
+						key={banner.id}
+						style={{
+							width: isMoreThanOneHighlightBanners() ? "45vw" : "95vw",
+						}}
+					>
+						<HighlightBanner
+							highlightDetails={banner}
+							bannerHeight={isMoreThanOneHighlightBanners() ? 100 : 200}
+						/>
 					</div>
 				))}
 			</div>
