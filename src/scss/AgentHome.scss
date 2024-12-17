@@ -1,0 +1,75 @@
+@import "variables.scss";
+@import "animations.scss";
+.agent-home {
+	font-family: "Poppins", sans-serif;
+	.agent-tab {
+		color: $color-grey-1;
+		padding: 8px 4px;
+		font-size: 14px;
+	}
+	.agent-tab--active {
+		color: $mikado-yellow;
+		border-color: $mikado-yellow;
+	}
+	.agent-tab-container {
+		background-color: $oxford-blue;
+	}
+	.notification-bubble {
+		background: $red-asterisk;
+		color: $color-white-blue;
+		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.9);
+		font-family: "Poppins-Medium";
+		font-weight: 500;
+		font-size: 10px;
+	}
+}
+.confirmation-table {
+	background-color: $yale-blue;
+	&--header {
+		color: $mikado-yellow;
+		font-size: 24px;
+		font-family: "Poppins-Bold";
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+		font-weight: 600;
+		margin: 8px 0;
+	}
+	.table-card {
+		background-color: $oxford-blue;
+		box-shadow: 0 3px 7px #000;
+		border-radius: 15px;
+		color: $color-grey-1;
+	}
+}
+.orders-page {
+	background-color: $yale-blue;
+	.order-card {
+		background-color: $oxford-blue;
+		box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+		color: $color-grey-1;
+	}
+}
+.order-modal-alt {
+	font-family: "Poppins", sans-serif;
+}
+.order-modal-container {
+	background: $yale-blue;
+	font-family: "Poppins", sans-serif;
+	height: 100vh;
+	.order-modal {
+		color: $color-grey-1;
+		background: $oxford-blue;
+	}
+	.order-item-card {
+		background-color: $yale-blue;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+	}
+	.order-detail-line {
+		color: $color-neu-four;
+		font-family: "Poppins-Light";
+		font-size: 12px;
+	}
+	.order-edit-icon {
+		font-size: 14px;
+		color: $rich-black;
+	}
+}
