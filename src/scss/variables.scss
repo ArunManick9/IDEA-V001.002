@@ -94,3 +94,25 @@ $gradient-concave: linear-gradient(
 	rgba(0, 0, 0, 0.075),
 	rgba(255, 255, 255, 0.15)
 );
+
+// themes setup
+$themes: (
+	one: (
+		primary: #001d3dff,
+		secondary: #003566ff,
+		contrast: #ffc300ff,
+		dark-primary: #000814ff,
+	),
+	two: (
+		primary: #500096,
+		secondary: #7a178b,
+		contrast: #ea698b,
+		dark-primary: #220039,
+	),
+	three: (
+		primary: #22223b,
+		secondary: #4a4e69,
+		contrast: #f2e9e4,
+		dark-primary: #12121e,
+	),
+);

@@ -144,7 +144,7 @@ const MenuList = () => {
 			{/* Heading */}
 			<h1 className="heading">
 				Consolidated View of your Menu and Categories at{" "}
-				<span className="fg-mikado">{data[0]?.name}</span>
+				<span className="fg-contrast">{data[0]?.name}</span>
 			</h1>
 
 			{/* Button Group: View/Edit All Menus, Create QR for Menu, Create Agent(s), and Settings */}
@@ -162,7 +162,6 @@ const MenuList = () => {
 					<i className="fas fa-cog"></i> Settings
 				</button>
 			</div>
-
 
 			{/* Menus and Categories */}
 			<div className="w-full flexbox justify-center items-start space-x-6 transition-all duration-300">

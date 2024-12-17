@@ -1,8 +1,10 @@
 @use "variables" as *;
+@use "mixins";
 
 .locations-container {
+	@include mixins.theme-colors(three);
 	font-family: "Poppins", sans-serif;
-	background-color: $yale-blue;
+	background-color: var(--secondary-color);
 	min-width: 100vw;
 	&--inner {
 		display: flex;
@@ -14,7 +16,7 @@
 		font-weight: 700;
 		font-family: "Poppins-Bold";
 		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-		color: $mikado-yellow;
+		color: var(--contrast-color);
 		letter-spacing: 1.2px;
 	}
 	.locations-flex {
@@ -38,16 +40,20 @@
 	margin-bottom: 24px;
 	background: linear-gradient(
 		to right bottom,
-		$yale-blue,
-		$oxford-blue,
-		$rich-black
+		var(--secondary-color),
+		var(--primary-color),
+		var(--dark-color)
 	);
 	color: $color-white-blue;
 
 	&--new {
 		margin-bottom: 24px;
-		background: linear-gradient(to right bottom, $oxford-blue, $rich-black);
-		color: $gold;
+		background: linear-gradient(
+			to right bottom,
+			var(--primary-color),
+			var(--dark-color)
+		);
+		color: var(--contrast-color);
 		width: 350px;
 		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 	}

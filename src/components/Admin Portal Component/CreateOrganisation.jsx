@@ -363,7 +363,7 @@ const CreateOrganization = ({ user_id, setCreateOrgClicked }) => {
 						</>
 					)}
 
-					<div className="flex justify-between mt-6">
+					<div className="flexbox justify-between mt-6">
 						{currentStep > 0 && (
 							<button
 								type="button"

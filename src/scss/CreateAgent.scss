@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins";
 
 .flexbox {
 	display: flex;
@@ -7,13 +8,14 @@
 	}
 }
 .create-agent-container {
-	background-color: $oxford-blue;
+	@include mixins.theme-colors(three);
+	background-color: var(--primary-color);
 	font-family: "Poppins", sans-serif;
 	position: relative;
 	flex-direction: column;
 }
-.fg-mikado {
-	color: $mikado-yellow;
+.fg-contrast {
+	color: var(--contrast-color);
 }
 h1.title {
 	text-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
@@ -24,7 +26,7 @@ h1.title {
 	margin-top: 4px;
 	border-radius: 5px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-	background-color: $yale-blue;
+	background-color: var(--secondary-color);
 	color: $color-grey-1;
 	transition: all 0.2s ease;
 	&:hover {
@@ -38,7 +40,7 @@ h1.title {
 	}
 
 	&--submit {
-		background-color: $mikado-yellow;
+		background-color: var(--contrast-color);
 		color: $rich-black;
 		&:hover {
 			filter: brightness(0.9);
@@ -48,7 +50,7 @@ h1.title {
 .create-agent-form {
 	border-radius: 5px;
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
-	background-color: $yale-blue;
+	background-color: var(--secondary-color);
 	color: $color-white-blue;
 	select,
 	input {
