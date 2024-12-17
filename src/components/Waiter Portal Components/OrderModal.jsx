@@ -90,7 +90,7 @@ export default function OrderModal() {
 					<AiOutlineClose size={24} />
 				</button>
 
-				<h2 className="text-2xl font-bold mb-6 text-center fg-mikado">
+				<h2 className="text-2xl font-bold mb-6 text-center fg-contrast">
 					Order Details
 				</h2>
 

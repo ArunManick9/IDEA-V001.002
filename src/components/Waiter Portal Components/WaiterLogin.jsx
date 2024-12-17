@@ -66,7 +66,7 @@ export default function WaiterLogin() {
 				<LogoutButton />
 			</div>
 			<div className="waiter-login-wrapper shadow-lg rounded-lg p-6 w-full max-w-md">
-				<h2 className="text-2xl font-semibold text-center fg-mikado mb-4">
+				<h2 className="text-2xl font-semibold text-center fg-contrast mb-4">
 					Waiter Login
 				</h2>
 				<form onSubmit={handleSubmit} className="space-y-4">

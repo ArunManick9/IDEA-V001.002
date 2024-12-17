@@ -56,7 +56,7 @@ const LoginScreen = () => {
 					<button
 						className={`px-4 py-2 mr-2 font-medium login-form--label ${
 							activeTab === "login"
-								? "white-color bg-yale active-tab"
+								? "white-color bg-secondary active-tab"
 								: "dark-gray-color bg-light-gray"
 						}`}
 						onClick={() =>
@@ -71,7 +71,7 @@ const LoginScreen = () => {
 					<button
 						className={`px-4 py-2 font-medium login-form--label ${
 							activeTab === "createUser"
-								? "white-color bg-yale active-tab"
+								? "white-color bg-secondary active-tab"
 								: "dark-gray-color bg-light-gray"
 						}`}
 						onClick={() =>

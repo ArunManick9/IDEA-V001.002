@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins";
 
 // scrollbar rules
 .custom-scrollbar {
@@ -41,6 +42,7 @@
 	background-color: $color-grey-2;
 }
 .wrapper {
+	@include mixins.theme-colors(three);
 	background-color: $color-grey-2;
 	width: 100%;
 	font-family: "Poppins";
@@ -67,14 +69,14 @@
 	margin-top: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 	transition: all 0.2s ease;
-	background-color: $oxford-blue;
-	color: $mikado-yellow;
+	background-color: var(--primary-color);
+	color: var(--contrast-color);
 	cursor: pointer;
 }
 .btn--saving {
 	cursor: disabled;
-	color: $oxford-blue;
-	background-color: $mikado-yellow;
+	color: var(--primary-color);
+	background-color: var(--contrast-color);
 }
 .alert-wrapper {
 	position: absolute;
@@ -98,7 +100,7 @@
 }
 .btn--back {
 	border-radius: 10px;
-	background-color: $yale-blue;
+	background-color: var(--secondary-color);
 	color: $color-white-blue;
 	font-size: 1rem;
 	padding: 6px 12px;
@@ -106,12 +108,12 @@
 	transition: all 0.15s ease;
 	&-icon {
 		margin-right: 10px;
-		color: $mikado-yellow;
+		color: var(--contrast-color);
 	}
 	&:hover {
-		background-color: $mikado-yellow;
+		background-color: var(--contrast-color);
 		box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
-		color: $oxford-blue;
+		color: var(--primary-color);
 		transform: scale(1.1);
 		.btn--back-icon {
 			color: $rich-black;

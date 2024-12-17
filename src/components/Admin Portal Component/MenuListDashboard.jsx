@@ -10,7 +10,7 @@ import LogoutButton from "./LogoutButton";
 
 const MenuListDashboard = () => {
 	const location = useLocation();
-	const { loc_id } = useParams(); 
+	const { loc_id } = useParams();
 
 	const [menuData, setMenuData] = useState([]);
 	const [showEditModal, setShowEditModal] = useState(false);
@@ -121,11 +121,11 @@ const MenuListDashboard = () => {
 						<FontAwesomeIcon icon={faSquarePlus} /> Add Menu
 					</button>
 					<button
-		className="menuboard-btn menuboard-btn--enhance"
-		onClick={() => navigate(`/menuboard/${loc_id}/enhancemenu`)}
-	>
-		Enhance Menu
-	</button>
+						className="menuboard-btn menuboard-btn--enhance"
+						onClick={() => navigate(`/menuboard/${loc_id}/enhancemenu`)}
+					>
+						Enhance Menu
+					</button>
 				</div>
 
 				<div className="flexbox space-x-4 mb-8 justify-center">
@@ -134,7 +134,7 @@ const MenuListDashboard = () => {
 							key={index}
 							className={`px-4 py-2 rounded-full menu-filter ${
 								selectedMenu === menu
-									? "bg-mikado fg-yale  shadow-md"
+									? "bg-contrast fg-secondary  shadow-md"
 									: "bg-gray-1 text-gray-700"
 							}`}
 							onClick={() => setSelectedMenu(menu)}
@@ -154,7 +154,7 @@ const MenuListDashboard = () => {
 										key={index}
 										className={`category ${
 											selectedCategory === category
-												? "bg-mikado fg-yale font-bold shadow-md"
+												? "bg-contrast fg-secondary font-bold shadow-md"
 												: "bg-gray-1 text-gray-700"
 										}`}
 										onClick={() => setSelectedCategory(category)}

@@ -70,7 +70,7 @@ export default function AgentHome() {
 						key={tab.id}
 						className={`flex-1 py-2 text-center relative ${
 							currentPage === tab.id
-								? "border-b-2 fg-mikado font-semibold agent-tab agent-tab--active"
+								? "border-b-2 fg-contrast font-semibold agent-tab agent-tab--active"
 								: "agent-tab"
 						}`}
 						onClick={() => setCurrentPage(tab.id)}

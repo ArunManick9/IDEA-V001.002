@@ -1,6 +1,8 @@
 @use "variables" as *;
 @use "animations" as *;
+@use "mixins";
 .agent-home {
+	@include mixins.theme-colors(three);
 	font-family: "Poppins", sans-serif;
 	.agent-tab {
 		color: $color-grey-1;
@@ -8,11 +10,11 @@
 		font-size: 14px;
 	}
 	.agent-tab--active {
-		color: $mikado-yellow;
-		border-color: $mikado-yellow;
+		color: var(--contrast-color);
+		border-color: var(--contrast-color);
 	}
 	.agent-tab-container {
-		background-color: $oxford-blue;
+		background-color: var(--primary-color);
 	}
 	.notification-bubble {
 		background: $red-asterisk;
@@ -24,9 +26,10 @@
 	}
 }
 .confirmation-table {
-	background-color: $yale-blue;
+	@include mixins.theme-colors(three);
+	background-color: var(--secondary-color);
 	&--header {
-		color: $mikado-yellow;
+		color: var(--contrast-color);
 		font-size: 24px;
 		font-family: "Poppins-Bold";
 		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
@@ -34,16 +37,17 @@
 		margin: 8px 0;
 	}
 	.table-card {
-		background-color: $oxford-blue;
+		background-color: var(--primary-color);
 		box-shadow: 0 3px 7px #000;
 		border-radius: 15px;
 		color: $color-grey-1;
 	}
 }
 .orders-page {
-	background-color: $yale-blue;
+	@include mixins.theme-colors(three);
+	background-color: var(--secondary-color);
 	.order-card {
-		background-color: $oxford-blue;
+		background-color: var(--primary-color);
 		box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
 		color: $color-grey-1;
 	}
@@ -52,15 +56,16 @@
 	font-family: "Poppins", sans-serif;
 }
 .order-modal-container {
-	background: $yale-blue;
+	@include mixins.theme-colors(three);
+	background: var(--secondary-color);
 	font-family: "Poppins", sans-serif;
 	height: 100vh;
 	.order-modal {
 		color: $color-grey-1;
-		background: $oxford-blue;
+		background: var(--primary-color);
 	}
 	.order-item-card {
-		background-color: $yale-blue;
+		background-color: var(--secondary-color);
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
 	}
 	.order-detail-line {

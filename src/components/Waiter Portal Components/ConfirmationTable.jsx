@@ -98,7 +98,7 @@ export default function ConfirmTableScreen({ loc_id, onCountChange }) {
 						<p className="text-lg font-semibold text-center mb-2">
 							Share the below PassKey
 						</p>
-						<p className="text-xl font-bold text-center fg-mikado">
+						<p className="text-xl font-bold text-center fg-contrast">
 							{record.passKey}
 						</p>
 						<p className="text-lg text-center mt-2">

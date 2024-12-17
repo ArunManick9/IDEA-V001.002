@@ -90,7 +90,7 @@ export default function CreateAgent() {
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>
-			<h1 className="text-4xl font-semibold mb-6 fg-mikado text-center title">
+			<h1 className="text-4xl font-semibold mb-6 fg-contrast text-center title">
 				Create and Manage Your Agents
 			</h1>
 
