@@ -23,12 +23,13 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 	};
 
 	const previousSlide = () => {
-		setCurrent((prev) => (prev + 1) % items.length);
+		setCurrent((prev) => (prev - 1 + items.length) % items.length);
 		startTimer();
 	};
 
 	const nextSlide = () => {
-		setCurrent((prev) => (prev - 1 + items.length) % items.length);
+		
+		setCurrent((prev) => (prev + 1) % items.length);
 		startTimer();
 	};
 
