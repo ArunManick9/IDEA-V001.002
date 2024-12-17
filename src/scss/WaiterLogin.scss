@@ -1,0 +1,18 @@
+@import "variables.scss";
+
+.otp-inputs-container {
+	gap: 4px;
+}
+.waiter-login-container {
+	background-color: $oxford-blue;
+	font-family: "Poppins", sans-serif;
+	.waiter-login-wrapper {
+		background-color: $yale-blue;
+	}
+}
+.fg-white {
+	color: $color-white-blue;
+}
+.font-medium {
+	font-family: "Poppins-Medium";
+}

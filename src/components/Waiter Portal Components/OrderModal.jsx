@@ -62,7 +62,7 @@ export default function OrderModal() {
 
 	if (loading) {
 		return (
-			<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+			<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30 order-modal-alt">
 				<div className="bg-white p-6 rounded-md shadow-md w-1/3 text-center">
 					<p>Loading order details...</p>
 				</div>
@@ -72,7 +72,7 @@ export default function OrderModal() {
 
 	if (!orderDetails || !Array.isArray(orderDetails.order_list)) {
 		return (
-			<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
+			<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 order-modal-alt">
 				<div className="bg-white p-6 rounded-md shadow-md w-1/3 text-center">
 					<p>Error loading order details or no items available.</p>
 				</div>
@@ -81,16 +81,18 @@ export default function OrderModal() {
 	}
 
 	return (
-		<div className="flex items-center justify-center bg-black bg-opacity-0 z-50">
-			<div className="relative bg-white w-11/12 md:w-2/3 lg:w-1/2 rounded-lg shadow-lg p-8">
+		<div className="flex items-center justify-center z-50 order-modal-container">
+			<div className="relative w-11/12 md:w-2/3 lg:w-1/2 rounded-lg shadow-lg p-8 order-modal">
 				<button
-					className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+					className="absolute top-4 right-4 fg-white hover:text-gray-900"
 					onClick={handleClose}
 				>
 					<AiOutlineClose size={24} />
 				</button>
 
-				<h2 className="text-2xl font-bold mb-6 text-center">Order Details</h2>
+				<h2 className="text-2xl font-bold mb-6 text-center fg-mikado">
+					Order Details
+				</h2>
 
 				<div className="space-y-4 mb-6">
 					<p>
@@ -104,21 +106,21 @@ export default function OrderModal() {
 					</p>
 				</div>
 
-				<div className="space-y-4">
+				<div className="space-y-4 ">
 					<h3 className="text-xl font-semibold mb-4">Items</h3>
 					{orderDetails.order_list.map((item) => (
 						<div
 							key={item.item_id}
-							className="flex items-center justify-between p-4 bg-gray-100 rounded-md"
+							className="flex items-center justify-between p-4 rounded-md order-item-card"
 						>
 							<div>
 								<p className="text-lg font-medium">{item.item_name}</p>
-								<p className="text-gray-600">
+								<p className="order-detail-line">
 									Price: ₹{item.price} | Quantity: {item.quantity}
 								</p>
 							</div>
 							<button
-								className="text-blue-500 hover:text-blue-700"
+								className="order-edit-icon"
 								onClick={() => console.log(`Editing item ${item.item_id}`)}
 							>
 								<AiOutlineEdit size={20} />
@@ -127,17 +129,17 @@ export default function OrderModal() {
 					))}
 				</div>
 
-				<div className="flex justify-between mt-8">
+				<div className="flexbox justify-between mt-8">
 					<button
-						className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+						className="btn btn--submit px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
 						onClick={() => console.log("Add items clicked")}
 					>
 						Add Items
 					</button>
 					<button
-						className={`${
-							isVerified ? "bg-gray-400" : "bg-green-500"
-						} text-white px-4 py-2 rounded-md transition-colors ${
+						className={`btn ${
+							isVerified ? "btn--add" : "btn--submit"
+						}  px-4 py-2 rounded-md transition-colors ${
 							isVerified ? "" : "hover:bg-green-600"
 						}`}
 						onClick={verifyOrder}

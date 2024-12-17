@@ -159,3 +159,18 @@
 		background-color: #f8f9fa;
 	}
 }
+
+@keyframes glow {
+	0% {
+		box-shadow: 0 0 3px #ffc300ff, 0 0 5px #ffc300ff, 0 0 7px #f8f9fa,
+			0 0 10px #f8f9fa;
+	}
+	50% {
+		box-shadow: 0 0 5px #f8f9fa, 0 0 7px #ffc300ff, 0 0 10px #ffc300ff,
+			0 0 50px #f8f9fa;
+	}
+	100% {
+		box-shadow: 0 0 3px #ffc300ff, 0 0 5px #ffc300ff, 0 0 7px #f8f9fa,
+			0 0 10px #f8f9fa;
+	}
+}
