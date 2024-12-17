@@ -1,10 +1,11 @@
 @use "variables" as *;
+@use "sass:map";
 
 @mixin theme-colors($theme) {
-	$colors: map-get($themes, $theme);
+	$colors: map.get($themes, $theme);
 
-	--primary-color: #{map-get($colors, primary)};
-	--secondary-color: #{map-get($colors, secondary)};
-	--contrast-color: #{map-get($colors, contrast)};
-	--dark-color: #{map-get($colors, dark-primary)};
+	--primary-color: #{map.get($colors, primary)};
+	--secondary-color: #{map.get($colors, secondary)};
+	--contrast-color: #{map.get($colors, contrast)};
+	--dark-color: #{map.get($colors, dark-primary)};
 }
