@@ -1,4 +1,4 @@
-@import "variables.scss";
+@use "variables" as *;
 
 .locations-container {
 	font-family: "Poppins", sans-serif;

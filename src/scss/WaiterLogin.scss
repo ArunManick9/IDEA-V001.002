@@ -1,4 +1,4 @@
-@import "variables.scss";
+@use "variables" as *;
 
 .otp-inputs-container {
 	gap: 4px;

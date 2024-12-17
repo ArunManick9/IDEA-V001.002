@@ -1,4 +1,4 @@
-@import "variables.scss";
+@use "variables" as *;
 
 .confirm-table {
 	background-color: $color-neu-one;

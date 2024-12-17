@@ -8,4 +8,11 @@ export default defineConfig({
 		host: true,
 		port: 8080,
 	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: "modern-compiler", // or "modern"
+			},
+		},
+	},
 });
