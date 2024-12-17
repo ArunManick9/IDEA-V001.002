@@ -1,4 +1,4 @@
-@import "variables.scss";
+@use "variables" as *;
 
 .menu-list-container {
 	background-color: $rich-black;
