@@ -23,7 +23,6 @@ import LocationSettings from "./components/Admin Portal Component/LocationSettin
 import ThankYouScreen from "./components/Visitor Components/ThankYou";
 
 const App = () => {
-
 	return (
 		<AdminPortalAuthProvider>
 			<LocationProvider>
@@ -36,7 +35,10 @@ const App = () => {
 						<Route path="/" element={<LoginScreen />} />
 						<Route path="/locations" element={<LocationCards />} />
 						<Route path="/location/:loc_id/menus" element={<MenuList />} />
-						<Route path="/location/:loc_id/locationsettiNgs" element={<LocationSettings />} />
+						<Route
+							path="/location/:loc_id/locationsettings"
+							element={<LocationSettings />}
+						/>
 						<Route path="/:loc_id/menuboard" element={<MenuListDashboard />} />
 						<Route path="/additem/:loc_id" element={<AddItemForm />} />
 						<Route path="/location/:loc_id/createqr" element={<CreateQR />} />
@@ -50,13 +52,7 @@ const App = () => {
 							path="/location/:loc_id/createagent"
 							element={<CreateAgent />}
 						/>
-						<Route
-							path="/location/:loc_id/allagents"
-							element={<AllAgents/>}
-						/>
-
-
-
+						<Route path="/location/:loc_id/allagents" element={<AllAgents />} />
 						<Route path="/location/:loc_id/:agent_id" element={<AgentHome />} />
 						<Route
 							path="/digimenu/:loc_id/:table_id"
@@ -70,10 +66,7 @@ const App = () => {
 							path="menuboard/:loc_id/enhancemenu"
 							element={<EnhanceMenu />}
 						/>
-						<Route
-							path="digimenu/thank-you"
-							element={<ThankYouScreen/>}
-						/>
+						<Route path="digimenu/thank-you" element={<ThankYouScreen />} />
 					</Routes>
 				</Router>
 			</LocationProvider>{" "}
