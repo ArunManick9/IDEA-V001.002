@@ -10,21 +10,25 @@ export default function ConfirmTable() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const { loc_id, table_id } = useParams();
     const [passKey, setPassKey] = useState("");
+    const [requiresPasskey, setRequiresPasskey] = useState(false);
     const [hasInserted, setHasInserted] = useState(false); // Track insertion
     const inputRefs = useRef([]); // Refs to handle focus on each input
 
     useEffect(() => {
         const fetchLocation = async () => {
             try {
-                const requiresPasskey = await getMenuOtp(loc_id); // Call the imported function
-                console.log("Requires passkey:", requiresPasskey); // Log the result
+                const otpRequired = await getMenuOtp(loc_id); // Call the imported function
+                console.log("Requires passkey:", otpRequired);
 
-                // If the passkey is not required, authenticate automatically
-                if (!requiresPasskey) {
+                setRequiresPasskey(otpRequired);
+
+                // If OTP is not required or user is already authenticated, skip the OTP screen
+                const isCustomerAuthenticated = localStorage.getItem("iscustomerauthenticated") === "true";
+                if (!otpRequired || isCustomerAuthenticated) {
                     setIsAuthenticated(true);
                 }
             } catch (error) {
-                console.error("Error fetching location:", error); // Log errors
+                console.error("Error fetching location:", error);
             }
         };
 
@@ -32,16 +36,13 @@ export default function ConfirmTable() {
     }, [loc_id]);
 
     useEffect(() => {
-        if (isAuthenticated) return; // Skip passkey generation if authenticated
-
+        if (isAuthenticated || !requiresPasskey) return; // Skip passkey generation if authenticated or not required
         if (hasInserted) return; // Prevent duplicate insertion
 
-        // Generate a random 5-digit passkey
         const generatePassKey = () => {
             return Math.floor(10000 + Math.random() * 90000).toString();
         };
 
-        // Insert passkey, loc_id, and table_id into Supabase table
         const insertPassKey = async () => {
             const newPassKey = generatePassKey();
             setPassKey(newPassKey);
@@ -66,11 +67,10 @@ export default function ConfirmTable() {
             }
         };
 
-        // Run insert function on component mount
         insertPassKey();
 
         inputRefs.current[0]?.focus();
-    }, [loc_id, table_id, hasInserted, isAuthenticated]);
+    }, [loc_id, table_id, hasInserted, isAuthenticated, requiresPasskey]);
 
     const handleAuthenticate = () => {
         const userEnteredKey = enteredKey.join("");
@@ -87,7 +87,6 @@ export default function ConfirmTable() {
         newEnteredKey[index] = e.target.value;
         setEnteredKey(newEnteredKey);
 
-        // Move to the next input if a digit was entered and it's not the last box
         if (e.target.value && index < 4) {
             inputRefs.current[index + 1]?.focus();
         }
