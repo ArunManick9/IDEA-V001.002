@@ -1,10 +1,12 @@
-@import "variables.scss";
+@use "variables" as *;
+@use "mixins";
 
 .flexbox {
 	display: flex;
 }
 .outer-container {
 	background-color: $color-grey-3;
+	@include mixins.theme-colors(three);
 }
 .inner-container {
 	background-color: $color-grey-2;
@@ -29,8 +31,8 @@
 	}
 }
 .login-btn {
-	background-color: $oxford-blue;
-	color: $gold;
+	background-color: var(--primary-color);
+	color: var(--contrast-color);
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 	border-radius: 4px;
 	cursor: pointer;
@@ -46,7 +48,7 @@
 	}
 	&--google {
 		color: $rich-black;
-		background-color: $mikado-yellow;
+		background-color: var(--contrast-color);
 	}
 }
 
@@ -58,8 +60,8 @@
 .white-color {
 	color: $color-white-blue;
 }
-.bg-yale {
-	background-color: $yale-blue;
+.bg-secondary {
+	background-color: var(--secondary-color);
 }
 .dark-gray-color {
 	color: $color-grey-4;

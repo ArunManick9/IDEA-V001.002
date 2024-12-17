@@ -1,11 +1,12 @@
-@import "variables.scss";
-
+@use "variables" as *;
+@use "mixins";
 .menuboard-outer {
-	background-color: $yale-blue;
+	@include mixins.theme-colors(three);
+	background-color: var(--secondary-color);
 	position: relative;
 }
 .menuboard {
-	background-color: $oxford-blue;
+	background-color: var(--primary-color);
 	font-family: "Poppins", sans-serif;
 	border-radius: 5px;
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
@@ -51,11 +52,11 @@
 .bg-rich-black {
 	background-color: $rich-black;
 }
-.bg-yale {
-	background-color: $yale-blue;
+.bg-secondary {
+	background-color: var(--secondary-color);
 }
-.bg-mikado {
-	background-color: $mikado-yellow;
+.bg-contrast {
+	background-color: var(--contrast-color);
 }
 .bg-gray-1 {
 	background-color: $color-grey-1;
@@ -63,9 +64,9 @@
 .fg-rich-black {
 	color: $rich-black;
 }
-.fg-yale {
-	color: $yale-blue;
+.fg-secondary {
+	color: var(--secondary-color);
 }
-.fg-oxford {
-	color: $oxford-blue;
+.fg-primary {
+	color: var(--primary-color);
 }

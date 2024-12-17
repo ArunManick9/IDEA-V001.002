@@ -1,17 +1,19 @@
-@import "variables.scss";
+@use "variables" as *;
+@use "mixins";
 
 .enhance-wrapper {
+	@include mixins.theme-colors(three);
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: $oxford-blue;
+	background: var(--primary-color);
 }
 .enhance-container {
 	width: 500px;
 	font-family: "Poppins", sans-serif;
-	background-color: $yale-blue;
+	background-color: var(--secondary-color);
 	box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
 	color: $color-grey-1;
 	font-size: 14px;
@@ -19,7 +21,7 @@
 		font-size: 1.8rem;
 		font-weight: 800;
 		font-family: "Poppins-ExtraBold";
-		color: $mikado-yellow;
+		color: var(--contrast-color);
 		letter-spacing: 1.2px;
 		text-align: center;
 		margin-bottom: 16px;

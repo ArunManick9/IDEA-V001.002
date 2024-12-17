@@ -1,4 +1,6 @@
-@import "variables.scss";
+@use "variables" as *;
+@use "mixins";
+
 .font-semibold {
 	font-weight: 600;
 	font-family: "Poppins-SemiBold";
@@ -10,6 +12,7 @@
 .digimenu {
 	font-family: "Poppins", sans-serif;
 	background-color: $color-neu-one;
+	@include mixins.theme-colors(three);
 	&__greet {
 		height: 100%;
 		position: absolute;
@@ -42,7 +45,7 @@
 					font-size: 2.25rem;
 					font-weight: 600;
 					font-family: "Poppins-SemiBold";
-					color: $oxford-blue;
+					color: var(--primary-color);
 					text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 				}
 			}
@@ -77,6 +80,7 @@
 			margin: 8px;
 			transition: all 0.1s ease;
 			cursor: pointer;
+			font-size: 14px;
 
 			&--active {
 				font-weight: 700;
@@ -133,13 +137,13 @@
 		}
 	}
 	&__cart {
-		background: $oxford-blue;
+		background: var(--primary-color);
 		box-shadow: $shadow-neu-thick, $shadow-bevel;
 		animation: fadeUp 0.4s ease both;
 		position: fixed;
 		bottom: 16px;
 		right: 16px;
-		color: $mikado-yellow;
+		color: var(--contrast-color);
 		transition: all 0.4s ease;
 	}
 
@@ -239,7 +243,7 @@
 		display: grid;
 		gap: 16px;
 		row-gap: 32px;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: auto minmax(0, 1fr);
 	}
 	&__highlight-container {
 		position: relative;
@@ -248,6 +252,7 @@
 .cart-wrapper {
 	animation: slideUp 0.4s ease both;
 	background-color: $color-neu-two;
+	z-index: 4;
 	box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.15);
 	&--disappear {
 		animation: slideDown 0.6s forwards ease;
@@ -323,11 +328,11 @@
 	box-shadow: $shadow-neu-float;
 	&--submit {
 		color: $color-white-blue;
-		background-color: $oxford-blue;
+		background-color: var(--primary-color);
 	}
-	&--yale {
-		background-color: $yale-blue;
-		color: $mikado-yellow;
+	&--secondary {
+		background-color: var(--secondary-color);
+		color: var(--contrast-color);
 	}
 	&--grey {
 		background-color: $color-grey-2;

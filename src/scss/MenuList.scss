@@ -1,7 +1,8 @@
-@import "variables.scss";
-
+@use "variables" as *;
+@use "mixins";
 .menu-list-container {
-	background-color: $rich-black;
+	background-color: var(--primary-color);
+	@include mixins.theme-colors(three);
 	font-family: "Poppins", sans-serif;
 	gap: 16px;
 	h1.heading {
@@ -13,7 +14,7 @@
 	.menu-item {
 		background-color: $color-white-blue;
 		display: flex;
-		color: $oxford-blue;
+		color: var(--primary-color);
 		&:hover {
 			transform: scale(1.03);
 			transition: all 0.2s ease;
@@ -48,7 +49,7 @@
 		margin-top: 4px;
 		border-radius: 5px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-		background-color: $yale-blue;
+		background-color: var(--secondary-color);
 		color: $color-grey-1;
 		transition: all 0.2s ease;
 		&:hover {
@@ -62,15 +63,15 @@
 		}
 
 		&--add {
-			background-color: $oxford-blue;
-			color: $gold;
+			background-color: var(--primary-color);
+			color: var(--contrast-color);
 			&:hover {
 				filter: brightness(1.2);
 			}
 		}
 
 		&--submit {
-			background-color: $mikado-yellow;
+			background-color: var(--contrast-color);
 			color: $rich-black;
 			&:hover {
 				filter: brightness(0.9);

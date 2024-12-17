@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"; // Import useNavigate and useParams
 import { getagentlogin } from "../../services/supported_api";
 import LogoutButton from "../Admin Portal Component/LogoutButton";
+import "../../scss/WaiterLogin.scss";
 
 export default function WaiterLogin() {
 	const [mbNum, setMbNum] = useState("");
@@ -60,17 +61,17 @@ export default function WaiterLogin() {
 	const closeModal = () => setShowModal(false);
 
 	return (
-		<div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+		<div className="min-h-screen waiter-login-container flexbox items-center justify-center px-4">
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>
-			<div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-				<h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
+			<div className="waiter-login-wrapper shadow-lg rounded-lg p-6 w-full max-w-md">
+				<h2 className="text-2xl font-semibold text-center fg-contrast mb-4">
 					Waiter Login
 				</h2>
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<div>
-						<label className="block text-sm font-medium text-gray-600">
+						<label className="block text-sm font-medium fg-white">
 							Mobile Number
 						</label>
 						<input
@@ -85,10 +86,10 @@ export default function WaiterLogin() {
 					</div>
 
 					<div>
-						<label className="block text-sm font-medium text-gray-600 mb-2">
+						<label className="block text-sm font-medium fg-white mb-2">
 							6-Digit Password
 						</label>
-						<div className="flex justify-between space-x-2">
+						<div className="flexbox justify-between otp-inputs-container">
 							{password.map((digit, index) => (
 								<input
 									key={index}
@@ -97,7 +98,7 @@ export default function WaiterLogin() {
 									value={digit}
 									maxLength={1}
 									onChange={(e) => handlePasswordChange(index, e.target.value)}
-									className="w-12 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 text-lg font-semibold"
+									className="w-12 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400 text-lg font-semibold otp-input"
 								/>
 							))}
 						</div>
@@ -105,7 +106,7 @@ export default function WaiterLogin() {
 
 					<button
 						type="submit"
-						className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition duration-200"
+						className="w-full btn btn--submit transition duration-200"
 					>
 						Login
 					</button>

@@ -1,0 +1,19 @@
+@use "variables" as *;
+@use "mixins";
+.otp-inputs-container {
+	gap: 4px;
+}
+.waiter-login-container {
+	@include mixins.theme-colors(three);
+	background-color: var(--primary-color);
+	font-family: "Poppins", sans-serif;
+	.waiter-login-wrapper {
+		background-color: var(--secondary-color);
+	}
+}
+.fg-white {
+	color: $color-white-blue;
+}
+.font-medium {
+	font-family: "Poppins-Medium";
+}

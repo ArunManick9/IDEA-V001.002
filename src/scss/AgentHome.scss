@@ -1,0 +1,80 @@
+@use "variables" as *;
+@use "animations" as *;
+@use "mixins";
+.agent-home {
+	@include mixins.theme-colors(three);
+	font-family: "Poppins", sans-serif;
+	.agent-tab {
+		color: $color-grey-1;
+		padding: 8px 4px;
+		font-size: 14px;
+	}
+	.agent-tab--active {
+		color: var(--contrast-color);
+		border-color: var(--contrast-color);
+	}
+	.agent-tab-container {
+		background-color: var(--primary-color);
+	}
+	.notification-bubble {
+		background: $red-asterisk;
+		color: $color-white-blue;
+		box-shadow: 0 2px 3px rgba(0, 0, 0, 0.9);
+		font-family: "Poppins-Medium";
+		font-weight: 500;
+		font-size: 10px;
+	}
+}
+.confirmation-table {
+	@include mixins.theme-colors(three);
+	background-color: var(--secondary-color);
+	&--header {
+		color: var(--contrast-color);
+		font-size: 24px;
+		font-family: "Poppins-Bold";
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+		font-weight: 600;
+		margin: 8px 0;
+	}
+	.table-card {
+		background-color: var(--primary-color);
+		box-shadow: 0 3px 7px #000;
+		border-radius: 15px;
+		color: $color-grey-1;
+	}
+}
+.orders-page {
+	@include mixins.theme-colors(three);
+	background-color: var(--secondary-color);
+	.order-card {
+		background-color: var(--primary-color);
+		box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+		color: $color-grey-1;
+	}
+}
+.order-modal-alt {
+	font-family: "Poppins", sans-serif;
+}
+.order-modal-container {
+	@include mixins.theme-colors(three);
+	background: var(--secondary-color);
+	font-family: "Poppins", sans-serif;
+	height: 100vh;
+	.order-modal {
+		color: $color-grey-1;
+		background: var(--primary-color);
+	}
+	.order-item-card {
+		background-color: var(--secondary-color);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+	}
+	.order-detail-line {
+		color: $color-neu-four;
+		font-family: "Poppins-Light";
+		font-size: 12px;
+	}
+	.order-edit-icon {
+		font-size: 14px;
+		color: $rich-black;
+	}
+}
