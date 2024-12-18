@@ -3,6 +3,7 @@ import QRCode from "qrcode";
 import { FiDownload } from "react-icons/fi"; // For download icon
 import { useNavigate, useParams } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
+import "../../scss/CreateQR.scss";
 
 export default function CreateQR() {
 	const { loc_id } = useParams();
@@ -47,12 +48,12 @@ export default function CreateQR() {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center p-6 space-y-6 bg-gray-100 rounded-lg shadow-lg">
+		<div className="flexbox flex-col items-center justify-center p-6 space-y-6 bg-gray-100 shadow-lg createQR-outer">
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>
 			{/* Heading */}
-			<h2 className="text-2xl font-medium text-gray-800">
+			<h2 className="text-2xl font-bold fg-primary createQR-header">
 				Enter Table Name to Generate a Unique QR Code
 			</h2>
 
@@ -67,7 +68,7 @@ export default function CreateQR() {
 
 			{/* Non-editable URL field */}
 			<div className="w-full max-w-md">
-				<label className="block text-gray-700 mb-2">Generated URL</label>
+				<label className="block fg-rich-blacck mb-2">Generated URL</label>
 				<input
 					type="text"
 					value={generatedUrl}
@@ -77,20 +78,17 @@ export default function CreateQR() {
 			</div>
 
 			{/* Create QR Button */}
-			<button
-				onClick={handleCreateQRCode}
-				className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-300"
-			>
+			<button onClick={handleCreateQRCode} className="btn btn--submit">
 				Create QR Code
 			</button>
 
 			{/* QR Code Display and Download */}
 			{qrImage && (
-				<div className="flex flex-col items-center mt-6 space-y-4">
+				<div className="flexbox flex-col items-center mt-6 space-y-4">
 					<img src={qrImage} alt="Generated QR Code" className="w-48 h-48" />
 					<button
 						onClick={handleDownloadQRCode}
-						className="flex items-center space-x-2 bg-green-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition duration-300"
+						className="flex items-center space-x-2 btn btn--add-menu"
 					>
 						<FiDownload />
 						<span>Download QR Code</span>

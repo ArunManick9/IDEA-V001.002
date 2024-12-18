@@ -1,0 +1,12 @@
+@use "variables" as *;
+@use "mixins";
+
+.createQR-outer {
+	@include mixins.theme-colors(three);
+	height: 100vh;
+	background-color: var(--secondary-color);
+	font-family: "Poppins";
+	.createQR-header {
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	}
+}
