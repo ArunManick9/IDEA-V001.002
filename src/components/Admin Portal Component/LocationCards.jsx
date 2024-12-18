@@ -124,7 +124,7 @@ const LocationCards = () => {
 				/>
 			)}
 			{loading && <Loading />}
-			<div className="locations-container--inner mx-auto py-12">
+			<div className="locations-container--inner mx-auto">
 				<div className="w-full flexbox justify-end">
 					<LogoutButton />
 				</div>
