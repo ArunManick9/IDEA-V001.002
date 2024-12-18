@@ -460,6 +460,49 @@
 	}
 }
 
+.order-overlay {
+	background-color: $color-neu-one;
+	border-radius: 25px;
+	font-family: "Poppins", sans-serif;
+	width: 90vw;
+	box-shadow: $shadow-lightest;
+
+	.order-title {
+		color: $color-grey-2;
+		font-family: "Poppins";
+		letter-spacing: 0.8px;
+		font-size: 14px;
+	}
+	.order-detail {
+		color: $color-grey-2;
+		opacity: 0.9;
+		font-family: "Poppins-Light";
+		letter-spacing: 0.8px;
+		font-size: 14px;
+	}
+}
+
+.thank-you-screen {
+	font-family: "Poppins", sans-serif;
+	@include mixins.theme-colors(three);
+	.header {
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	}
+	.statement-container {
+		display: flex;
+		flex-direction: column;
+		align-items: space-between;
+		justify-content: flex-start;
+		padding: 0 32px;
+	}
+	.statement {
+		color: $color-grey-2;
+		font-family: "Poppins-Light";
+		font-size: 14px;
+		letter-spacing: 0.8px;
+	}
+}
+
 // Fade-in animation for modal
 @keyframes fadeIn {
 	from {
