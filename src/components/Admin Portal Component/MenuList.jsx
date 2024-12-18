@@ -247,24 +247,24 @@ const MenuList = () => {
 
 					{showAddModal && (
 						<div className="fixed inset-0 bg-black bg-opacity-50 flexbox justify-center items-center">
-							<div className="bg-white p-6 rounded-lg shadow-lg">
+							<div className="bg-white p-6 rounded-lg shadow-lg add-menu-modal">
 								<h2 className="text-lg font-light mb-4">Add a New Menu</h2>
 								<input
 									type="text"
-									className="w-full p-2 border border-gray-300 rounded-lg mb-4"
+									className="w-full p-2 border border-gray-300 rounded-lg mb-4 add-menu-modal--input"
 									placeholder="Enter menu name"
 									value={newMenu}
 									onChange={(e) => setNewMenu(e.target.value)}
 								/>
 								<div className="flexbox justify-end space-x-4">
 									<button
-										className="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition"
+										className="btn"
 										onClick={() => setShowAddModal(false)}
 									>
 										Cancel
 									</button>
 									<button
-										className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
+										className="btn btn--submit"
 										onClick={handleAddMenuConfirm}
 									>
 										Add Menu
