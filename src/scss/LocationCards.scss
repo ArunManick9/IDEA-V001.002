@@ -5,11 +5,11 @@
 	@include mixins.theme-colors(three);
 	font-family: "Poppins", sans-serif;
 	background-color: var(--secondary-color);
-	min-width: 100vw;
 	&--inner {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-top: 20px;
 	}
 	.header {
 		font-size: 2.8rem;
