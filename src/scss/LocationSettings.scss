@@ -1,0 +1,85 @@
+@use "variables" as *;
+@use "mixins";
+
+.settings-loader {
+	@include mixins.theme-colors(three);
+	background-color: var(--primary-color);
+	color: $color-white-blue;
+	font-family: "Poppins", sans-serif;
+}
+.settings {
+	gap: 32px;
+	@include mixins.theme-colors(three);
+	font-family: "Poppins", sans-serif;
+	background-color: var(--secondary-color);
+	&__header {
+		font-size: 3rem;
+		font-family: "Poppins-Bold";
+		color: var(--contrast-color);
+		letter-spacing: 1.2px;
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+	}
+	.toggle-button {
+		background-color: var(--contrast-color);
+		border-radius: 50%;
+		box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+		top: 0;
+		transition: all 0.2s ease;
+		&--off {
+			transform: translateX(0);
+		}
+		&--on {
+			transform: translate(25px);
+		}
+	}
+	&__color-palette {
+		margin-bottom: 32px;
+		&--header {
+			font-size: 20px;
+			font-family: "Poppins-SemiBold";
+			text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+			margin-bottom: 12px;
+			color: $rich-black;
+		}
+		&--container {
+			display: flex;
+			width: 500px;
+			gap: 20px;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+		&--item-wrapper {
+			position: relative;
+		}
+		.active-theme::after {
+			content: "\2713";
+			position: absolute;
+			height: auto;
+			font-size: 12px;
+			width: auto;
+			padding: 1px 6px;
+			box-shadow: $shadow-lightest;
+			color: $color-white-blue;
+			background-color: $current-green;
+			border-radius: 50%;
+			top: -4px;
+			border: 2px solid $color-white-blue;
+			right: -4px;
+			z-index: 2;
+		}
+		&--item {
+			position: relative;
+			display: grid;
+			border-radius: 50%;
+			grid-template-columns: 1fr 1fr;
+			overflow: hidden;
+			height: 60px;
+			width: 60px;
+			box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
+			.color--contrast {
+				grid-column: span 2;
+			}
+		}
+	}
+}

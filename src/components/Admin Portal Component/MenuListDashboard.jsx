@@ -165,7 +165,7 @@ const MenuListDashboard = () => {
 							</ul>
 						</div>
 
-						<div className="w-3/4 ml-12  h-full">
+						<div className="w-3/4 ml-12  h-full custom-scrollbar">
 							<h3 className="text-lg font-semibold">Menu Items</h3>
 							{menuItems.length > 0 ? (
 								<ul className="overflow-y-auto h-full">

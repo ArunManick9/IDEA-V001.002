@@ -78,4 +78,12 @@
 			}
 		}
 	}
+	.add-menu-modal {
+		background-color: var(--primary-color);
+		color: var(--contrast-color);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+		&--input {
+			color: $rich-black;
+		}
+	}
 }

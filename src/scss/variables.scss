@@ -11,6 +11,7 @@ $color-grey-2: #495057;
 $color-grey-3: #343a40;
 $color-grey-4: #212529;
 $red-asterisk: #c40000;
+$current-green: #169116;
 
 // -----------------------------------------------
 // neumorphism variables
@@ -114,5 +115,11 @@ $themes: (
 		secondary: #4a4e69,
 		contrast: #f2e9e4,
 		dark-primary: #12121e,
+	),
+	four: (
+		primary: #033f63,
+		secondary: #28666e,
+		contrast: #fedc97,
+		dark-primary: #002135,
 	),
 );
