@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CategoryList from "./CategoryList";
 import { editmenulist, loadlocation } from "../../services/supported_api";
+import { useLocations } from "../../context/LocationContext.jsx";
 import Loading from "./Loading";
 import LogoutButton from "./LogoutButton";
 import "../../scss/MenuList.scss";
@@ -17,6 +18,7 @@ const MenuList = () => {
 	const [selectedMenu, setSelectedMenu] = useState(null);
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true); // New loading state
+	const { activeTheme } = useLocations();
 
 	const navigate = useNavigate();
 	// Retrieve the access token from localStorage (or location state as fallback)
@@ -132,7 +134,9 @@ const MenuList = () => {
 	}
 
 	return (
-		<div className="flexbox flex-col justify-center items-center space-y-6 min-h-screen transition-all duration-300 menu-list-container">
+		<div
+			className={`flexbox flex-col justify-center items-center space-y-6 min-h-screen transition-all duration-300 menu-list-container theme-${activeTheme}`}
+		>
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>

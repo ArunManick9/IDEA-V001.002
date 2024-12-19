@@ -1,8 +1,7 @@
 @use "variables" as *;
-@use "mixins";
+@use "themes";
 
 .createQR-outer {
-	@include mixins.theme-colors(three);
 	height: 100vh;
 	background-color: var(--secondary-color);
 	font-family: "Poppins";

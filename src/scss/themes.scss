@@ -1,0 +1,14 @@
+@use "mixins";
+
+.theme-one {
+	@include mixins.theme-colors(one);
+}
+.theme-two {
+	@include mixins.theme-colors(two);
+}
+.theme-three {
+	@include mixins.theme-colors(three);
+}
+.theme-four {
+	@include mixins.theme-colors(four);
+}

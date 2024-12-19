@@ -5,6 +5,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import EditMenuItemModal from "./EditMenuItems";
+import { useLocations } from "../../context/LocationContext";
 import "../../scss/MenuListDashboard.scss";
 import LogoutButton from "./LogoutButton";
 
@@ -16,7 +17,7 @@ const MenuListDashboard = () => {
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 	const navigate = useNavigate();
-
+	const { activeTheme } = useLocations();
 	// Retrieve the access token from localStorage (or location state as fallback)
 	const access_token =
 		location.state?.access_token || localStorage.getItem("access_token");
@@ -64,7 +65,7 @@ const MenuListDashboard = () => {
 		if (categories.length > 0) {
 			setSelectedCategory("All Categories");
 		}
-	}, [selectedMenu]);
+	}, [selectedMenu, categories.length]);
 
 	const menuItems =
 		selectedMenu === "All Menu"
@@ -108,7 +109,9 @@ const MenuListDashboard = () => {
 	};
 
 	return (
-		<div className="flexbox justify-center items-center min-h-screen menuboard-outer">
+		<div
+			className={`flexbox justify-center items-center min-h-screen menuboard-outer theme-${activeTheme}`}
+		>
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>

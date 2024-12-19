@@ -2,7 +2,6 @@
 @use "mixins";
 .menu-list-container {
 	background-color: var(--primary-color);
-	@include mixins.theme-colors(three);
 	font-family: "Poppins", sans-serif;
 	gap: 16px;
 	h1.heading {

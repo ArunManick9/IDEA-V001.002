@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import QRCode from "qrcode";
 import { FiDownload } from "react-icons/fi"; // For download icon
 import { useNavigate, useParams } from "react-router-dom";
+import { useLocations } from "../../context/LocationContext";
 import LogoutButton from "./LogoutButton";
 import "../../scss/CreateQR.scss";
 
@@ -10,7 +11,7 @@ export default function CreateQR() {
 	const [tableIdentifier, setTableIdentifier] = useState("");
 	const [qrImage, setQrImage] = useState("");
 	const [generatedUrl, setGeneratedUrl] = useState("");
-
+	const { activeTheme } = useLocations();
 	const navigate = useNavigate();
 
 	// Retrieve the access token from localStorage (or location state as fallback)
@@ -48,7 +49,9 @@ export default function CreateQR() {
 	};
 
 	return (
-		<div className="flexbox flex-col items-center justify-center p-6 space-y-6 bg-gray-100 shadow-lg createQR-outer">
+		<div
+			className={`flexbox flex-col items-center justify-center p-6 space-y-6 shadow-lg createQR-outer theme-${activeTheme}`}
+		>
 			<div className="logout-wrapper">
 				<LogoutButton />
 			</div>
