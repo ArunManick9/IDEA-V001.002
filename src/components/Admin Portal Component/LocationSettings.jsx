@@ -15,6 +15,7 @@ const LocationSettings = () => {
 	const [otpValidation, setOtpValidation] = useState(false);
 
 	const { activeTheme, updateTheme } = useLocations();
+	const [currentTheme, setCurrentTheme] = useState();
 
 	const hardCodedColorPalettes = [
 		{
@@ -52,6 +53,10 @@ const LocationSettings = () => {
 	];
 
 	useEffect(() => {
+		setCurrentTheme(activeTheme);
+	}, [activeTheme]);
+
+	useEffect(() => {
 		const fetchLocationData = async () => {
 			try {
 				const data = await loadlocation(loc_id);
@@ -69,6 +74,7 @@ const LocationSettings = () => {
 
 	const handleSave = async () => {
 		try {
+			updateTheme(currentTheme);
 			await editWaiterSupport(waiterSupport, loc_id);
 			await editMenuOtp(otpValidation, loc_id);
 			alert("Settings saved successfully!");
@@ -88,14 +94,18 @@ const LocationSettings = () => {
 
 	if (!locationData) {
 		return (
-			<div className="flexbox justify-center items-center min-h-screen settings-loader">
+			<div
+				className={`flexbox justify-center items-center min-h-screen settings-loader theme-${activeTheme}`}
+			>
 				<p className="text-lg fg-white">Loading location settings...</p>
 			</div>
 		);
 	}
 
 	return (
-		<div className="flexbox flex-col justify-start items-center p-6 min-h-screen settings">
+		<div
+			className={`flexbox flex-col justify-start items-center p-6 min-h-screen settings theme-${activeTheme}`}
+		>
 			{/* Title */}
 			<h1 className=" settings__header">Settings</h1>
 
@@ -146,13 +156,13 @@ const LocationSettings = () => {
 					{hardCodedColorPalettes.map((palette) => (
 						<div
 							className={`settings__color-palette--item-wrapper ${
-								activeTheme === palette.name ? "active-theme" : ""
+								currentTheme === palette.name ? "active-theme" : ""
 							}`}
 							key={palette.id}
 						>
 							<div
 								className="settings__color-palette--item"
-								onClick={() => updateTheme(palette.name)}
+								onClick={() => setCurrentTheme(palette.name)}
 							>
 								<div
 									className="color--contrast"

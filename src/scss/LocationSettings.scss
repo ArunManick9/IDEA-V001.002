@@ -1,5 +1,6 @@
 @use "variables" as *;
 @use "mixins";
+@use "themes";
 
 .settings-loader {
 	@include mixins.theme-colors(three);
@@ -9,7 +10,6 @@
 }
 .settings {
 	gap: 32px;
-	@include mixins.theme-colors(three);
 	font-family: "Poppins", sans-serif;
 	background-color: var(--secondary-color);
 	&__header {
