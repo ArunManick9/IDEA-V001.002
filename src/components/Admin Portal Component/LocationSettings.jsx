@@ -6,6 +6,7 @@ import {
 	editMenuOtp,
 } from "../../services/supported_api";
 import "../../scss/LocationSettings.scss";
+import { useLocations } from "../../context/LocationContext";
 
 const LocationSettings = () => {
 	const { loc_id } = useParams(); // Retrieve `loc_id` from URL params
@@ -13,7 +14,7 @@ const LocationSettings = () => {
 	const [waiterSupport, setWaiterSupport] = useState(false);
 	const [otpValidation, setOtpValidation] = useState(false);
 
-	const [activeTheme, setActiveTheme] = useState("three");
+	const { activeTheme, updateTheme } = useLocations();
 
 	const hardCodedColorPalettes = [
 		{
@@ -135,6 +136,8 @@ const LocationSettings = () => {
 					></div>
 				</button>
 			</div>
+
+			{/* Color Palette Selection */}
 			<div className="settings__color-palette">
 				<h3 className="settings__color-palette--header">
 					Choose a color palette for your admin portal:
@@ -149,7 +152,7 @@ const LocationSettings = () => {
 						>
 							<div
 								className="settings__color-palette--item"
-								onClick={() => setActiveTheme(palette.name)}
+								onClick={() => updateTheme(palette.name)}
 							>
 								<div
 									className="color--contrast"
