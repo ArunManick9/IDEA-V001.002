@@ -1,0 +1,48 @@
+@use "variables" as *;
+@use "mixins";
+
+.all-agents-wrapper {
+	@include mixins.theme-colors(three);
+	background-color: $color-grey-3;
+	font-family: "Poppins";
+	min-height: 100vh;
+	.assigned-table-input {
+		border-radius: 4px;
+		width: 50px;
+		padding: 4px;
+		color: $rich-black;
+		font-family: "Poppins-Light";
+	}
+	.assigned-table-item {
+		background-color: $color-grey-1;
+		color: $color-grey-4;
+	}
+	.all-agents--header {
+		font-size: 2rem;
+		color: var(--contrast-color);
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+		font-family: "Poppins-Bold";
+		letter-spacing: 1.2px;
+	}
+	.search-input {
+		border-radius: 8px;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+		transition: transform 0.2s ease;
+
+		&:focus {
+			transform: translateY(-4px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+			outline: none;
+		}
+	}
+	.table {
+		border-radius: 12px;
+		border: 2px solid $color-grey-1;
+		color: $color-white-blue;
+		&-header--item {
+			font-family: "Poppins-SemiBold";
+			background-color: $color-grey-4;
+			color: $color-grey-1;
+		}
+	}
+}
