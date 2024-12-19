@@ -17,6 +17,8 @@ const LocationCards = () => {
 		updateLocations,
 		newLocationAdded,
 		resetLocationUpdateFlag,
+		activeTheme,
+		updateTheme,
 	} = useLocations();
 	const [deleteModal, setDeleteModal] = useState({
 		show: false,
@@ -36,6 +38,8 @@ const LocationCards = () => {
 	if (!access_token || !user_id) {
 		navigate("/"); // Redirect to login if no token/user_id is found
 	}
+
+	console.log(activeTheme, updateTheme)
 
 	useEffect(() => {
 		const fetchLocations = async () => {
@@ -116,7 +120,7 @@ const LocationCards = () => {
 	};
 
 	return (
-		<div className="relative min-h-screen locations-container">
+		<div className={`relative min-h-screen locations-container locations-container--theme-${activeTheme}`}>
 			{createOrgClicked && (
 				<CreateOrganization
 					user_id={user_id}

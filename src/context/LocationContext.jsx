@@ -1,10 +1,11 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const LocationContext = createContext();
 
 export const LocationProvider = ({ children }) => {
 	const [locations, setLocations] = useState([]);
 	const [newLocationAdded, setNewLocationAdded] = useState(false);
+	const [activeTheme, setActiveTheme] = useState("three");
 
 	const updateLocations = (newLocations) => {
 		setLocations(newLocations);
@@ -18,6 +19,15 @@ export const LocationProvider = ({ children }) => {
 		setNewLocationAdded(false);
 	};
 
+	const updateTheme = (theme) => {
+		setActiveTheme(theme);
+	};
+
+	useEffect(() => {
+		// Example side effect: Logging theme changes
+		console.log("Active theme changed to:", activeTheme);
+	}, [activeTheme]);
+
 	return (
 		<LocationContext.Provider
 			value={{
@@ -26,6 +36,8 @@ export const LocationProvider = ({ children }) => {
 				newLocationAdded,
 				triggerLocationUpdate,
 				resetLocationUpdateFlag,
+				activeTheme,
+				updateTheme,
 			}}
 		>
 			{children}
