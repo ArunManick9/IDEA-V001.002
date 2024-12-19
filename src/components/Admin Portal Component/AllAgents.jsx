@@ -5,6 +5,7 @@ import {
 	updateAssignedTables,
 } from "../../services/supported_api";
 import "../../scss/AllAgents.scss";
+import { useLocations } from "../../context/LocationContext";
 
 export default function AllAgents() {
 	const { loc_id } = useParams(); // Get the location ID from the route params
@@ -12,6 +13,7 @@ export default function AllAgents() {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const { activeTheme } = useLocations();
 
 	useEffect(() => {
 		const fetchAgents = async () => {
@@ -83,8 +85,8 @@ export default function AllAgents() {
 	if (error) return <p>Error: {error}</p>;
 
 	return (
-		<div className="p-8 all-agents-wrapper">
-			<div className="flexbox justify-between items-center mb-4">
+		<div className={`p-8 all-agents-wrapper theme-${activeTheme}`}>
+			<div className="flexbox justify-between items-center mb-4 all-agents-top">
 				<h1 className="all-agents--header">Agents</h1>
 				<button className="btn btn--submit" onClick={saveChanges}>
 					Save
