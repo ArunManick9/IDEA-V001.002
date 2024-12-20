@@ -4,6 +4,7 @@ import {
 	loadlocation,
 	editWaiterSupport,
 	editMenuOtp,
+	edittheme,
 } from "../../services/supported_api";
 import "../../scss/LocationSettings.scss";
 import { useLocations } from "../../context/LocationContext";
@@ -74,9 +75,10 @@ const LocationSettings = () => {
 
 	const handleSave = async () => {
 		try {
-			updateTheme(currentTheme);
+			await updateTheme(currentTheme); // Ensure theme is updated in context
 			await editWaiterSupport(waiterSupport, loc_id);
 			await editMenuOtp(otpValidation, loc_id);
+			await edittheme(currentTheme, loc_id); // Use currentTheme for backend
 			alert("Settings saved successfully!");
 		} catch (error) {
 			console.error("Error saving settings:", error);

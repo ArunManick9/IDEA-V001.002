@@ -152,6 +152,22 @@ export async function editWaiterSupport(waiterSupport, loc_id) {
 	  console.log(`Menu OTP updated successfully:`, data);
 	}
   }
+
+  export async function edittheme(activetheme, loc_id) {
+	console.log("Updating waiter_support:", activetheme, "for loc_id:", loc_id);
+  
+	const { data, error } = await supabase
+	  .from("HOTEL_BASE")
+	  .update({ active_theme: activetheme })
+	  .eq("loc_id", loc_id)
+	  .select();
+  
+	if (error) {
+	  console.log(`Error updating waiter_support: ${error.message}`);
+	} else {
+	  console.log(`Waiter support updated successfully:`, data);
+	}
+  }
   
 
 //get Menulistboard
