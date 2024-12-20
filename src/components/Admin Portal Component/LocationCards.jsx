@@ -39,7 +39,7 @@ const LocationCards = () => {
 		navigate("/"); // Redirect to login if no token/user_id is found
 	}
 
-	console.log(activeTheme, updateTheme)
+	console.log(activeTheme, updateTheme);
 
 	useEffect(() => {
 		const fetchLocations = async () => {
@@ -120,7 +120,9 @@ const LocationCards = () => {
 	};
 
 	return (
-		<div className={`relative min-h-screen locations-container locations-container--theme-${activeTheme}`}>
+		<div
+			className={`relative min-h-screen locations-container theme-${activeTheme}`}
+		>
 			{createOrgClicked && (
 				<CreateOrganization
 					user_id={user_id}

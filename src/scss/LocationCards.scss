@@ -1,53 +1,52 @@
 @use "variables" as *;
 @use "mixins";
+@use "themes";
 
 .locations-container {
 	font-family: "Poppins", sans-serif;
 	background-color: var(--secondary-color);
-  
+
 	&--inner {
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  padding-top: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 20px;
 	}
-  
+
 	.header {
-	  font-size: 2.8rem;
-	  font-weight: 700;
-	  font-family: "Poppins-Bold";
-	  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-	  color: var(--contrast-color);
-	  letter-spacing: 1.2px;
+		font-size: 2.8rem;
+		font-weight: 700;
+		font-family: "Poppins-Bold";
+		text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+		color: var(--contrast-color);
+		letter-spacing: 1.2px;
 	}
-  
+
 	.locations-flex {
-	  display: flex;
-	  width: 80vw;
-	  margin: 0 32px;
-	  flex-direction: row;
-	  gap: 48px;
-	  flex-wrap: wrap;
-	  align-items: stretch;
-	  justify-content: center;
+		display: flex;
+		width: 80vw;
+		margin: 0 32px;
+		flex-direction: row;
+		gap: 48px;
+		flex-wrap: wrap;
+		align-items: stretch;
+		justify-content: center;
 	}
-  
-	// Modifier thing
-	&--theme-one {
-	  @include mixins.theme-colors(one);
-	}
-  
-	&--theme-two {
-	  @include mixins.theme-colors(two);
-	}
-  
-	&--theme-three {
-	  @include mixins.theme-colors(three);
-	}
-	&--theme-three {
-		@include mixins.theme-colors(four);
-	  }
-  }
+
+	// // Modifier thing
+	// &--theme-one {
+	// 	@include mixins.theme-colors(one);
+	// }
+	// &--theme-two {
+	// 	@include mixins.theme-colors(two);
+	// }
+	// &--theme-three {
+	// 	@include mixins.theme-colors(three);
+	// }
+	// &--theme-four {
+	// 	@include mixins.theme-colors(four);
+	// }
+}
 
 .fg-gray-1 {
 	color: $color-grey-1;

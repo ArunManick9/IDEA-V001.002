@@ -1,7 +1,6 @@
 @use "variables" as *;
 @use "mixins";
 .menuboard-outer {
-	@include mixins.theme-colors(three);
 	background-color: var(--secondary-color);
 	position: relative;
 }
