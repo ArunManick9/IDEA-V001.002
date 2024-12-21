@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../../scss/HighlightBanner.scss";
 import {
 	faCircleArrowLeft,
@@ -28,7 +28,6 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 	};
 
 	const nextSlide = () => {
-		
 		setCurrent((prev) => (prev + 1) % items.length);
 		startTimer();
 	};
@@ -38,6 +37,7 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 			startTimer();
 		}
 		return () => clearInterval(timerRef.current);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [items]);
 
 	const getCurrentItem = () => items[current] || {};
@@ -60,12 +60,15 @@ const HighlightBanner = ({ highlightDetails, bannerHeight = 100 }) => {
 			startTimer();
 		}
 		return () => clearInterval(timerRef.current);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [items]);
 
 	return (
 		<div
 			className={`banner ${animationClass}`}
-			style={{ height: bannerHeight + "px" }}
+			style={{
+				height: bannerHeight + "px",
+			}}
 		>
 			<div className="banner__background">
 				<img
