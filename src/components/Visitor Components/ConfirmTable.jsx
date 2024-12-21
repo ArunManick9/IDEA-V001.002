@@ -3,6 +3,7 @@ import DigiMenu from "./DigiMenu";
 import { useParams } from "react-router-dom";
 import supabase from "../../services/supabase";
 import "../../scss/ConfirmTable.scss";
+import "../../scss/Digimenu.scss";
 import { getMenuOtp } from "../../services/supported_api";
 
 export default function ConfirmTable() {

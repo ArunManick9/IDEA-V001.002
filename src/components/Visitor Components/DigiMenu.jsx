@@ -7,7 +7,7 @@ import Cart from "./Cart";
 
 import HighlightBanner from "./HighlightBanner";
 
-export default function DigiMenu({ activeMenu, activeItemId }) {
+export default function DigiMenu() {
 	const { loc_id, table_id } = useParams();
 	const [locationName, setLocationName] = useState("");
 	const [menuData, setMenuData] = useState([]);
@@ -22,31 +22,29 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 
 	const theme = searchParams.get("theme") || "default";
 
-    const [themeFile, setThemeFile] = useState("");
+	const [themeFile, setThemeFile] = useState("");
 
 	// Dynamically load theme based on query parameter
-    useEffect(() => {
-        if (theme === "yellow") {
-            setThemeFile("flatdigimenu.scss");
-        } else {
-            setThemeFile("DigiMenu.scss");
-        }
-    }, [theme]);
+	useEffect(() => {
+		if (theme === "yellow") {
+			setThemeFile("flatdigimenu.scss");
+		} else {
+			setThemeFile("DigiMenu.scss");
+		}
+	}, [theme]);
 
-    // Import the theme CSS dynamically
-    useEffect(() => {
-        if (themeFile) {
-            import(`../../scss/${themeFile}`)
-                .then(() => {
-                    console.log(`${themeFile} has been applied`);
-                })
-                .catch((error) => {
-                    console.error("Error loading theme:", error);
-                });
-        }
-    }, [themeFile]);
-
-
+	// Import the theme CSS dynamically
+	useEffect(() => {
+		if (themeFile) {
+			import(`../../scss/${themeFile}`)
+				.then(() => {
+					console.log(`${themeFile} has been applied`);
+				})
+				.catch((error) => {
+					console.error("Error loading theme:", error);
+				});
+		}
+	}, [themeFile]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -136,7 +134,6 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 			setCartWrapperClass("cart-wrapper");
 			setShowCart(true);
 		}
-
 	};
 
 	return (
@@ -153,15 +150,16 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 					</div>
 				</div>
 			)}
-			<h1 className="digimenu__header">
+			<h1 className="digimenu__header mb-6">
 				Welcome to <span>{locationName} | </span> Table: <span>{table_id}</span>
 			</h1>
 			<div className="digimenu__highlights-container">
 				{getHighlightBanners()?.map((banner) => (
 					<div
-						className={`digimenu__highlight-container ${
-							isMoreThanOneHighlightBanners() ? "highlight-multiple" : "highlight-single"
-						}`}
+						className="digimenu__highlight-container"
+						style={{
+							width: isMoreThanOneHighlightBanners() ? "45vw" : "95vw",
+						}}
 						key={banner.id}
 					>
 						<HighlightBanner
@@ -176,7 +174,9 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 				{getMenus()?.map((menu) => (
 					<div
 						key={menu}
-						className={`category ${selectedMenu === menu ? "category--active" : ""}`}
+						className={`category ${
+							selectedMenu === menu ? "category--active" : ""
+						}`}
 						onClick={() => {
 							setSelectedMenu(menu);
 						}}
@@ -192,7 +192,11 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 						{menuItem.category}
 					</div>
 					<div
-						className={`menu-items ${menuItemsFormat === "grid" ? "menu-items--grid" : "menu-items--list"}`}
+						className={`menu-items ${
+							menuItemsFormat === "grid"
+								? "menu-items--grid"
+								: "menu-items--list"
+						}`}
 					>
 						{menuItem.menuItems?.map((item) => (
 							<MenuItemCard
