@@ -1,11 +1,10 @@
-// DigiMenu.js
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { fetchAllMenuCardData } from "../../services/supported_api";
 import { FaShoppingCart } from "react-icons/fa";
 import MenuItemCard from "./MenuItemCard";
 import Cart from "./Cart";
-import "../../scss/DigiMenu.scss";
+
 import HighlightBanner from "./HighlightBanner";
 
 export default function DigiMenu({ activeMenu, activeItemId }) {
@@ -20,6 +19,34 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 	const [showGreet, setShowGreet] = useState(false);
 	const [searchParams] = useSearchParams();
 	const menuItemsFormat = searchParams.get("displayType") || "grid";
+
+	const theme = searchParams.get("theme") || "default";
+
+    const [themeFile, setThemeFile] = useState("");
+
+	// Dynamically load theme based on query parameter
+    useEffect(() => {
+        if (theme === "yellow") {
+            setThemeFile("flatdigimenu.scss");
+        } else {
+            setThemeFile("DigiMenu.scss");
+        }
+    }, [theme]);
+
+    // Import the theme CSS dynamically
+    useEffect(() => {
+        if (themeFile) {
+            import(`../../scss/${themeFile}`)
+                .then(() => {
+                    console.log(`${themeFile} has been applied`);
+                })
+                .catch((error) => {
+                    console.error("Error loading theme:", error);
+                });
+        }
+    }, [themeFile]);
+
+
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -109,11 +136,11 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 			setCartWrapperClass("cart-wrapper");
 			setShowCart(true);
 		}
-		console.log(cartItems);
+
 	};
 
 	return (
-		<div className="p-6 min-h-screen digimenu">
+		<div className="digimenu">
 			{showGreet && (
 				<div className="digimenu__greet">
 					<div className="digimenu__greet--content">
@@ -126,17 +153,16 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 					</div>
 				</div>
 			)}
-			<h1 className={`digimenu__header mb-6`}>
+			<h1 className="digimenu__header">
 				Welcome to <span>{locationName} | </span> Table: <span>{table_id}</span>
 			</h1>
 			<div className="digimenu__highlights-container">
 				{getHighlightBanners()?.map((banner) => (
 					<div
-						className="digimenu__highlight-container"
+						className={`digimenu__highlight-container ${
+							isMoreThanOneHighlightBanners() ? "highlight-multiple" : "highlight-single"
+						}`}
 						key={banner.id}
-						style={{
-							width: isMoreThanOneHighlightBanners() ? "45vw" : "95vw",
-						}}
 					>
 						<HighlightBanner
 							highlightDetails={banner}
@@ -146,13 +172,11 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 				))}
 			</div>
 			{/* Menu Tabs with Dropdowns */}
-			<div className={`category-wrapper`}>
+			<div className="category-wrapper">
 				{getMenus()?.map((menu) => (
 					<div
 						key={menu}
-						className={`category ${
-							selectedMenu === menu && "category--active"
-						}`}
+						className={`category ${selectedMenu === menu ? "category--active" : ""}`}
 						onClick={() => {
 							setSelectedMenu(menu);
 						}}
@@ -168,9 +192,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 						{menuItem.category}
 					</div>
 					<div
-						className={`grid ${
-							menuItemsFormat === "grid" ? "menu-items--grid" : "grid-cols-1"
-						} sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
+						className={`menu-items ${menuItemsFormat === "grid" ? "menu-items--grid" : "menu-items--list"}`}
 					>
 						{menuItem.menuItems?.map((item) => (
 							<MenuItemCard
@@ -188,9 +210,7 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 			))}
 			{/* Cart Toggle */}
 			{showCart && (
-				<div
-					className={`fixed bottom-0 right-0 w-full md:w-1/3 h-4/5 ${cartWrapperClass} p-6 overflow-y-auto z-5`}
-				>
+				<div className={` ${cartWrapperClass}`}>
 					<Cart
 						cartItems={cartItems}
 						handleAddToCart={handleAddToCart}
@@ -203,11 +223,8 @@ export default function DigiMenu({ activeMenu, activeItemId }) {
 				</div>
 			)}
 			{/* Floating Cart Button */}
-			<button
-				className=" p-5 rounded-full digimenu__cart z-4"
-				onClick={handleCloseCart}
-			>
-				<FaShoppingCart className="w-6 h-6" />
+			<button className="cart-button" onClick={handleCloseCart}>
+				<FaShoppingCart className="cart-icon" />
 			</button>
 		</div>
 	);
