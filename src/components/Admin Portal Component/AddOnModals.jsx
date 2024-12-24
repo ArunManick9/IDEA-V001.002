@@ -4,16 +4,16 @@ const AddonsModal = ({ form, onAddonsSaved, onClose }) => {
   const [addons, setAddons] = useState([]);
 
   const handleAddAddon = () => {
-    setAddons([...addons, ""]);
+    setAddons([...addons, { name: "", price: "" }]);
   };
 
   const handleRemoveAddon = (index) => {
     setAddons(addons.filter((_, i) => i !== index));
   };
 
-  const handleInputChange = (index, value) => {
+  const handleInputChange = (index, field, value) => {
     const updatedAddons = [...addons];
-    updatedAddons[index] = value;
+    updatedAddons[index][field] = value;
     setAddons(updatedAddons);
   };
 
@@ -35,10 +35,18 @@ const AddonsModal = ({ form, onAddonsSaved, onClose }) => {
             <div key={index} className="flexbox items-center gap-4">
               <input
                 type="text"
-                placeholder={`Addon ${index + 1}`}
-                value={addon}
-                onChange={(e) => handleInputChange(index, e.target.value)}
+                placeholder={`Addon Name ${index + 1}`}
+                value={addon.name}
+                onChange={(e) => handleInputChange(index, "name", e.target.value)}
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-md"
+              />
+              <input
+                type="number"
+                step="0.01"
+                placeholder="Price"
+                value={addon.price}
+                onChange={(e) => handleInputChange(index, "price", e.target.value)}
+                className="w-24 px-4 py-2 border border-gray-300 rounded-md"
               />
               <button
                 onClick={() => handleRemoveAddon(index)}
@@ -67,7 +75,6 @@ const AddonsModal = ({ form, onAddonsSaved, onClose }) => {
               Cancel
             </button>
             <button
-
               onClick={handleSave}
               type="button"
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
