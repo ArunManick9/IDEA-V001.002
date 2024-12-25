@@ -18,7 +18,7 @@ const MenuList = () => {
 	const [selectedMenu, setSelectedMenu] = useState(null);
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true); // New loading state
-	//const { activeTheme } = useLocations();
+	const { activeTheme } = useLocations();
 
 	const navigate = useNavigate();
 	// Retrieve the access token from localStorage (or location state as fallback)
@@ -65,8 +65,6 @@ const MenuList = () => {
 			window.removeEventListener("keydown", handleKeyPress);
 		};
 	}, []);
-
-
 
 	const handleAddMenu = () => {
 		setShowAddModal(true);
@@ -135,12 +133,6 @@ const MenuList = () => {
 		return <Loading />; // Show the Loading component while data is being fetched
 	}
 
-	console.log(data[0].active_theme)
-	
-
-const activeTheme = data[0].active_theme
-
-	console.log(activeTheme)
 	return (
 		<div
 			className={`flexbox flex-col justify-center items-center space-y-6 min-h-screen transition-all duration-300 menu-list-container theme-${activeTheme}`}

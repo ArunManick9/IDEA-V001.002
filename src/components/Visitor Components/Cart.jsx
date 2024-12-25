@@ -34,7 +34,7 @@ const Cart = ({
 				order_list: cartEntries.map((item) => ({
 					item_id: item.id,
 					item_name: item.name,
-					quantity: item.quantity,
+					quantity: item.quantity || 1,
 					price: item.price,
 				})),
 				visitorid,
@@ -62,9 +62,9 @@ const Cart = ({
 				<p className="text-gray-600">Your cart is empty</p>
 			) : (
 				<ul className="cart__items">
-					{cartEntries.map((item) => (
+					{cartEntries.map((item, index) => (
 						<li
-							key={item.id}
+							key={index}
 							className="flexbox justify-between items-center cart__item"
 						>
 							<div className="flexbox items-center">
@@ -84,7 +84,7 @@ const Cart = ({
 								<button
 									onClick={() =>
 										setTimeout(() => {
-											handleRemoveFromCart(item);
+											handleRemoveFromCart(item, item.storageId || item.id);
 										}, 200)
 									}
 									className="cart__icon rounded-full transition-all"
@@ -97,7 +97,7 @@ const Cart = ({
 								<button
 									onClick={() =>
 										setTimeout(() => {
-											handleAddToCart(item);
+											handleAddToCart(item, item.storageId || item.id);
 										}, 200)
 									}
 									className="cart__icon rounded-full transition-all"

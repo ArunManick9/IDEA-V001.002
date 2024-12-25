@@ -98,24 +98,26 @@ export default function DigiMenu() {
 
 	const isMoreThanOneHighlightBanners = () => getHighlightBanners().length > 1;
 
-	const handleAddToCart = (item) => {
+	const handleAddToCart = (item, storageId) => {
+		const identifier = storageId || item.id;
 		setCartItems((prev) => ({
 			...prev,
-			[item.id]: {
+			[identifier]: {
 				...item,
-				quantity: (prev[item.id]?.quantity || 0) + 1,
+				quantity: (prev[identifier]?.quantity || 0) + 1,
 			},
 		}));
 	};
 
-	const handleRemoveFromCart = (item) => {
+	const handleRemoveFromCart = (item, storageId = "") => {
+		const identifier = storageId || item.id;
 		setCartItems((prev) => {
 			const newCartItems = { ...prev };
 
-			if (newCartItems[item.id]?.quantity > 1) {
-				newCartItems[item.id].quantity -= 1;
+			if (newCartItems[identifier]?.quantity > 1) {
+				newCartItems[identifier].quantity -= 1;
 			} else {
-				delete newCartItems[item.id];
+				delete newCartItems[identifier];
 			}
 
 			return newCartItems;

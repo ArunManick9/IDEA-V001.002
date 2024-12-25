@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import MenuDetail from "./MenuDetail";
 
@@ -11,11 +11,15 @@ const MenuItemCard = ({
 	menuItemsFormat,
 }) => {
 	const [showDetail, setShowDetail] = useState(false);
+	const isItemInCart = (menuItemId) =>
+		Object.keys(cartItems).includes(`${menuItemId}`);
 
 	return (
 		<>
 			<div
-				className={`flexbox items-center p-2 menu-item menu-item--${menuItemsFormat}`}
+				className={`flexbox items-center p-2 menu-item menu-item--${menuItemsFormat} ${
+					isItemInCart(item.id) ? "added-in-cart" : ""
+				}`}
 				onClick={() => setShowDetail(true)} // Show modal on click
 			>
 				<div className="menu-item--image-wrapper">
@@ -32,29 +36,38 @@ const MenuItemCard = ({
 					<p className=" text-gray-600 truncate">{item.description}</p>
 					<span className="font-bold text-gray-900">${item.price}</span>
 				</div>
-				<div className="flexbox items-center ml-3 icons-wrapper">
-					<button
-						onClick={(e) => {
-							e.stopPropagation(); // Prevent parent click event
-							handleRemoveFromCart(item);
-						}}
-						className="p-1 rounded-lg menu-item--icons transition-all duration-200"
-					>
-						<FaMinus />
-					</button>
-					<span className="mx-2 text-gray-900 font-semibold item__quantity">
-						{cartItems[item.id]?.quantity || 0}
-					</span>
-					<button
-						onClick={(e) => {
-							e.stopPropagation(); // Prevent parent click event
-							handleAddToCart(item);
-						}}
-						className="p-1 rounded-lg menu-item--icons transition-all duration-200"
-					>
-						<FaPlus />
-					</button>
-				</div>
+				{!item.quantity_component ? (
+					<div className="flexbox items-center ml-3 icons-wrapper">
+						<button
+							onClick={(e) => {
+								e.stopPropagation(); // Prevent parent click event
+								handleRemoveFromCart(item);
+							}}
+							className="p-1 rounded-lg menu-item--icons transition-all duration-200"
+						>
+							<FaMinus />
+						</button>
+						<span className="mx-2 text-gray-900 font-semibold item__quantity">
+							{cartItems[item.id]?.quantity || 0}
+						</span>
+						<button
+							onClick={(e) => {
+								e.stopPropagation(); // Prevent parent click event
+								handleAddToCart(item);
+							}}
+							className="p-1 rounded-lg menu-item--icons transition-all duration-200"
+						>
+							<FaPlus />
+						</button>
+					</div>
+				) : (
+					<div className="quantity-buttons">
+						<span className="quantity-button">Add</span>
+						{isItemInCart(item.id) && (
+							<span className="quantity-button"> | Edit</span>
+						)}
+					</div>
+				)}
 			</div>
 
 			{/* Modal Overlay */}
