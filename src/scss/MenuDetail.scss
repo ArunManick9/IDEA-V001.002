@@ -1,9 +1,17 @@
 @use "variables" as *;
-
+.menu-details-modal {
+	&__content {
+		background-color: $color-neu-one;
+		height: 80vh;
+		overflow-y: auto;
+	}
+	.selected-bubble {
+		color: $mikado-yellow;
+	}
+}
 .menu-details {
 	font-family: "Poppins", sans-serif;
-	background-color: $color-neu-one;
-	min-height: 100vh;
+
 	&--content {
 		display: flex;
 		flex-direction: column;

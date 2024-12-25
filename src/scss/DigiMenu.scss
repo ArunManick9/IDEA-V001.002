@@ -162,12 +162,29 @@
 		color: var(--contrast-color);
 		transition: all 0.4s ease;
 	}
+	.added-in-cart::after {
+		content: "\2713";
+		position: absolute;
+		height: auto;
+		font-size: 12px;
+		width: auto;
+		padding: 1px 5.5px;
+		box-shadow: $shadow-lightest;
+		color: $color-white-blue;
+		background-color: $current-green;
+		border-radius: 50%;
+		top: 0;
+		border: 2px solid $color-white-blue;
+		right: 0;
+		z-index: 20;
+	}
 
 	.menu-item--grid {
 		background-color: $color-neu-one;
 		background: $gradient-concave;
 		border-radius: 15px;
 		flex-direction: column;
+		position: relative;
 		align-items: center;
 		justify-content: center;
 		width: 100px;
@@ -220,6 +237,7 @@
 	.menu-item--row {
 		background-color: $color-neu-one;
 		background: $gradient-concave;
+		position: relative;
 		border-radius: 15px;
 		box-shadow: $shadow-neu-small;
 		margin: 10px 0;

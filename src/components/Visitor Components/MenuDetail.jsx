@@ -13,13 +13,16 @@ export default function MenuDetail({
 	handleCloseModal,
 }) {
 	const [menuItem, setMenuItem] = useState({});
+	const [itemName, setItemName] = useState();
+	const [itemPrice, setItemPrice] = useState();
 	const [cartCount, setCartCount] = useState(0);
+	const [size, setItemSize] = useState();
 
 	useEffect(() => {
 		async function extractMenuItem() {
 			try {
 				const response = await fetchMenuItem(menu_id, loc_id);
-				setMenuItem(response);
+				await setMenuItem(response);
 			} catch (error) {
 				console.error("Error while fetching menu item:", error);
 			}
@@ -28,15 +31,23 @@ export default function MenuDetail({
 	}, [menu_id, loc_id]);
 
 	useEffect(() => {
+		const getId = () => (size ? `${menuItem.id}${size}` : menuItem.id);
 		// Check if the menu item exists in cartItems after menuItem is updated
-		if (menuItem.id && cartItems[menuItem.id]) {
-			setCartCount(cartItems[menuItem.id].quantity || 0);
+		if (menuItem.id && cartItems[getId()]) {
+			setCartCount(cartItems[getId()].quantity || 0);
+		} else {
+			setCartCount(0);
 		}
-	}, [menuItem, cartItems]);
+	}, [menuItem, cartItems, size]);
 
 	const isQuantityBasedComponent = () => Boolean(menuItem.quantity_component);
 
 	const getQuantityComponent = () => JSON.parse(menuItem.quantity_component);
+	function handleQuantitySelection(size, price) {
+		setItemName(`${menuItem.name} : ${size}`);
+		setItemPrice(parseFloat(Number(price).toFixed(2)));
+		setItemSize(size);
+	}
 
 	return (
 		<div className="menu-details-modal">
@@ -77,13 +88,21 @@ export default function MenuDetail({
 								<div className="menu-details--content__box--description">
 									{menuItem.description}
 								</div>
-								{cartCount > 0 && !isQuantityBasedComponent() && (
+								{cartCount > 0 && (
 									<div className="cart-counter">
 										<button
 											onClick={(e) => {
 												setCartCount((currentCount) => currentCount - 1);
 												e.stopPropagation();
-												handleRemoveFromCart(menuItem);
+												handleRemoveFromCart(
+													{
+														...menuItem,
+														name: itemName,
+														price: itemPrice,
+														storageId: `${menuItem.id}${size}`,
+													},
+													`${menuItem.id}${size}`
+												);
 											}}
 											className="cart__icon rounded-full transition-all"
 										>
@@ -94,7 +113,15 @@ export default function MenuDetail({
 											onClick={(e) => {
 												setCartCount((currentCount) => currentCount + 1);
 												e.stopPropagation();
-												handleAddToCart(menuItem);
+												handleAddToCart(
+													{
+														...menuItem,
+														name: itemName,
+														price: itemPrice,
+														storageId: `${menuItem.id}${size}`,
+													},
+													`${menuItem.id}${size}`
+												);
 											}}
 											className="cart__icon rounded-full transition-all"
 										>
@@ -111,15 +138,17 @@ export default function MenuDetail({
 									<div className="menu-details--content__box--quantity-bubbles">
 										{getQuantityComponent().map((bubble, index) => (
 											<div
-												className="menu-details--content__box--quantity-bubble"
+												className={`menu-details--content__box--quantity-bubble ${
+													itemPrice == bubble.price ? "selected-bubble" : ""
+												}`}
 												key={index}
+												onClick={() =>
+													handleQuantitySelection(bubble.size, bubble.price)
+												}
 											>
 												{bubble.size}: ${bubble.price}
 											</div>
 										))}
-
-										<div className="menu-details--content__box--quantity-bubble"></div>
-										<div className="menu-details--content__box--quantity-bubble"></div>
 									</div>
 								</div>
 							)}
@@ -129,13 +158,25 @@ export default function MenuDetail({
 							</div>
 						</div>
 						<div className="content__box--button">
-							{(cartCount === 0 || isQuantityBasedComponent()) && (
+							{cartCount === 0 && (
 								<button
-									onClick={() => setCartCount(1)}
+									onClick={(e) => {
+										setCartCount(1);
+										e.stopPropagation();
+										handleAddToCart(
+											{
+												...menuItem,
+												name: itemName,
+												price: itemPrice,
+												storageId: `${menuItem.id}${size}`,
+											},
+											`${menuItem.id}${size}`
+										);
+									}}
 									className="neu-button neu-button--black"
-									disabled={cartCount > 0}
+									disabled={isQuantityBasedComponent() && !size}
 								>
-									{cartCount > 0 ? "Added to Cart" : "Add to Cart"}
+									Add to Cart
 								</button>
 							)}
 						</div>
