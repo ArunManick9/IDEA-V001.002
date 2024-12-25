@@ -26,31 +26,51 @@ const EnhanceMenu = () => {
     setBannerType(type);
   };
 
+  const handleViewAllBanners = () => {
+    // Navigate to the desired route with loc_id
+    navigate(`/menuboard/${loc_id}/enhancemenu/allbanners`);
+  };
+
   return (
     <div className="enhance-wrapper">
       <div className="max-w-lg mx-auto p-6 rounded-lg enhance-container">
         <h1 className="enhance-container--header">Enhance Your Menu</h1>
 
-        {/* Direct Banner Options */}
-        <div className="mt-4 space-y-4">
+        {/* View All Banners Button */}
+        <div className="mt-4">
           <button
+            onClick={handleViewAllBanners}
+            className="btn btn--submit w-full py-2 text-center bg-green-500 text-white rounded-lg"
+          >
+            View All Banners
+          </button>
+        </div>
+
+        {/* Section Heading */}
+        <h2 className="mt-6 text-lg font-semibold text-gray-700 text-center">
+          Create New Banners
+        </h2>
+
+        {/* Direct Banner Options as Cards */}
+        <div className="mt-4 flex flex-wrap gap-4 justify-center">
+          <div
             onClick={() => handleBannerTypeChange("highlight")}
-            className="btn btn--banner-option w-full py-2 text-center bg-white text-black rounded-lg shadow-md"
+            className="card w-40 h-24 bg-white text-black rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center hover:shadow-lg transition-shadow"
           >
-            Highlight Banner
-          </button>
-          <button
+            <span className="text-center font-medium">Create Highlight Banner</span>
+          </div>
+          <div
             onClick={() => handleBannerTypeChange("combo")}
-            className="btn btn--banner-option w-full py-2 text-center bg-white text-black rounded-lg shadow-md"
+            className="card w-40 h-24 bg-white text-black rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center hover:shadow-lg transition-shadow"
           >
-            Combo Banner
-          </button>
-          <button
+            <span className="text-center font-medium">Create Combo Banner</span>
+          </div>
+          <div
             onClick={() => handleBannerTypeChange("cart")}
-            className="btn btn--banner-option w-full py-2 text-center bg-white text-black rounded-lg shadow-md"
+            className="card w-40 h-24 bg-white text-black rounded-lg shadow-md cursor-pointer flex flex-col items-center justify-center hover:shadow-lg transition-shadow"
           >
-            Cart Suggestion Banner
-          </button>
+            <span className="text-center font-medium">Create Cart Suggestion Banner</span>
+          </div>
         </div>
 
         {/* Render selected banner type content */}
@@ -59,15 +79,6 @@ const EnhanceMenu = () => {
         )}
 
         {bannerType === "combo" && <ComboBanner />} {/* Render ComboBanner when combo is selected */}
-
-        {/* View All Banners Button */}
-        {bannerType && (
-          <div className="mt-6">
-            <button className="btn btn--submit w-full py-2 text-center bg-green-500 text-white rounded-lg">
-              View All Banners
-            </button>
-          </div>
-        )}
 
         {popupMessage && (
           <div className="text-center text-green-500 mt-4">{popupMessage}</div>
