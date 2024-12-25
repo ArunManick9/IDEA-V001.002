@@ -464,3 +464,52 @@ export const updateAssignedTables = async (agentId, assignedTables) => {
 	}
 	return data;
   };
+
+  
+
+  export async function getEnhanceTableRows(loc_id) {
+	let { data, error } = await supabase
+	  .from("ENHANCE_TABLE")
+	  .select("*")
+	  .eq("loc_id", loc_id);
+  
+	if (error) {
+	  console.error("Error fetching enhance table rows:", error.message);
+	} else {
+	  console.log("Data fetched successfully:", data);
+	}
+  
+	return data;
+  }
+  
+
+  export async function handleToggleStatus(bannerId, currentStatus, setData) {
+	try {
+	  const updatedStatus = !currentStatus; // Toggle the current status
+  
+	  const { data, error } = await supabase
+		.from('ENHANCE_TABLE')
+		.update({ isActive: updatedStatus })
+		.eq('id', bannerId)
+		.select();
+  
+	  if (error) {
+		throw new Error(error.message);
+	  }
+  
+	  console.log(`Banner ${bannerId} status updated successfully:`, data);
+  
+	  // Update the state with the new status
+	  setData(prevData => 
+		prevData.map(banner =>
+		  banner.id === bannerId ? { ...banner, isActive: updatedStatus } : banner
+		)
+	  );
+	  
+	  return data; // Return the updated data
+  
+	} catch (error) {
+	  console.error("Error updating banner status:", error.message);
+	  return null; // Return null in case of an error
+	}
+  }

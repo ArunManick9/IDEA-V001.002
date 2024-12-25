@@ -21,6 +21,7 @@ import Dummy from "./components/Dummy";
 import AllAgents from "./components/Admin Portal Component/AllAgents";
 import LocationSettings from "./components/Admin Portal Component/LocationSettings";
 import ThankYouScreen from "./components/Visitor Components/ThankYou";
+import AllBanners from "./components/Admin Portal Component/AllBanners";
 
 const App = () => {
 	return (
@@ -65,6 +66,10 @@ const App = () => {
 						<Route
 							path="menuboard/:loc_id/enhancemenu"
 							element={<EnhanceMenu />}
+						/>
+						<Route
+							path="menuboard/:loc_id/enhancemenu/allbanners"
+							element={<AllBanners/>}
 						/>
 						<Route path="digimenu/thank-you" element={<ThankYouScreen />} />
 					</Routes>
