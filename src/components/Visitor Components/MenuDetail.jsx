@@ -97,11 +97,15 @@ export default function MenuDetail({
 												handleRemoveFromCart(
 													{
 														...menuItem,
-														name: itemName,
-														price: itemPrice,
-														storageId: `${menuItem.id}${size}`,
+														...(isQuantityBasedComponent() && {
+															name: itemName,
+															price: itemPrice,
+															storageId: `${menuItem.id}${size}`,
+														}),
 													},
-													`${menuItem.id}${size}`
+													isQuantityBasedComponent()
+														? `${menuItem.id}${size}`
+														: menuItem.id
 												);
 											}}
 											className="cart__icon rounded-full transition-all"
@@ -116,11 +120,15 @@ export default function MenuDetail({
 												handleAddToCart(
 													{
 														...menuItem,
-														name: itemName,
-														price: itemPrice,
-														storageId: `${menuItem.id}${size}`,
+														...(isQuantityBasedComponent() && {
+															name: itemName,
+															price: itemPrice,
+															storageId: `${menuItem.id}${size}`,
+														}),
 													},
-													`${menuItem.id}${size}`
+													isQuantityBasedComponent()
+														? `${menuItem.id}${size}`
+														: menuItem.id
 												);
 											}}
 											className="cart__icon rounded-full transition-all"
@@ -166,11 +174,15 @@ export default function MenuDetail({
 										handleAddToCart(
 											{
 												...menuItem,
-												name: itemName,
-												price: itemPrice,
-												storageId: `${menuItem.id}${size}`,
+												...(isQuantityBasedComponent() && {
+													name: itemName,
+													price: itemPrice,
+													storageId: `${menuItem.id}${size}`,
+												}),
 											},
-											`${menuItem.id}${size}`
+											isQuantityBasedComponent()
+												? `${menuItem.id}${size}`
+												: menuItem.id
 										);
 									}}
 									className="neu-button neu-button--black"
