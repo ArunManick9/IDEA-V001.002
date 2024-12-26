@@ -12,7 +12,9 @@ const MenuItemCard = ({
 }) => {
 	const [showDetail, setShowDetail] = useState(false);
 	const isItemInCart = (menuItemId) =>
-		Object.keys(cartItems).includes(`${menuItemId}`);
+		Object.keys(cartItems)
+			.map((id) => parseInt(id))
+			.includes(menuItemId);
 
 	return (
 		<>
@@ -61,12 +63,7 @@ const MenuItemCard = ({
 						</button>
 					</div>
 				) : (
-					<div className="quantity-buttons">
-						<span className="quantity-button">Add</span>
-						{isItemInCart(item.id) && (
-							<span className="quantity-button"> | Edit</span>
-						)}
-					</div>
+					<span className="quantity-info">(Specify Quantity)</span>
 				)}
 			</div>
 

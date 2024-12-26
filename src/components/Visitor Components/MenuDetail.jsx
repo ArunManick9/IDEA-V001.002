@@ -86,7 +86,9 @@ export default function MenuDetail({
 							</div>
 							<div className="content__box--bottom-2">
 								<div className="menu-details--content__box--description">
-									{menuItem.description}
+									{menuItem.description?.length > 300
+										? menuItem.description?.slice(0, 300).concat("...")
+										: menuItem.description}
 								</div>
 								{cartCount > 0 && (
 									<div className="cart-counter">
@@ -141,7 +143,7 @@ export default function MenuDetail({
 							{isQuantityBasedComponent() && (
 								<div className="content__box--bottom-4">
 									<div className="menu-details--content__box--quantity">
-										Quantity
+										Choose Quantity
 									</div>
 									<div className="menu-details--content__box--quantity-bubbles">
 										{getQuantityComponent().map((bubble, index) => (
@@ -162,7 +164,10 @@ export default function MenuDetail({
 							)}
 
 							<div className="content__box--bottom-3">
-								Price: <span>${menuItem.price?.toFixed(2)}</span>
+								Price:{" "}
+								<span>
+									${itemPrice?.toFixed(2) || menuItem.price?.toFixed(2)}
+								</span>
 							</div>
 						</div>
 						<div className="content__box--button">
