@@ -106,13 +106,13 @@
 				margin-bottom: 12px;
 			}
 			&--quantity-bubble {
-				font-size: 12px;
+				font-size: 14px;
 				font-family: "Poppins-Light";
-				border-radius: 12px;
+				border-radius: 14px;
 				border: 1px solid $color-grey-2;
 				color: $color-grey-2;
 				border-top-left-radius: 0px;
-				padding: 2px 8px;
+				padding: 3px 9px;
 			}
 			.selected-bubble {
 				background-color: var(--primary-color);
