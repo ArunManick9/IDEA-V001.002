@@ -162,6 +162,10 @@
 		color: var(--contrast-color);
 		transition: all 0.4s ease;
 	}
+	.quantity-info {
+		color: $color-grey-2;
+		font-size: 9px;
+	}
 	.added-in-cart::after {
 		content: "\2713";
 		position: absolute;
@@ -173,9 +177,9 @@
 		color: $color-white-blue;
 		background-color: $current-green;
 		border-radius: 50%;
-		top: 0;
+		top: -4px;
 		border: 2px solid $color-white-blue;
-		right: 0;
+		right: -4px;
 		z-index: 20;
 	}
 
@@ -232,6 +236,9 @@
 			margin-left: auto;
 			margin-top: 4px;
 			margin-bottom: 2px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 		}
 	}
 	.menu-item--row {
@@ -430,9 +437,10 @@
 	&__content {
 		background: $color-white-blue;
 		border-radius: 15px;
-		width: 90%;
+		width: 95%;
+		height: 80vh;
 		max-width: 500px;
-		padding: 16px;
+		padding: 8px;
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 		animation: fadeIn 0.3s ease-in-out;
 

@@ -2,11 +2,8 @@
 .menu-details-modal {
 	&__content {
 		background-color: $color-neu-one;
-		height: 80vh;
+		overflow-x: hidden;
 		overflow-y: auto;
-	}
-	.selected-bubble {
-		color: $mikado-yellow;
 	}
 }
 .menu-details {
@@ -20,7 +17,7 @@
 			margin-top: 48px;
 			position: relative;
 			background: linear-gradient(to right, $color-neu-three, $color-neu-four);
-			height: 350px;
+			min-height: 350px;
 			width: 300px;
 			box-shadow: $shadow-neu-float-light;
 			border-color: $color-white-blue;
@@ -82,13 +79,45 @@
 			}
 			.content__box--bottom-3 {
 				height: 24px;
+				margin-bottom: 12px;
 				color: $color-grey-2;
 				font-family: "Poppins-Light";
-				font-size: 18px;
+				font-size: 16px;
 				flex: 0.2;
 				& > span {
 					font-family: "Poppins";
 				}
+			}
+			.content__box--bottom-4 {
+				flex: 1;
+			}
+			&--quantity {
+				color: $color-grey-2;
+				font-size: 14px;
+				font-family: "Poppins-Light";
+				margin-bottom: 8px;
+			}
+			&--quantity-bubbles {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: flex-start;
+				gap: 8px;
+				margin-bottom: 12px;
+			}
+			&--quantity-bubble {
+				font-size: 12px;
+				font-family: "Poppins-Light";
+				border-radius: 12px;
+				border: 1px solid $color-grey-2;
+				color: $color-grey-2;
+				border-top-left-radius: 0px;
+				padding: 2px 8px;
+			}
+			.selected-bubble {
+				background-color: var(--primary-color);
+				color: var(--contrast-color);
+				border: 1px solid var(--primary-color);
 			}
 			&--name {
 				font-family: "Poppins-Bold";
@@ -116,7 +145,7 @@
 				position: absolute;
 				bottom: 0;
 				right: 0;
-				transform: translate(30%, 55%);
+				transform: translate(20%, 50%);
 				button.neu-button {
 					font-size: 14px;
 					cursor: pointer;
