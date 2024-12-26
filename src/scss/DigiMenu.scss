@@ -162,12 +162,33 @@
 		color: var(--contrast-color);
 		transition: all 0.4s ease;
 	}
+	.quantity-info {
+		color: $color-grey-2;
+		font-size: 9px;
+	}
+	.added-in-cart::after {
+		content: "\2713";
+		position: absolute;
+		height: auto;
+		font-size: 12px;
+		width: auto;
+		padding: 1px 5.5px;
+		box-shadow: $shadow-lightest;
+		color: $color-white-blue;
+		background-color: $current-green;
+		border-radius: 50%;
+		top: -4px;
+		border: 2px solid $color-white-blue;
+		right: -4px;
+		z-index: 20;
+	}
 
 	.menu-item--grid {
 		background-color: $color-neu-one;
 		background: $gradient-concave;
 		border-radius: 15px;
 		flex-direction: column;
+		position: relative;
 		align-items: center;
 		justify-content: center;
 		width: 100px;
@@ -215,11 +236,15 @@
 			margin-left: auto;
 			margin-top: 4px;
 			margin-bottom: 2px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 		}
 	}
 	.menu-item--row {
 		background-color: $color-neu-one;
 		background: $gradient-concave;
+		position: relative;
 		border-radius: 15px;
 		box-shadow: $shadow-neu-small;
 		margin: 10px 0;
@@ -288,7 +313,8 @@
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
-	padding: 1.25rem;
+	padding: 1rem;
+	font-size: 20px;
 	box-shadow: $shadow-neu-thick-mid;
 	background: var(--primary-color);
 	color: var(--contrast-color);
@@ -411,9 +437,10 @@
 	&__content {
 		background: $color-white-blue;
 		border-radius: 15px;
-		width: 90%;
+		width: 95%;
+		height: 80vh;
 		max-width: 500px;
-		padding: 16px;
+		padding: 8px;
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 		animation: fadeIn 0.3s ease-in-out;
 
