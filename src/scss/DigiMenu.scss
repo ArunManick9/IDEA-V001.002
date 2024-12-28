@@ -555,7 +555,7 @@
 .thank-you-screen {
 	font-family: "Poppins", sans-serif;
 	background-color: $color-neu-one;
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	.header {
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	}

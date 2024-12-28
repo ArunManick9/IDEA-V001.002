@@ -42,7 +42,7 @@
 	background-color: $color-grey-2;
 }
 .wrapper {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: $color-grey-2;
 	width: 100%;
 	font-family: "Poppins";
