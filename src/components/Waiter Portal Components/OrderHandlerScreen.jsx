@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function OrdersHandlerScreen({ loc_id, onCountChange }) {
 	const [orders, setOrders] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [activeTab, setActiveTab] = useState("New"); // Current tab state
 	const navigate = useNavigate();
 
 	// Fetch initial orders
@@ -12,8 +13,7 @@ export default function OrdersHandlerScreen({ loc_id, onCountChange }) {
 		const { data, error } = await supabase
 			.from("ORDER_DB")
 			.select("order_id, table_id, status")
-			.eq("loc_id", loc_id)
-			.eq("status", "New");
+			.eq("loc_id", loc_id);
 
 		if (error) {
 			console.error("Error fetching orders:", error);
@@ -67,6 +67,9 @@ export default function OrdersHandlerScreen({ loc_id, onCountChange }) {
 		navigate(`/location/${loc_id}/orders/${order.order_id}`);
 	};
 
+	// Filter orders by status
+	const filteredOrders = orders.filter((order) => order.status === activeTab);
+
 	if (loading) {
 		return <p className="text-center mt-10">Loading orders...</p>;
 	}
@@ -77,16 +80,34 @@ export default function OrdersHandlerScreen({ loc_id, onCountChange }) {
 				Orders for Location: {loc_id}
 			</h1>
 
+			{/* Tabs for different statuses */}
+			<div className="flexbox justify-center space-x-4 mb-6">
+				{["New", "Verified", "Accepted", "Fulfilled"].map((status) => (
+					<button
+						key={status}
+						className={`px-4 py-2 rounded-md ${
+							activeTab === status
+								? "bg-blue-500 text-white"
+								: "bg-gray-200 text-gray-700"
+						} hover:bg-blue-600 transition-colors`}
+						onClick={() => setActiveTab(status)}
+					>
+						{status}
+					</button>
+				))}
+			</div>
+
+			{/* Orders List */}
 			<div className="space-y-4">
-				{orders.length === 0 ? (
+				{filteredOrders.length === 0 ? (
 					<p className="text-center text-gray-500">
-						No new orders available...
+						No orders under "{activeTab}" status.
 					</p>
 				) : (
-					orders.map((order) => (
+					filteredOrders.map((order) => (
 						<div
 							key={order.order_id}
-							className="flex items-center justify-between p-4 order-card rounded-md shadow-md"
+							className="flexbox items-center justify-between p-4 order-card rounded-md shadow-md"
 						>
 							<p className="text-lg font-semibold">
 								Table ID: {order.table_id}

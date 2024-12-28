@@ -6,7 +6,7 @@
 }
 .outer-container {
 	background-color: $color-grey-3;
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 }
 .inner-container {
 	background-color: $color-grey-2;

@@ -54,6 +54,7 @@ export default function ConfirmTableScreen({ loc_id, onCountChange }) {
 			.subscribe();
 
 		console.log("Subscription set up complete.");
+		
 
 		return () => {
 			console.log("Cleaning up subscription for loc_id:", locIdString);
@@ -79,6 +80,8 @@ export default function ConfirmTableScreen({ loc_id, onCountChange }) {
 			onCountChange((prevCount) => prevCount - 1); // Decrease counter when a table is confirmed
 		}
 	};
+
+	console.log(tableRecords)
 
 	return (
 		<div className="flexbox flex-col items-center justify-center min-h-screen space-y-6 confirmation-table">

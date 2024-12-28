@@ -2,7 +2,7 @@
 @use "animations" as *;
 @use "mixins";
 .agent-home {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	font-family: "Poppins", sans-serif;
 	.agent-tab {
 		color: $color-grey-1;
@@ -26,7 +26,7 @@
 	}
 }
 .confirmation-table {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: var(--secondary-color);
 	&--header {
 		color: var(--contrast-color);
@@ -44,7 +44,7 @@
 	}
 }
 .orders-page {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: var(--secondary-color);
 	.order-card {
 		background-color: var(--primary-color);
@@ -56,7 +56,7 @@
 	font-family: "Poppins", sans-serif;
 }
 .order-modal-container {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background: var(--secondary-color);
 	font-family: "Poppins", sans-serif;
 	height: 100vh;

@@ -1,7 +1,7 @@
 @use "variables" as *;
 @use "mixins";
 .create-org-popup {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: $color-grey-1;
 	font-family: "Poppins", sans-serif;
 	border-radius: 3px;

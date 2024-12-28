@@ -2,7 +2,7 @@
 @use "mixins";
 
 .confirm-table {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: $color-neu-one;
 	font-family: "Poppins", sans-serif;
 	&--header {
