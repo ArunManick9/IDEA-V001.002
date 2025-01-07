@@ -5,7 +5,7 @@ const LocationContext = createContext();
 export const LocationProvider = ({ children }) => {
 	const [locations, setLocations] = useState([]);
 	const [newLocationAdded, setNewLocationAdded] = useState(false);
-	const [activeTheme, setActiveTheme] = useState("three");
+	const [activeTheme, setActiveTheme] = useState("one");
 
 	const updateLocations = (newLocations) => {
 		setLocations(newLocations);

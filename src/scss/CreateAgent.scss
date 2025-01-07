@@ -8,7 +8,7 @@
 	}
 }
 .create-agent-container {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: var(--primary-color);
 	font-family: "Poppins", sans-serif;
 	position: relative;

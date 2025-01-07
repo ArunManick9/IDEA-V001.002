@@ -4,7 +4,7 @@
 	gap: 4px;
 }
 .waiter-login-container {
-	@include mixins.theme-colors(three);
+	@include mixins.theme-colors(one);
 	background-color: var(--primary-color);
 	font-family: "Poppins", sans-serif;
 	.waiter-login-wrapper {

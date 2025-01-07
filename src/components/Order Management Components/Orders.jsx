@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import supabase from '../../services/supabase';
 import { updateOrderStatus } from '../../services/supported_api';
+import { useParams } from 'react-router-dom';
 //test
 export default function Orders() {
   const [buckets, setBuckets] = useState({
@@ -10,7 +11,7 @@ export default function Orders() {
   });
   const [showNotification, setShowNotification] = useState(false);
   const [highlightedOrderId, setHighlightedOrderId] = useState(null);
-  const locid = 'ABC_SUN_001A';
+  const { loc_id } = useParams();
 
   // Fetch orders and subscribe to real-time changes
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function Orders() {
       const { data, error } = await supabase
         .from('ORDER_DB')
         .select('*')
-        .eq('loc_id', locid);
+        .eq('loc_id', loc_id);
 
       if (error) {
         console.error('Error fetching orders:', error);
@@ -55,7 +56,7 @@ export default function Orders() {
       .channel('custom-filter-channel')
       .on(
         'postgres_changes',
-        { event: 'UPDATE', schema: 'public', table: 'ORDER_DB', filter: `loc_id=eq.${locid}` },
+        { event: 'UPDATE', schema: 'public', table: 'ORDER_DB', filter: `loc_id=eq.${loc_id}` },
         (payload) => {
           // Update the relevant bucket based on the order's updated status
           const updatedOrder = payload.new;
@@ -166,7 +167,7 @@ export default function Orders() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Orders for Location: {locid}</h1>
+      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">Orders for Location: {loc_id}</h1>
 
       {showNotification && (
         <div className="fixed top-0 left-0 right-0 bg-green-500 text-white text-center p-3 rounded-md shadow-lg">
