@@ -11,12 +11,14 @@ export default function MenuDetail({
 	handleRemoveFromCart,
 	cartItems,
 	handleCloseModal,
+	adjustAddons,
 }) {
 	const [menuItem, setMenuItem] = useState({});
 	const [itemName, setItemName] = useState();
 	const [itemPrice, setItemPrice] = useState();
 	const [cartCount, setCartCount] = useState(0);
 	const [size, setItemSize] = useState();
+	const [addOnObject, setAddOnObject] = useState([]);
 
 	useEffect(() => {
 		async function extractMenuItem() {
@@ -42,7 +44,47 @@ export default function MenuDetail({
 
 	const isQuantityBasedComponent = () => Boolean(menuItem.quantity_component);
 
+	const isAddOnsAvailable = () => Boolean(menuItem.addons_list);
+
+	const getAddOnString = () => addOnObject.join(", ");
+
+	function handleAddOnChange(e) {
+		if (e.target.checked) {
+			setAddOnObject((prev) => [...prev, e.target.name]);
+		} else {
+			setAddOnObject((prev) => prev.filter((item) => item !== e.target.name));
+		}
+	}
+
+	useEffect(() => {
+		const addOnTotal =
+			getAddons()
+				?.filter((addOn) => addOnObject.includes(addOn.name))
+				?.reduce((sum, current) => sum + Number(current.price), 0) || 0;
+		if (size) {
+			setItemPrice((prev) => parseFloat(Number(prev + addOnTotal).toFixed(2)));
+		} else if (addOnObject.length > 0) {
+			setItemPrice(parseFloat(Number(menuItem.price) + addOnTotal));
+		}
+		// propagating the changes upwards
+		if (isAddOnsAvailable() && cartCount > 0) {
+			adjustAddons(
+				isQuantityBasedComponent() ? `${menuItem.id}${size}` : menuItem.id,
+				{
+					...menuItem,
+					...(isQuantityBasedComponent() && {
+						name: itemName,
+						price: itemPrice,
+						storageId: `${menuItem.id}${size}`,
+					}),
+				},
+				getAddOnString()
+			);
+		}
+	}, [addOnObject, size]);
+
 	const getQuantityComponent = () => JSON.parse(menuItem.quantity_component);
+	const getAddons = () => JSON.parse(menuItem.addons_list || "[]") || [];
 	function handleQuantitySelection(size, price) {
 		setItemName(`${menuItem.name} : ${size}`);
 		setItemPrice(parseFloat(Number(price).toFixed(2)));
@@ -149,7 +191,7 @@ export default function MenuDetail({
 										{getQuantityComponent().map((bubble, index) => (
 											<div
 												className={`menu-details--content__box--quantity-bubble ${
-													itemPrice == bubble.price ? "selected-bubble" : ""
+													size == bubble.size ? "selected-bubble" : ""
 												}`}
 												key={index}
 												onClick={() =>
@@ -157,6 +199,33 @@ export default function MenuDetail({
 												}
 											>
 												{bubble.size}: ${bubble.price}
+											</div>
+										))}
+									</div>
+								</div>
+							)}
+
+							{isAddOnsAvailable() && (
+								<div className="content__box--bottom-5">
+									<div className="menu-details--content__box--addons">
+										Choose Addons
+									</div>
+									<div className="menu-details--content__box--addon-bubbles">
+										{getAddons().map((item, index) => (
+											<div
+												className="menu-details--content__box--addon-bubble"
+												key={index}
+											>
+												<input
+													type="checkbox"
+													name={item.name}
+													id={item.name}
+													checked={addOnObject.includes(item.name)}
+													onChange={handleAddOnChange}
+												/>
+												<span>
+													{item.name} - ${item.price}
+												</span>
 											</div>
 										))}
 									</div>
@@ -183,6 +252,9 @@ export default function MenuDetail({
 													name: itemName,
 													price: itemPrice,
 													storageId: `${menuItem.id}${size}`,
+												}),
+												...(isAddOnsAvailable() && {
+													addOns: getAddOnString(),
 												}),
 											},
 											isQuantityBasedComponent()
