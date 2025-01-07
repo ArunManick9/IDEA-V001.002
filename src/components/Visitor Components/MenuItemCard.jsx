@@ -9,12 +9,14 @@ const MenuItemCard = ({
 	cartItems,
 	loc_id,
 	menuItemsFormat,
+	adjustAddons,
 }) => {
 	const [showDetail, setShowDetail] = useState(false);
 	const isItemInCart = (menuItemId) =>
-		Object.keys(cartItems)
-			.map((id) => parseInt(id))
-			.includes(menuItemId);
+		Object.values(cartItems)
+			?.filter((item) => item.quantity > 0)
+			?.map((item) => parseInt(item.id))
+			?.includes(menuItemId);
 
 	return (
 		<>
@@ -78,6 +80,7 @@ const MenuItemCard = ({
 							handleAddToCart={handleAddToCart}
 							cartItems={cartItems}
 							handleCloseModal={() => setShowDetail(false)}
+							adjustAddons={adjustAddons}
 						/>
 						<button
 							className="close-button"

@@ -91,11 +91,34 @@
 			.content__box--bottom-4 {
 				flex: 1;
 			}
+			.content__box--bottom-5 {
+				flex: 1;
+				margin-bottom: 8px;
+			}
 			&--quantity {
 				color: $color-grey-2;
 				font-size: 14px;
 				font-family: "Poppins-Light";
 				margin-bottom: 8px;
+			}
+			.menu-details--content__box--addons {
+				color: $color-grey-2;
+				font-size: 14px;
+				font-family: "Poppins-Light";
+				margin-bottom: 4px;
+			}
+			&--addon-bubbles {
+				display: flex;
+				flex-wrap: wrap;
+				column-gap: 8px;
+			}
+			&--addon-bubble {
+				display: flex;
+				gap: 4px;
+				align-items: center;
+				font-size: 14px;
+				font-family: "Poppins-Light";
+				color: $color-grey-2;
 			}
 			&--quantity-bubbles {
 				display: flex;

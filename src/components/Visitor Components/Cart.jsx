@@ -13,7 +13,9 @@ const Cart = ({
 }) => {
 	const [showConfirmation, setShowConfirmation] = useState(false);
 	const [showOverlay, setShowOverlay] = useState(false);
-	const cartEntries = Object.values(cartItems);
+	const cartEntries = Object.values(cartItems).filter(
+		(item) => item.quantity > 0
+	);
 
 	const visitorid = "ABC_EFG_001"; // Static for now
 
@@ -36,6 +38,7 @@ const Cart = ({
 					item_name: item.name,
 					quantity: item.quantity || 1,
 					price: item.price,
+					addOns: item.addOns,
 				})),
 				visitorid,
 				status: waiter_sup ? "New" : "Verified", // Conditional status assignment
@@ -75,6 +78,11 @@ const Cart = ({
 								/>
 								<div>
 									<h3 className="cart__item--name">{item.name}</h3>
+									{item.addOns && (
+										<p className="text-gray-600 cart__item--price">
+											Add-ons : {item.addOns}
+										</p>
+									)}
 									<p className="text-gray-600 cart__item--price">
 										${item.price.toFixed(2)}
 									</p>
