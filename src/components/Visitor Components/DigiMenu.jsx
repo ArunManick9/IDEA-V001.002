@@ -98,6 +98,16 @@ export default function DigiMenu() {
 
 	const isMoreThanOneHighlightBanners = () => getHighlightBanners().length > 1;
 
+	const adjustAddons = (storageId, item, addOnString) => {
+		setCartItems((prev) => ({
+			...prev,
+			[storageId]: {
+				...item,
+				addOns: addOnString,
+			},
+		}));
+	};
+
 	const handleAddToCart = (item, storageId) => {
 		const identifier = storageId || item.id;
 		setCartItems((prev) => ({
@@ -209,6 +219,7 @@ export default function DigiMenu() {
 								handleRemoveFromCart={handleRemoveFromCart}
 								cartItems={cartItems}
 								loc_id={loc_id}
+								adjustAddons={adjustAddons}
 							/>
 						))}
 					</div>
