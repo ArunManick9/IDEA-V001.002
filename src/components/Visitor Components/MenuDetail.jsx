@@ -72,9 +72,9 @@ export default function MenuDetail({
 				isQuantityBasedComponent() ? `${menuItem.id}${size}` : menuItem.id,
 				{
 					...menuItem,
+					price: itemPrice,
 					...(isQuantityBasedComponent() && {
 						name: itemName,
-						price: itemPrice,
 						storageId: `${menuItem.id}${size}`,
 					}),
 				},
@@ -255,6 +255,7 @@ export default function MenuDetail({
 												}),
 												...(isAddOnsAvailable() && {
 													addOns: getAddOnString(),
+													price: itemPrice,
 												}),
 											},
 											isQuantityBasedComponent()
